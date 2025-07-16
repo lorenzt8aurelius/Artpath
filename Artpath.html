@@ -43,10 +43,29 @@
     .hero button:hover {
       background-color: #4f46e5;
     }
+    .navbar {
+  background-color: white;
+  padding: 20px 40px;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 1000;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #6366f1; /* Purple brand color */
+}
   </style>
 </head>
 <body>
-
+    <header class="navbar">
+  <div class="logo">ArtPath</div>
+</header>
   <section class="hero">
     <h1>Learn, Showcase, then Earn — All in One Place</h1>
     <p>A creative home for traditional artists. Build your portfolio, grow your skills, and start earning — even if you’re just beginning.</p>
