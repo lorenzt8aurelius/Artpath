@@ -7,21 +7,22 @@
 </head>
 <body>
 
- <header class="navbar">
-  <div class="logo">ArtPath</div>
+  <header class="navbar">
+  <div class="logo-area">
+    <div class="logo">ArtPath</div>
+    <button class="menu-button" onclick="toggleMenu()">☰ Menu</button>
+  </div>
 
-  <div class="nav-container">
-    <nav class="nav-links">
-      <a href="#">Home</a>
-      <a href="#">Learn</a>
-      <a href="#">Portfolio</a>
-      <a href="#">Login</a>
-    </nav>
+  <nav class="nav-links" id="mainMenu">
+    <a href="#">Home</a>
+    <a href="#">Learn</a>
+    <a href="#">Portfolio</a>
+    <a href="#">Login</a>
+  </nav>
 
-    <div class="search-bar">
-      <input type="text" id="searchInput" placeholder="Search..." />
-      <button onclick="handleSearch()">🔍</button>
-    </div>
+  <div class="search-bar">
+    <input type="text" id="searchInput" placeholder="Search..." />
+    <button onclick="handleSearch()">🔍</button>
   </div>
 </header>
 
