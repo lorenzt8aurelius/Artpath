@@ -1,7 +1,4 @@
-function handleSearch() {
-  const input = document.getElementById("searchInput").value;
-  console.log("User searched for:", input);
-
-  // You can later use this input to filter artwork, redirect, or fetch data
-  alert(`You searched for: ${input}`);
+function handleCTA() {
+  alert("Let's build your portfolio!");
+  // Later: Scroll to signup or open modal
 }
