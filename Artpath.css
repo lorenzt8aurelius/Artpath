@@ -110,3 +110,34 @@ body {
 .search-bar button:hover {
   background-color: #4f46e5;
 }
+
+.logo-area {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.menu-button {
+  margin-top: 8px;
+  background-color: transparent;
+  color: #aaa;
+  border: 1px solid #444;
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+
+.menu-button:hover {
+  color: white;
+  border-color: #6366f1;
+}
+
+/* Menu (default: visible, can be hidden on toggle) */
+.nav-links {
+  display: flex;
+}
+
+.nav-links.hide {
+  display: none;
+}
