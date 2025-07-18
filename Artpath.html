@@ -2,83 +2,31 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <title>ArtPath – Create. Learn. Earn.</title>
   <link rel="stylesheet" href="Artpath.css">
-  <title>ArtPath - Learn, Create, Earn</title>
-  <style>
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      margin: 0;
-      padding: 0;
-      background-color: #fff;
-      color: #333;
-    }
-    .hero {
-      padding: 60px 20px;
-      text-align: center;
-      background: linear-gradient(to bottom right, #f3f4f6, #e0e7ff);
-    }
-    .hero h1 {
-      font-size: 3rem;
-      margin-bottom: 10px;
-      color: #1f2937;
-    }
-    .hero p {
-      font-size: 1.25rem;
-      margin-bottom: 30px;
-      color: #4b5563;
-    }
-    .hero img {
-      max-width: 100%;
-      height: auto;
-      margin-bottom: 30px;
-    }
-    .hero button {
-      background-color: #6366f1;
-      color: white;
-      border: none;
-      padding: 12px 24px;
-      font-size: 1rem;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-    .hero button:hover {
-      background-color: #4f46e5;
-    }
-    .navbar {
-  background-color: white;
-  padding: 20px 40px;
-  display: flex;
-  align-items: center;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-  position: fixed;
-  width: 100%;
-  top: 0;
-  z-index: 1000;
-}
-
-.logo {
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: #6366f1; /* Purple brand color */
-}
-  </style>
 </head>
-<section class="search-section">
-  <input type="text" id="searchInput" placeholder="Search artworks, artists..." />
-  <button onclick="handleSearch()">Search</button>
-</section>
 <body>
-    <header class="navbar">
-  <div class="logo">ArtPath</div>
-</header>
+
+  <!-- Navbar -->
+  <header class="navbar">
+    <div class="logo">ArtPath</div>
+    <nav class="nav-links">
+      <a href="#">Home</a>
+      <a href="#">Learn</a>
+      <a href="#">Portfolio</a>
+      <a href="#">Login</a>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
   <section class="hero">
-    <h1>Welcome to Artpath!</h1>
-    <p>A place to grow, be seen, and share your art with the world — one step at a time.</p>
-    <img src="your-image-placeholder.jpg" alt="Illustration of an artist workspace">
-    <button>Start Your Free Portfolio</button>
+    <div class="hero-text">
+      <h1>Create. Learn. Earn.</h1>
+      <p>Your journey from sketch to success — starts here.</p>
+      <button onclick="handleCTA()">Start Your Portfolio</button>
+    </div>
   </section>
 
-   <input type="text" id="searchInput" placeholder="Search artworks, artists..." />
-  <button onclick="handleSearch()">Search</button>
+  <script src="Landingpage.js"></script>
 </body>
 </html>
