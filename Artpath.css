@@ -84,7 +84,7 @@ body {
 .search-bar {
   display: flex;
   align-items: center;
-  margin-left: 20px;
+  margin-left: 100px;
 }
 
 .search-bar input {
