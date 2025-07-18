@@ -1,24 +1,28 @@
 .search-section {
+  position: absolute;
+  top: 80px; /* Adjust this if you have a navbar */
+  left: 50%;
+  transform: translateX(-50%);
   text-align: center;
-  margin-top: 40px;
+  width: 100%;
 }
 
 .search-section input {
-  padding: 10px;
-  width: 250px;
+  padding: 12px;
+  width: 400px; /* Wider input field */
   font-size: 1rem;
   border: 1px solid #ccc;
-  border-radius: 5px;
+  border-radius: 6px;
 }
 
 .search-section button {
-  padding: 10px 20px;
+  padding: 12px 24px;
   margin-left: 10px;
   font-size: 1rem;
   background-color: #6366f1;
   color: white;
   border: none;
-  border-radius: 5px;
+  border-radius: 6px;
   cursor: pointer;
 }
 
