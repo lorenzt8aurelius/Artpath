@@ -84,7 +84,7 @@ body {
 .search-bar {
   display: flex;
   align-items: center;
-  margin-left: 100px;
+  margin-left: 20 px;
 }
 
 .search-bar input {
@@ -104,7 +104,7 @@ body {
   color: white;
   border-radius: 0 5px 5px 0;
   cursor: pointer;
-  font-size: 0.95rem;
+  font-size: 1.50rem;
 }
 
 .search-bar button:hover {
