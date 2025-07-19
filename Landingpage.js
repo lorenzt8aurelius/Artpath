@@ -25,3 +25,8 @@ function startLearning() {
   alert("Redirecting to learning page...");
   // You can add: window.location.href = "learn.html";
 }
+
+function continueAsGuest() {
+  alert("You're now exploring as a guest!");
+  // Future: window.location.href = "explore.html";
+}
