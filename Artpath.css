@@ -237,3 +237,15 @@ body {
 ard svg {
   margin-bottom: 20px;
 }
+
+@media screen and (max-width: 768px) {
+  .choice-cards {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .card {
+    width: 100%;
+    max-width: 90%;
+  }
+}
