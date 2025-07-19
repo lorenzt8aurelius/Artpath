@@ -10,7 +10,7 @@
   <!-- Navbar -->
   <header class="navbar">
     <div class="logo">ArtPath</div>
-    <button class="menu-toggle" onclick="toggleSidebar()">☰ Menu</button>
+    <button class="menu-toggle" onclick="toggleSidebar()"> ☰ Menu</button>
   </header>
 
   <!-- Slide-Out Sidebar -->
@@ -29,12 +29,13 @@
 
     <div class="choice-cards">
 
-      <!-- Experienced Artist Card -->
+        <!-- Experienced Artist Card -->
       <div class="card" onclick="startPortfolio()">
-        <!-- 🎨 Portfolio Icon -->
-        <svg width="60" height="60" viewBox="0 0 64 64" fill="#6366f1" xmlns="http://www.w3.org/2000/svg">
-          <path d="M4 12h56v40H4z" fill="none" stroke="#6366f1" stroke-width="4" stroke-linecap="round"/>
-          <path d="M4 12l8-8h40l8 8" fill="none" stroke="#6366f1" stroke-width="4"/>
+        <!-- Portfolio Icon -->
+        <svg class="card-icon" width="70" height="70" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+          <rect x="6" y="16" width="52" height="36" fill="none" stroke="#6366f1" stroke-width="4" rx="4"/>
+          <line x1="6" y1="16" x2="6" y2="8" stroke="#6366f1" stroke-width="4"/>
+          <line x1="58" y1="16" x2="58" y2="8" stroke="#6366f1" stroke-width="4"/>
         </svg>
         <h3>I’m an artist with experience</h3>
         <p>Build your online portfolio and connect with clients.</p>
@@ -43,9 +44,10 @@
 
       <!-- Beginner Card -->
       <div class="card" onclick="startLearning()">
-        <!-- ✏️ Pencil Icon -->
-        <svg width="60" height="60" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
-          <path fill="#6366f1" d="M432,128H144a16,16,0,0,0,0,32H416v320H96V128H160a16,16,0,0,0,0-32H80A32,32,0,0,0,48,128V464a48,48,0,0,0,48,48H432a48,48,0,0,0,48-48V160A32,32,0,0,0,432,128Z"/>
+        <!-- Pencil + Question Mark Icon -->
+        <svg class="card-icon" width="70" height="70" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 52 L24 40 52 12 60 20 32 48Z" fill="none" stroke="#6366f1" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+          <text x="30" y="24" fill="#6366f1" font-size="16" font-family="Segoe UI, sans-serif" text-anchor="middle" alignment-baseline="middle">?</text>
         </svg>
         <h3>I’m just starting out</h3>
         <p>Take step-by-step courses to grow your skills confidently.</p>
