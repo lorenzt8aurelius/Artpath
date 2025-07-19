@@ -233,3 +233,7 @@ body {
   background-color: #222;
   transform: translateY(-4px);
 }
+
+ard svg {
+  margin-bottom: 20px;
+}
