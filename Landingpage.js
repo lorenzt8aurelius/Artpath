@@ -15,3 +15,13 @@ function startLearning() {
   alert("Redirecting to beginner courses...");
   // Later: window.location.href = "/learn.html";
 }
+
+function startPortfolio() {
+  alert("Redirecting to portfolio builder...");
+  // You can add: window.location.href = "portfolio.html";
+}
+
+function startLearning() {
+  alert("Redirecting to learning page...");
+  // You can add: window.location.href = "learn.html";
+}
