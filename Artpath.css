@@ -5,6 +5,10 @@ body {
   color: #f5f5f5;
 }
 
+.welcome-section {
+  padding-top: 120px; /* More space below navbar */
+}
+
 /* ==================== NAVBAR ==================== */
 .navbar {
   display: flex;
@@ -65,14 +69,13 @@ body {
   color: #6366f1;
 }
 
-/* ==================== MAIN MENU DROPDOWN (not in use) ==================== */
 .main-menu {
   display: none;
   position: absolute;
   top: 70px;
   right: 40px;
   background-color: #222;
-  border-radius: 8px;
+  border-radius: 8px; 
   padding: 10px 20px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
 }
@@ -294,4 +297,18 @@ body {
     width: 100%;
     max-width: 90%;
   }
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 8px; /* for horizontal scrollbar */
+}
+
+::-webkit-scrollbar-thumb {
+  background: #444;
+  border-radius: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1a1a1a;
 }
