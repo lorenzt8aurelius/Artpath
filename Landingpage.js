@@ -30,3 +30,8 @@ function continueAsGuest() {
   alert("You're now exploring as a guest!");
   // Future: window.location.href = "explore.html";
 }
+
+function toggleMainMenu() {
+  const menu = document.getElementById("mainMenu");
+  menu.style.display = menu.style.display === "block" ? "none" : "block";
+}
