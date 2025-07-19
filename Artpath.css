@@ -319,19 +319,26 @@ ard svg {
   color: #6366f1;
 }
 
+/* Floating Slide-In Sidebar */
 .sidebar {
-  height: 100vh;
-  width: 250px;
+  height: 90vh;
+  width: 240px;
   position: fixed;
-  top: 0;
-  right: -250px; /* hidden by default */
-  background-color: #1a1a1a;
-  padding: 60px 20px;
-  box-shadow: -2px 0 10px rgba(0,0,0,0.4);
+  top: 40px;
+  right: -300px; /* hidden off screen */
+  background-color: #1f1f1f;
+  border-radius: 12px 0 0 12px;
+  padding: 40px 20px;
+  box-shadow: -4px 0 20px rgba(0, 0, 0, 0.5);
   display: flex;
   flex-direction: column;
-  transition: right 0.3s ease;
+  transition: right 0.4s ease;
   z-index: 1500;
+}
+
+/* Show Sidebar */
+.sidebar.show {
+  right: 20px; /* slides in with 20px gap from the edge */
 }
 
 .sidebar a {
@@ -339,12 +346,9 @@ ard svg {
   text-decoration: none;
   margin-bottom: 20px;
   font-size: 1rem;
+  transition: color 0.3s ease;
 }
 
 .sidebar a:hover {
   color: #6366f1;
-}
-
-.sidebar.show {
-  right: 0;
 }
