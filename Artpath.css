@@ -249,3 +249,30 @@ ard svg {
     max-width: 90%;
   }
 }
+
+.guest-option {
+  margin-top: 30px;
+  text-align: center;
+}
+
+.guest-option p {
+  color: #aaa;
+  margin-bottom: 10px;
+  font-size: 0.95rem;
+}
+
+.guest-option button {
+  background-color: transparent;
+  color: #6366f1;
+  border: 1px solid #6366f1;
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.guest-option button:hover {
+  background-color: #6366f1;
+  color: white;
+}
