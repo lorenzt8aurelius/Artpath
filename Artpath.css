@@ -313,3 +313,8 @@ body {
 ::-webkit-scrollbar-track {
   background: #1a1a1a;
 }
+
+.card-icon {
+  display: block;
+  margin: 0 auto 20px;
+}
