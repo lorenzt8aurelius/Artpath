@@ -276,3 +276,7 @@ ard svg {
   background-color: #6366f1;
   color: white;
 }
+
+.card svg {
+  margin-bottom: 20px;
+}
