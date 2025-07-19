@@ -2,35 +2,37 @@ function handleSearch() {
   const query = document.getElementById("searchInput").value.trim();
   if (query) {
     alert(`You searched for: ${query}`);
-    // Later: Add logic to filter content or redirect to search results
+    // TODO: Implement search filtering or redirection
   }
 }
 
+// ========== User Choice Actions ==========
 function startPortfolio() {
   alert("Redirecting to portfolio builder...");
-  // Later: window.location.href = "/portfolio.html";
+  // TODO: window.location.href = "portfolio.html";
 }
 
 function startLearning() {
-  alert("Redirecting to beginner courses...");
-  // Later: window.location.href = "/learn.html";
-}
-
-function startPortfolio() {
-  alert("Redirecting to portfolio builder...");
-  // You can add: window.location.href = "portfolio.html";
-}
-
-function startLearning() {
-  alert("Redirecting to learning page...");
-  // You can add: window.location.href = "learn.html";
+  alert("Redirecting to learning path...");
+  // TODO: window.location.href = "learn.html";
 }
 
 function continueAsGuest() {
   alert("You're now exploring as a guest!");
-  // Future: window.location.href = "explore.html";
+  // TODO: window.location.href = "explore.html";
 }
 
+// ========== Sidebar Menu Toggle ==========
+function toggleSidebar() {
+  const sidebar = document.getElementById("sidebar");
+  sidebar.classList.toggle("show");
+}
+
+function closeSidebar() {
+  document.getElementById("sidebar").classList.remove("show");
+}
+
+// ========== (Optional) Old Dropdown Menu Logic ==========
 function toggleMainMenu() {
   const menu = document.getElementById("mainMenu");
   menu.style.display = menu.style.display === "block" ? "none" : "block";
