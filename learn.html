@@ -23,60 +23,40 @@
     <h1>Start Your Learning Journey</h1>
     <p>Step-by-step guides and creative challenges — built for beginners in traditional art.</p>
 
-   <div class="card">
- <h3><span class="icon">📚</span> Building Your First 5-Piece Portfolio</h3>
-  <p>✅ Skill Level: Beginner</p>
-  <p>🕒 Duration: 1 week</p>
-  <p>💡 Includes: Templates, critiques, submission review</p>
-  <button>Start Course</button>
+   <div class="choice-cards">
+  <div class="card" onclick="startPortfolio()">
+    … <!-- Existing Experienced Artist card -->
+  </div>
+  <div class="card" onclick="showTopicSelector();">
+    … <!-- Beginner card -->
+    <button>Start Learning</button>
+  </div>
 </div>
 
-<div class="card">
-  <h3>📢 Pricing and Commission 101</h3>
-  <p>✅ Skill Level: All levels</p>
-  <p>🕒 Duration: 2–3 days</p>
-  <p>💡 Includes: Sample price charts, client scripts</p>
-  <button>Start Course</button>
-</div>
-
-<div class="card">
-  <h3>🎨 Pencil Sketching Basics</h3>
-  <p>✅ Skill Level: Absolute beginner</p>
-  <p>🕒 Duration: 3 days</p>
-  <p>💡 Includes: Line drills, grip tips, guided practice</p>
-  <button>Start Course</button>
-
-  <section class="topics-section">
+<!-- Add this just after the choice-cards div -->
+<section id="topicSelector" class="topics-section hidden">
   <h2>Pick your learning topics</h2>
-  <p>Select one or more areas to help us recommend courses you’ll love.</p>
-
+  <p>Select one or more topics to help us recommend courses you'll love.</p>
   <div class="topics-grid">
-    <!-- Example Topic Card -->
     <div class="topic-card" onclick="toggleTopic(this)">
-      <img src="https://via.placeholder.com/120x80?text=Pencil" alt="Pencil sketching">
+      <img src="https://via.placeholder.com/120x80?text=Pencil" alt="Pencil Sketching">
       <span>Pencil Sketching</span>
     </div>
     <div class="topic-card" onclick="toggleTopic(this)">
-      <img src="https://via.placeholder.com/120x80?text=Charcoal" alt="Charcoal techniques">
+      <img src="https://via.placeholder.com/120x80?text=Charcoal" alt="Charcoal">
       <span>Charcoal Techniques</span>
     </div>
     <div class="topic-card" onclick="toggleTopic(this)">
-      <img src="https://via.placeholder.com/120x80?text=Portfolio" alt="Portfolio building">
+      <img src="https://via.placeholder.com/120x80?text=Portfolio" alt="Portfolio">
       <span>Portfolio Building</span>
     </div>
     <div class="topic-card" onclick="toggleTopic(this)">
-      <img src="https://via.placeholder.com/120x80?text=Pricing" alt="Pricing & commissions">
-      <span>Pricing & Commissions</span>
+      <img src="https://via.placeholder.com/120x80?text=Pricing" alt="Pricing">
+      <span>Pricing & Commission</span>
     </div>
-    <!-- Add more topic cards as needed -->
   </div>
-
-  <button id="continueTopics" onclick="continueAfterTopics()" disabled>
-    See my custom feed
-  </button>
+  <button id="continueTopics" onclick="continueAfterTopics()" disabled>See My Custom Feed</button>
 </section>
-
-</div>  
   </section>
 
   <footer style="text-align:center; padding: 40px 20px; background-color: #1a1a1a; color: #888;">
