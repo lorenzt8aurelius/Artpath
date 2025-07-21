@@ -9,7 +9,7 @@ body {
   padding-top: 120px; /* More space below navbar */
 }
 
-/* ==================== NAVBAR ==================== */
+/* NAVBAR */
 .navbar {
   display: flex;
   justify-content: space-between;
