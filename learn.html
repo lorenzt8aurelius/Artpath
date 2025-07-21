@@ -45,6 +45,37 @@
   <p>🕒 Duration: 3 days</p>
   <p>💡 Includes: Line drills, grip tips, guided practice</p>
   <button>Start Course</button>
+
+  <section class="topics-section">
+  <h2>Pick your learning topics</h2>
+  <p>Select one or more areas to help us recommend courses you’ll love.</p>
+
+  <div class="topics-grid">
+    <!-- Example Topic Card -->
+    <div class="topic-card" onclick="toggleTopic(this)">
+      <img src="https://via.placeholder.com/120x80?text=Pencil" alt="Pencil sketching">
+      <span>Pencil Sketching</span>
+    </div>
+    <div class="topic-card" onclick="toggleTopic(this)">
+      <img src="https://via.placeholder.com/120x80?text=Charcoal" alt="Charcoal techniques">
+      <span>Charcoal Techniques</span>
+    </div>
+    <div class="topic-card" onclick="toggleTopic(this)">
+      <img src="https://via.placeholder.com/120x80?text=Portfolio" alt="Portfolio building">
+      <span>Portfolio Building</span>
+    </div>
+    <div class="topic-card" onclick="toggleTopic(this)">
+      <img src="https://via.placeholder.com/120x80?text=Pricing" alt="Pricing & commissions">
+      <span>Pricing & Commissions</span>
+    </div>
+    <!-- Add more topic cards as needed -->
+  </div>
+
+  <button id="continueTopics" onclick="continueAfterTopics()" disabled>
+    See my custom feed
+  </button>
+</section>
+
 </div>  
   </section>
 
