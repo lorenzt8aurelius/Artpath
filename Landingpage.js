@@ -63,3 +63,33 @@ function previewArt() {
     previewArea.appendChild(img);
   }
 }
+
+let selectedTopics = new Set();
+
+function toggleTopic(card) {
+  const topic = card.querySelector('span').innerText;
+  if (selectedTopics.has(topic)) {
+    selectedTopics.delete(topic);
+    card.classList.remove('selected');
+  } else {
+    selectedTopics.add(topic);
+    card.classList.add('selected');
+  }
+  updateContinueButton();
+}
+
+function updateContinueButton() {
+  const btn = document.getElementById('continueTopics');
+  if (selectedTopics.size > 0) {
+    btn.disabled = false;
+    btn.classList.add('enabled');
+  } else {
+    btn.disabled = true;
+    btn.classList.remove('enabled');
+  }
+}
+
+function continueAfterTopics() {
+  alert('You chose: ' + Array.from(selectedTopics).join(', ') + '\nGreat! Custom feed is coming soon.');
+  // Later: window.location.href = "customFeed.html";
+}
