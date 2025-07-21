@@ -41,3 +41,7 @@ function toggleMainMenu() {
 function startPortfolio() {
   window.location.href = "portfolio.html";
 }
+
+function startLearning() {
+  window.location.href = "learn.html";
+}
