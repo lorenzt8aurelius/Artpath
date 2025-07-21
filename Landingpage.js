@@ -37,3 +37,7 @@ function toggleMainMenu() {
   const menu = document.getElementById("mainMenu");
   menu.style.display = menu.style.display === "block" ? "none" : "block";
 }
+
+function startPortfolio() {
+  window.location.href = "portfolio.html";
+}
