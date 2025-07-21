@@ -330,3 +330,31 @@ body {
   display: block;
   margin: 0 auto 20px;
 }
+
+.card {
+  background-color: #1a1a1a;
+  border: 1px solid #333;
+  border-radius: 12px;
+  width: 300px;
+  padding: 30px 20px;
+  text-align: left;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  border-color: #6366f1;
+  box-shadow: 0 8px 24px rgba(99, 102, 241, 0.5);
+}
+
+.icon {
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
+
+.card:hover .icon {
+  transform: rotate(-5deg) scale(1.1);
+}
