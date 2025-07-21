@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Login to ArtPath</title>
+  <link rel="stylesheet" href="Artpath.css" />
+</head>
+<body>
+
+  <header class="navbar">
+    <div class="logo">ArtPath</div>
+    <button class="menu-toggle" onclick="toggleSidebar()">☰ Menu</button>
+    <div class="sidebar" id="sidebar">
+      <a href="#" onclick="closeSidebar()">✕ Close</a>
+      <a href="index.html">Home</a>
+      <a href="learn.html">Learn</a>
+      <a href="portfolio.html">Portfolio</a>
+      <a href="login.html">Login</a>
+    </div>
+  </header>
+
+  <section class="welcome-section">
+    <h1>Log In or Sign Up</h1>
+    <p>Welcome back! Enter your details to continue.</p>
+
+    <form style="max-width: 400px; margin: 0 auto; text-align: left;">
+      <label>Email</label><br />
+      <input type="email" placeholder="you@example.com" style="width: 100%; padding: 10px; margin: 8px 0;" /><br />
+
+      <label>Password</label><br />
+      <input type="password" placeholder="••••••••" style="width: 100%; padding: 10px; margin: 8px 0;" /><br />
+
+      <button type="submit" style="width: 100%; padding: 12px; background-color: #6366f1; color: white; border: none;">Login</button>
+      <p style="text-align: center; margin-top: 10px;">Don't have an account? <a href="#">Register</a></p>
+    </form>
+  </section>
+
+  <footer style="text-align:center; padding: 40px 20px; background-color: #1a1a1a; color: #888;">
+    <p>© 2025 ArtPath. All rights reserved.</p>
+  </footer>
+
+  <script src="Landingpage.js"></script>
+</body>
+</html>
