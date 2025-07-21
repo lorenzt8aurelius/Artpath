@@ -45,3 +45,21 @@ function startPortfolio() {
 function startLearning() {
   window.location.href = "learn.html";
 }
+
+
+function previewArt() {
+  const fileInput = document.getElementById('artUpload');
+  const previewArea = document.getElementById('previewArea');
+
+  previewArea.innerHTML = ''; // Clear previous
+
+  const file = fileInput.files[0];
+  if (file) {
+    const img = document.createElement('img');
+    img.src = URL.createObjectURL(file);
+    img.style.maxWidth = '100%';
+    img.style.borderRadius = '8px';
+    img.style.marginTop = '10px';
+    previewArea.appendChild(img);
+  }
+}
