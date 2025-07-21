@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Start Your Journey – ArtPath</title>
+  <link rel="stylesheet" href="Artpath.css" />
+</head>
+<body>
+
+  <!-- Navbar -->
+  <header class="navbar">
+    <div class="logo">ArtPath</div>
+  </header>
+
+  <!-- Welcome Section -->
+  <section class="welcome-section" style="padding-top: 100px;">
+    <h1>Pick Topics You Want to Learn</h1>
+    <p>This helps us recommend the best creative paths for your journey.</p>
+  </section>
+
+  <!-- Topic Selection Grid -->
+  <section class="topic-grid" style="padding: 20px 40px; display: flex; flex-wrap: wrap; gap: 20px; justify-content: center;">
+    
+    <div class="topic-card" onclick="selectTopic(this)">
+      <img src="https://via.placeholder.com/300x120?text=Sketching" />
+      <h3>Sketching</h3>
+    </div>
+
+    <div class="topic-card" onclick="selectTopic(this)">
+      <img src="https://via.placeholder.com/300x120?text=Charcoal+Art" />
+      <h3>Charcoal Art</h3>
+    </div>
+
+    <div class="topic-card" onclick="selectTopic(this)">
+      <img src="https://via.placeholder.com/300x120?text=Watercolor" />
+      <h3>Watercolor</h3>
+    </div>
+
+    <div class="topic-card" onclick="selectTopic(this)">
+      <img src="https://via.placeholder.com/300x120?text=Portfolio+Basics" />
+      <h3>Portfolio Basics</h3>
+    </div>
+
+    <div class="topic-card" onclick="selectTopic(this)">
+      <img src="https://via.placeholder.com/300x120?text=Social+Media+for+Artists" />
+      <h3>Social Media for Artists</h3>
+    </div>
+
+  </section>
+
+  <!-- Button Row -->
+  <div style="text-align:center; margin-top: 30px;">
+    <button onclick="submitTopics()" style="padding: 12px 24px; background-color: #6366f1; color: white; border: none; border-radius: 6px; font-size: 1rem;">
+      Show Me My Learning Plan →
+    </button>
+  </div>
+
+  <!-- Footer -->
+  <footer style="text-align:center; padding: 40px 20px; background-color: #1a1a1a; color: #888; margin-top: 60px;">
+    <p>© 2025 ArtPath. All rights reserved.</p>
+  </footer>
+
+  <script>
+    const selectedTopics = new Set();
+
+    function selectTopic(card) {
+      const topic = card.querySelector("h3").textContent;
+      card.classList.toggle("selected");
+
+      if (selectedTopics.has(topic)) {
+        selectedTopics.delete(topic);
+      } else {
+        selectedTopics.add(topic);
+      }
+    }
+
+    function submitTopics() {
+      if (selectedTopics.size === 0) {
+        alert("Please select at least one topic to continue.");
+        return;
+      }
+      alert("Topics selected: " + Array.from(selectedTopics).join(", "));
+      // Future: Redirect to a custom learning page or store selection in database
+    }
+  </script>
+
+  <style>
+    .topic-card {
+      width: 280px;
+      border: 1px solid #333;
+      border-radius: 10px;
+      overflow: hidden;
+      background-color: #1a1a1a;
+      color: white;
+      cursor: pointer;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    .topic-card img {
+      width: 100%;
+      height: 120px;
+      object-fit: cover;
+    }
+
+    .topic-card h3 {
+      margin: 12px;
+      font-size: 1.1rem;
+    }
+
+    .topic-card.selected {
+      border: 2px solid #6366f1;
+      transform: scale(1.03);
+    }
+  </style>
+
+</body>
+</html>
