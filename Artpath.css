@@ -198,8 +198,20 @@ body {
   border-radius: 12px;
   width: 300px;
   padding: 30px 20px;
-  text-align: center;
+  text-align: left;
   transition: 0.3s ease;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.3);
+}
+
+.card p {
+  margin: 6px 0;
+  font-size: 0.95rem;
+  color: #bbb;
+}
+
+.choice-cards {
+  gap: 40px; /* Increased gap between cards */
+  margin-top: 30px;
 }
 
 .card svg {
