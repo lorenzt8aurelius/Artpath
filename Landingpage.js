@@ -64,6 +64,11 @@ function previewArt() {
   }
 }
 
+function showTopicSelector() {
+  document.getElementById('topicSelector').classList.remove('hidden');
+  window.scrollTo({ top: document.getElementById('topicSelector').offsetTop, behavior: 'smooth' });
+}
+
 let selectedTopics = new Set();
 
 function toggleTopic(card) {
@@ -80,7 +85,7 @@ function toggleTopic(card) {
 
 function updateContinueButton() {
   const btn = document.getElementById('continueTopics');
-  if (selectedTopics.size > 0) {
+  if (selectedTopics.size) {
     btn.disabled = false;
     btn.classList.add('enabled');
   } else {
@@ -90,6 +95,6 @@ function updateContinueButton() {
 }
 
 function continueAfterTopics() {
-  alert('You chose: ' + Array.from(selectedTopics).join(', ') + '\nGreat! Custom feed is coming soon.');
+  alert("You chose: " + Array.from(selectedTopics).join(", ") + "\nCustom feed coming soon!");
   // Later: window.location.href = "customFeed.html";
 }
