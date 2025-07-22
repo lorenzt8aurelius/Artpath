@@ -95,6 +95,40 @@ function updateContinueButton() {
 }
 
 function continueAfterTopics() {
-  alert("You chose: " + Array.from(selectedTopics).join(", ") + "\nCustom feed coming soon!");
-  // Later: window.location.href = "customFeed.html";
+ localStorage.setItem("selectedTopics", JSON.stringify(Array.from(selectedTopics)));
+window.location.href = "myLearningPlan.html";  // Redirect to next step (future page)
+}
+
+const selectedTopics = new Set();
+
+function toggleTopic(topic) {
+  if (selectedTopics.has(topic)) {
+    selectedTopics.delete(topic);
+  } else {
+    selectedTopics.add(topic);
+  }
+
+  updateUI();
+  updateContinueButton();
+}
+
+function updateUI() {
+  document.querySelectorAll('.topic-card').forEach(card => {
+    const topic = card.innerText.trim().split(" ").slice(1).join(" ");
+    if (selectedTopics.has(topic)) {
+      card.classList.add("selected");
+    } else {
+      card.classList.remove("selected");
+    }
+  });
+}
+
+function updateContinueButton() {
+  const btn = document.getElementById("continue-button");
+  btn.disabled = selectedTopics.size === 0;
+}
+
+function continueAfterTopics() {
+  localStorage.setItem("selectedTopics", JSON.stringify([...selectedTopics]));
+  window.location.href = "myLearningPlan.html"; // or your next step page
 }
