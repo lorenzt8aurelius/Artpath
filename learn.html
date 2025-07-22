@@ -2,72 +2,39 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Learn with ArtPath</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Start Learning</title>
   <link rel="stylesheet" href="Artpath.css" />
+  <script src="Landingpage.js" defer></script>
 </head>
 <body>
-
-  <header class="navbar">
-    <div class="logo">ArtPath</div>
-    <button class="menu-toggle" onclick="toggleSidebar()">☰ Menu</button>
-    <div class="sidebar" id="sidebar">
-      <a href="#" onclick="closeSidebar()">✕ Close</a>
-      <a href="index.html">Home</a>
-      <a href="learn.html">Learn</a>
-      <a href="portfolio.html">Portfolio</a>
-      <a href="#">Login</a>
-    </div>
+  <header>
+    <nav>
+      <a href="index.html" class="logo">ArtPath</a>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="learn.html" class="active">Learn</a></li>
+        <li><a href="portfolio.html">Portfolio</a></li>
+      </ul>
+    </nav>
   </header>
 
-  <section class="welcome-section">
-    <h1>Start Your Learning Journey</h1>
-    <p>Step-by-step guides and creative challenges — built for beginners in traditional art.</p>
+  <main class="main-content">
+    <section class="hero">
+      <h1 class="section-heading">🎯 Choose What You Want to Learn</h1>
+      <p class="section-subtext">Select your interests below to personalize your learning journey.</p>
 
-   <div class="choice-cards">
-  <div class="card" onclick="startPortfolio()">
-    … <!-- Existing Experienced Artist card -->
-  </div>
-  <div class="card" onclick="showTopicSelector();">
-    … <!-- Beginner card -->
-    <button>Start Learning</button>
-  </div>
-</div>
+      <div class="topic-grid">
+        <div class="topic-card" onclick="toggleTopic('Sketching')">✏️ Sketching</div>
+        <div class="topic-card" onclick="toggleTopic('Charcoal Art')">🖤 Charcoal Art</div>
+        <div class="topic-card" onclick="toggleTopic('Inking')">🖊️ Inking</div>
+        <div class="topic-card" onclick="toggleTopic('Watercolor')">🎨 Watercolor</div>
+        <div class="topic-card" onclick="toggleTopic('Acrylic')">🖌 Acrylic Painting</div>
+        <div class="topic-card" onclick="toggleTopic('Anatomy')">💀 Anatomy for Artists</div>
+      </div>
 
-<!-- Add this just after the choice-cards div -->
-<section id="topicSelector" class="topics-section hidden">
-  <h2>Pick your learning topics</h2>
-  <p>Select one or more topics to help us recommend courses you'll love.</p>
-  <div class="topics-grid">
-    <div class="topic-card" onclick="toggleTopic(this)">
-      <img src="https://via.placeholder.com/120x80?text=Pencil" alt="Pencil Sketching">
-      <span>Pencil Sketching</span>
-    </div>
-    <div class="topic-card" onclick="toggleTopic(this)">
-      <img src="https://via.placeholder.com/120x80?text=Charcoal" alt="Charcoal">
-      <span>Charcoal Techniques</span>
-    </div>
-    <div class="topic-card" onclick="toggleTopic(this)">
-      <img src="https://via.placeholder.com/120x80?text=Portfolio" alt="Portfolio">
-      <span>Portfolio Building</span>
-    </div>
-    <div class="topic-card" onclick="toggleTopic(this)">
-      <img src="https://via.placeholder.com/120x80?text=Pricing" alt="Pricing">
-      <span>Pricing & Commission</span>
-    </div>
-  </div>
-  <button id="continueTopics" onclick="continueAfterTopics()" disabled>See My Custom Feed</button>
-</section>
-  </section>
-
-  <footer style="text-align:center; padding: 40px 20px; background-color: #1a1a1a; color: #888;">
-    <p>© 2025 ArtPath. All rights reserved.</p>
-    <p>
-      <a href="#" style="color: #6366f1; margin: 0 10px;">About</a>
-      <a href="#" style="color: #6366f1; margin: 0 10px;">FAQ</a>
-      <a href="#" style="color: #6366f1; margin: 0 10px;">Contact</a>
-    </p>
-  </footer>
-
-  <script src="Landingpage.js"></script>
+      <button id="continue-button" onclick="continueAfterTopics()" disabled>Continue</button>
+    </section>
+  </main>
 </body>
 </html>
