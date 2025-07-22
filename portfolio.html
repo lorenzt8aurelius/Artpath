@@ -7,9 +7,8 @@
 </head>
 <body>
 
-
-  <button onclick="history.back()" class="back-button">← Back</button>
   <header class="navbar">
+    <button onclick="history.back()" class="back-button">← Back</button>
     <div class="logo">ArtPath</div>
     <button class="menu-toggle" onclick="toggleSidebar()">☰ Menu</button>
     <div class="sidebar" id="sidebar">
@@ -21,45 +20,39 @@
     </div>
   </header>
 
- <section class="welcome-section">
-  <h1>Welcome, Lorenzo!</h1>
-  <p>Here’s your personal portfolio dashboard.</p>
-
-  <div class="card">
-  <h3>📤 Upload Your Artwork</h3>
-  <input type="file" id="artUpload" accept="image/*" onchange="previewArt()" style="margin-bottom: 10px;" />
-  <div id="previewArea" style="margin-top: 10px;"></div>
-</div>
-
-  <div class="choice-cards">
-    <div class="card">
-      <h3>🎨 Your Art Uploads</h3>
-      <p>You haven’t uploaded any art yet.</p>
-      <button>Upload Artwork</button>
-    </div>
-
-    <div class="card">
-      <h3>📈 Your Stats</h3>
-      <p>0 artworks | 0 likes | 0 commissions</p>
-      <button>View Dashboard</button>
-    </div>
-  </div>
-</section>
+  <main class="main-content" style="flex-direction: column; align-items: center;">
+    <section class="portfolio-dashboard card" style="max-width: 600px; width: 100%; margin-top: 120px; padding: 40px 32px; text-align: center;">
+      <h1 style="font-size: 2.2rem; margin-bottom: 0.5rem;">Welcome, Lorenzo!</h1>
+      <p style="color: #b3b3b3; margin-bottom: 2.5rem;">Here’s your personal portfolio dashboard.</p>
+      <div style="display: flex; flex-wrap: wrap; gap: 32px; justify-content: center;">
+        <div class="card" style="flex: 1 1 260px; min-width: 220px; max-width: 320px; padding: 2rem 1rem; text-align: center;">
+          <h3 style="margin-bottom: 1rem;">📤 Upload Your Artwork</h3>
+          <input type="file" id="artUpload" accept="image/*" onchange="previewArt()" style="margin-bottom: 10px; width: 100%;" />
+          <div id="previewArea" style="margin-top: 10px;"></div>
+        </div>
+        <div class="card" style="flex: 1 1 260px; min-width: 220px; max-width: 320px; padding: 2rem 1rem; text-align: center;">
+          <h3 style="margin-bottom: 1rem;">📈 Your Stats</h3>
+          <p style="margin-bottom: 1.5rem;">0 artworks | 0 likes | 0 commissions</p>
+          <button style="width: 100%;">View Dashboard</button>
+        </div>
+      </div>
+      <div class="card" style="margin-top: 32px; padding: 2rem 1rem; max-width: 320px; margin-left: auto; margin-right: auto;">
+        <h3 style="margin-bottom: 1rem;">🎨 Your Art Uploads</h3>
+        <p>You haven’t uploaded any art yet.</p>
+        <button style="width: 100%;">Upload Artwork</button>
+      </div>
+    </section>
+  </main>
 
   <script src="Landingpage.js"></script>
 
-  
-<footer style="text-align:center; padding: 40px 20px; background-color: #1a1a1a; color: #888;">
-  <p>© 2025 ArtPath. All rights reserved.</p>
-  <p>
-    <a href="#" style="color: #6366f1; margin: 0 10px;">About</a>
-    <a href="#" style="color: #6366f1; margin: 0 10px;">FAQ</a>
-    <a href="#" style="color: #6366f1; margin: 0 10px;">Contact</a>
-  </p>
-</footer>
-
-<script src="Landingpage.js"></script>
-</body>
-</html>
+  <footer style="text-align:center; padding: 40px 20px; background-color: #1a1a1a; color: #888;">
+    <p>© 2025 ArtPath. All rights reserved.</p>
+    <p>
+      <a href="#" style="color: #6366f1; margin: 0 10px;">About</a>
+      <a href="#" style="color: #6366f1; margin: 0 10px;">FAQ</a>
+      <a href="#" style="color: #6366f1; margin: 0 10px;">Contact</a>
+    </p>
+  </footer>
 </body>
 </html>
