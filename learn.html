@@ -9,7 +9,8 @@
 </head>
 <body>
   <header>
-    <nav>
+    <nav class="navbar">
+      <button onclick="history.back()" class="back-button">← Back</button>
       <a href="index.html" class="logo">ArtPath</a>
       <ul>
         <li><a href="index.html">Home</a></li>
@@ -21,11 +22,16 @@
 
   <main class="main-content">
     <section class="hero">
+      <!-- Illustration Example -->
+      <img src="https://undraw.co/api/illustrations/2d1b7e7e-7e2e-4e2e-8e2e-7e2e4e2e8e2e" alt="Learning Illustration" style="width: 180px; margin-bottom: 1.5rem; border-radius: 12px; box-shadow: 0 2px 12px rgba(99,102,241,0.10);" />
       <h1 class="section-heading">🎯 Choose What You Want to Learn</h1>
       <p class="section-subtext">Select your interests below to personalize your learning journey.</p>
 
       <div class="topic-grid">
-        <div class="topic-card" onclick="toggleTopic('Sketching')">✏️ Sketching</div>
+        <div class="topic-card" onclick="toggleTopic('Sketching')">
+          <img src="sketching-icon.svg" alt="" style="width:32px; margin-bottom:8px;" />
+          ✏️ Sketching
+        </div>
         <div class="topic-card" onclick="toggleTopic('Charcoal Art')">🖤 Charcoal Art</div>
         <div class="topic-card" onclick="toggleTopic('Inking')">🖊️ Inking</div>
         <div class="topic-card" onclick="toggleTopic('Watercolor')">🎨 Watercolor</div>
