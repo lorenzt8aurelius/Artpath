@@ -482,3 +482,434 @@ body {
   color: white;
   cursor: pointer;
 }
+
+/* === Minimal Learn Section Styles === */
+
+.main-content {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+  background: #111;
+  padding-top: 60px;
+}
+
+.hero {
+  background: #18181b;
+  border-radius: 18px;
+  box-shadow: 0 4px 32px rgba(0,0,0,0.10);
+  padding: 48px 32px 32px 32px;
+  margin: 40px 0;
+  width: 100%;
+  max-width: 540px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.section-heading {
+  font-size: 2.2rem;
+  color: #fff;
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+  letter-spacing: -1px;
+  font-weight: 700;
+}
+
+.section-subtext {
+  color: #b3b3b3;
+  font-size: 1.08rem;
+  margin-bottom: 2.5rem;
+  margin-top: 0;
+}
+
+.topic-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+  width: 100%;
+  margin-bottom: 2.5rem;
+}
+
+@media (max-width: 600px) {
+  .hero {
+    padding: 28px 8px 20px 8px;
+    max-width: 98vw;
+  }
+  .topic-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+}
+
+.topic-card {
+  background: #202023;
+  color: #fff;
+  border-radius: 12px;
+  border: 1.5px solid #23234a;
+  box-shadow: 0 2px 8px rgba(99,102,241,0.04);
+  padding: 1.1rem 0.5rem;
+  font-size: 1.08rem;
+  text-align: center;
+  cursor: pointer;
+  transition: box-shadow 0.2s, border-color 0.2s, background 0.2s;
+  user-select: none;
+  outline: none;
+}
+.topic-card.selected {
+  border-color: #6366f1;
+  background: #23234a;
+  box-shadow: 0 4px 16px rgba(99,102,241,0.10);
+}
+.topic-card:active {
+  background: #18181b;
+}
+
+#continue-button {
+  background: #6366f1;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.85rem 2.2rem;
+  font-size: 1.08rem;
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(99,102,241,0.08);
+  opacity: 0.7;
+  cursor: not-allowed;
+  transition: opacity 0.2s, background 0.2s;
+  margin-bottom: 0.5rem;
+}
+#continue-button.enabled,
+#continue-button:not(:disabled) {
+  opacity: 1;
+  cursor: pointer;
+  background: #6366f1;
+}
+#continue-button:active {
+  background: #4f46e5;
+}
+
+/* === Enhanced Learn Section Space Management === */
+
+.main-content {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center; /* Vertically center */
+  background: #111;
+  padding: 0 16px;
+}
+
+.hero {
+  width: 100%;
+  max-width: 600px; /* Slightly wider for more content */
+  min-height: 60vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Center content vertically in hero */
+  align-items: center;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+.topic-grid {
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto 2.5rem auto;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 22px;
+}
+
+@media (max-width: 700px) {
+  .hero {
+    max-width: 98vw;
+    padding: 18px 4px 12px 4px;
+  }
+  .topic-grid {
+    max-width: 98vw;
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+}
+
+/* === Fit Topic Grid to Hero Container === */
+.topic-grid {
+  width: 100%;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 32px;
+  padding: 0 8px;
+  max-width: none;
+  margin-bottom: 2.5rem;
+}
+
+@media (max-width: 700px) {
+  .topic-grid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+    padding: 0 2px;
+    max-width: none;
+  }
+}
+
+/* === Enlarge Topic Cards for Learn Section === */
+.topic-grid {
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 32px;
+  max-width: 600px;
+}
+
+.topic-card {
+  min-width: 200px;
+  min-height: 120px;
+  padding: 2.2rem 1rem 1.2rem 1rem;
+  font-size: 1.25rem;
+  border-radius: 18px;
+}
+
+.topic-card img {
+  width: 48px !important;
+  height: 48px;
+  margin-bottom: 12px !important;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media (max-width: 700px) {
+  .topic-grid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+    max-width: 98vw;
+  }
+  .topic-card {
+    min-width: 0;
+    font-size: 1.08rem;
+    padding: 1.2rem 0.5rem 1rem 0.5rem;
+  }
+  .topic-card img {
+    width: 36px !important;
+    height: 36px;
+    margin-bottom: 8px !important;
+  }
+}
+
+/* === Horizontal Topic Grid for Learn Section === */
+.topic-grid {
+  display: flex;
+  flex-direction: row;
+  gap: 32px;
+  width: 100%;
+  padding: 0 8px;
+  overflow-x: auto;
+  margin-bottom: 2.5rem;
+  justify-content: flex-start;
+}
+
+.topic-card {
+  flex: 0 0 240px;
+  min-width: 220px;
+  max-width: 260px;
+  min-height: 140px;
+  padding: 2.2rem 1rem 1.2rem 1rem;
+  font-size: 1.25rem;
+  border-radius: 18px;
+  margin-bottom: 0;
+}
+
+.topic-card img {
+  width: 48px !important;
+  height: 48px;
+  margin-bottom: 12px !important;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media (max-width: 900px) {
+  .topic-grid {
+    gap: 18px;
+    padding: 0 2px;
+  }
+  .topic-card {
+    flex: 0 0 180px;
+    min-width: 160px;
+    max-width: 200px;
+    font-size: 1.08rem;
+    padding: 1.2rem 0.5rem 1rem 0.5rem;
+  }
+  .topic-card img {
+    width: 36px !important;
+    height: 36px;
+    margin-bottom: 8px !important;
+  }
+}
+
+/* === Horizontal Hero Layout for Learn Section === */
+.hero.hero-horizontal {
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 48px;
+  padding: 48px 32px;
+  max-width: 900px;
+  margin: 40px auto;
+}
+
+.hero-illustration {
+  flex: 0 0 260px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-illustration img {
+  width: 220px;
+  max-width: 100%;
+  border-radius: 16px;
+  box-shadow: 0 2px 12px rgba(99,102,241,0.10);
+}
+
+.hero-content {
+  flex: 1 1 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-width: 0;
+}
+
+@media (max-width: 900px) {
+  .hero.hero-horizontal {
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    padding: 24px 8px;
+  }
+  .hero-illustration {
+    justify-content: center;
+    margin-bottom: 12px;
+  }
+  .hero-content {
+    align-items: center;
+    width: 100%;
+  }
+}
+
+/* === Custom Horizontal Scrollbar for Topic Grid === */
+.topic-grid {
+  scrollbar-width: thin;
+  scrollbar-color: #6366f1 #23234a;
+}
+
+.topic-grid::-webkit-scrollbar {
+  height: 8px;
+  background: #23234a;
+  border-radius: 8px;
+}
+
+.topic-grid::-webkit-scrollbar-thumb {
+  background: #6366f1;
+  border-radius: 8px;
+}
+
+.topic-grid::-webkit-scrollbar-thumb:hover {
+  background: #4f46e5;
+}
+
+/* === Improved Horizontal Hero Layout for Learn Section (No Scrollbar) === */
+.hero.hero-horizontal {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 48px;
+  padding: 48px 32px;
+  max-width: 1000px;
+  margin: 40px auto;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.hero-illustration {
+  flex: 0 0 260px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-illustration img {
+  width: 220px;
+  max-width: 100%;
+  border-radius: 16px;
+  box-shadow: 0 2px 12px rgba(99,102,241,0.10);
+}
+
+.hero-content {
+  flex: 1 1 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-width: 0;
+}
+
+.topic-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 32px;
+  width: 100%;
+  padding: 0 8px;
+  margin-bottom: 2.5rem;
+  justify-content: flex-start;
+  /* Remove scrollbar styles */
+  overflow-x: unset;
+  scrollbar-width: unset;
+  scrollbar-color: unset;
+}
+
+.topic-card {
+  flex: 1 1 220px;
+  min-width: 220px;
+  max-width: 260px;
+  min-height: 140px;
+  padding: 2.2rem 1rem 1.2rem 1rem;
+  font-size: 1.25rem;
+  border-radius: 18px;
+  margin-bottom: 0;
+  box-sizing: border-box;
+}
+
+@media (max-width: 900px) {
+  .hero.hero-horizontal {
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    padding: 24px 8px;
+    max-width: 98vw;
+  }
+  .hero-illustration {
+    justify-content: center;
+    margin-bottom: 12px;
+  }
+  .hero-content {
+    align-items: center;
+    width: 100%;
+  }
+  .topic-grid {
+    gap: 18px;
+    padding: 0 2px;
+    justify-content: center;
+  }
+  .topic-card {
+    min-width: 160px;
+    max-width: 200px;
+    font-size: 1.08rem;
+    padding: 1.2rem 0.5rem 1rem 0.5rem;
+  }
+}
+
+/* Remove custom scrollbar for topic-grid */
+.topic-grid::-webkit-scrollbar,
+.topic-grid::-webkit-scrollbar-thumb,
+.topic-grid::-webkit-scrollbar-thumb:hover {
+  display: none !important;
+  background: none !important;
+}
