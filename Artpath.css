@@ -414,3 +414,20 @@ body {
   opacity: 1;
   cursor: pointer;
 }
+
+
+.back-button {
+  background-color: transparent;
+  color: #444;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  padding: 10px 15px;
+  margin: 10px;
+  font-weight: bold;
+  transition: color 0.2s;
+}
+
+.back-button:hover {
+  color: #000;
+}
