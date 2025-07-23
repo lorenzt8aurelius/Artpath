@@ -6,34 +6,19 @@
   <link rel="stylesheet" href="Artpath.css">
 </head>
 <body>
-
-<!-- Registration Modal (for Login) -->
-<div id="registerModal" class="modal hidden">
-  <div class="modal-content">
-    <span class="close-modal" id="closeModalBtn">&times;</span>
-    <form id="registerForm">
-      <input type="text" placeholder="Name" required />
-      <input type="email" placeholder="Email" required />
-      <input type="password" placeholder="Password" required />
-      <button type="submit">Register</button>
-    </form>
-  </div>
-</div>
-
-  <!-- Navbar -->
-  <header class="navbar">
+  <header class="navbar sticky-navbar">
     <div class="logo">ArtPath</div>
     <nav class="main-nav">
       <a href="artist_dashboard.html" class="main-nav-link">My Studio</a>
       <a href="client_dashboard.html" class="main-nav-link">Find Artists</a>
       <a href="artist_page.html" class="main-nav-link">Spotlight</a>
     </nav>
-    <button class="menu-toggle" onclick="toggleSidebar()"> ☰ Menu</button>
+    <button class="menu-toggle" onclick="toggleSidebar()">☰ Menu</button>
   </header>
 
-  <!-- Slide-Out Sidebar -->
+  <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
   <div class="sidebar" id="sidebar">
-    <a href="#" onclick="closeSidebar()">✕ Close</a>
+    <button class="close-sidebar" onclick="closeSidebar()">×</button>
     <a href="#" id="loginSidebarLink">Login</a>
     <a href="artist_dashboard.html">My Studio</a>
     <a href="client_dashboard.html">Find Artists</a>
@@ -76,7 +61,19 @@
     </div>
   </div>
 
-  <!-- Featured Art Section -->
+  <!-- Registration Modal -->
+  <div id="registerModal" class="modal hidden">
+    <div class="modal-content">
+      <button class="close-modal" id="closeModalBtn">×</button>
+      <form id="registerForm">
+        <input type="text" placeholder="Name" required />
+        <input type="email" placeholder="Email" required />
+        <input type="password" placeholder="Password" required />
+        <button type="submit">Register</button>
+      </form>
+    </div>
+  </div>
+
   <section class="art-gallery">
     <h2>Featured Artworks (Coming Soon)</h2>
     <div class="art-grid">
@@ -87,44 +84,48 @@
     </div>
   </section>
 
-  <!-- Continue as Guest Section (moved and restyled) -->
-  <div class="guest-option-restyled">
-    <span>Just exploring? </span>
-    <a href="#" class="guest-link">Continue as Guest</a>
-  </div>
+  <footer>
+    <p>© 2025 ArtPath. All rights reserved.</p>
+    <p>
+      <a href="#">About</a>
+      <a href="#">FAQ</a>
+      <a href="#">Contact</a>
+    </p>
+  </footer>
 
-  <!-- JavaScript -->
   <script src="Landingpage.js"></script>
-
-  
-<footer style="text-align:center; padding: 40px 20px; background-color: #1a1a1a; color: #888;">
-  <p>© 2025 ArtPath. All rights reserved.</p>
-  <p>
-    <a href="#" style="color: #6366f1; margin: 0 10px;">About</a>
-    <a href="#" style="color: #6366f1; margin: 0 10px;">FAQ</a>
-    <a href="#" style="color: #6366f1; margin: 0 10px;">Contact</a>
-  </p>
-</footer>
-
-<script>
-// Modal open/close logic for Login in sidebar
-const loginSidebarLink = document.getElementById('loginSidebarLink');
-const closeModalBtn = document.getElementById('closeModalBtn');
-const registerModal = document.getElementById('registerModal');
-
-loginSidebarLink.addEventListener('click', (e) => {
-  e.preventDefault();
-  registerModal.classList.remove('hidden');
-});
-closeModalBtn.addEventListener('click', () => {
-  registerModal.classList.add('hidden');
-});
-window.addEventListener('click', (e) => {
-  if (e.target === registerModal) {
-    registerModal.classList.add('hidden');
-  }
-});
-</script>
+  <script>
+    // Sidebar open/close logic
+    function toggleSidebar() {
+      document.getElementById('sidebar').classList.toggle('show');
+      document.getElementById('sidebarOverlay').classList.toggle('show');
+    }
+    function closeSidebar() {
+      document.getElementById('sidebar').classList.remove('show');
+      document.getElementById('sidebarOverlay').classList.remove('show');
+    }
+    // Modal open/close logic for Login in sidebar
+    const loginSidebarLink = document.getElementById('loginSidebarLink');
+    const closeModalBtn = document.getElementById('closeModalBtn');
+    const registerModal = document.getElementById('registerModal');
+    if (loginSidebarLink) {
+      loginSidebarLink.addEventListener('click', (e) => {
+        e.preventDefault();
+        registerModal.classList.remove('hidden');
+        closeSidebar();
+      });
+    }
+    if (closeModalBtn) {
+      closeModalBtn.addEventListener('click', () => {
+        registerModal.classList.add('hidden');
+      });
+    }
+    window.addEventListener('click', (e) => {
+      if (e.target === registerModal) {
+        registerModal.classList.add('hidden');
+      }
+    });
+  </script>
 <style>
 .nav-highlight {
   font-weight: 700;
