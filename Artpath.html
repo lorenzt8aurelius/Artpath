@@ -23,6 +23,11 @@
   <!-- Navbar -->
   <header class="navbar">
     <div class="logo">ArtPath</div>
+    <nav class="main-nav">
+      <a href="artist_dashboard.html" class="main-nav-link">My Studio</a>
+      <a href="client_dashboard.html" class="main-nav-link">Find Artists</a>
+      <a href="artist_page.html" class="main-nav-link">Featured Artist</a>
+    </nav>
     <button class="menu-toggle" onclick="toggleSidebar()"> ☰ Menu</button>
   </header>
 
@@ -143,6 +148,48 @@ window.addEventListener('click', (e) => {
   margin-left: 6px;
   vertical-align: middle;
   opacity: 0.7;
+}
+.main-nav {
+  display: flex;
+  gap: 40px;
+  align-items: center;
+  margin-left: 60px;
+}
+
+.main-nav-link {
+  color: #60aaff;
+  font-weight: 500;
+  font-size: 1.02rem;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  text-decoration: none;
+  position: relative;
+  padding: 4px 0;
+  transition: color 0.2s;
+}
+
+.main-nav-link::after {
+  content: '';
+  display: block;
+  height: 2px;
+  width: 0;
+  background: linear-gradient(90deg, #60aaff 0%, #fff 100%);
+  transition: width 0.3s;
+  margin: 0 auto;
+  border-radius: 2px;
+}
+
+.main-nav-link:hover,
+.main-nav-link.active {
+  color: #fff;
+}
+
+.main-nav-link:hover::after,
+.main-nav-link.active::after {
+  width: 100%;
+}
+@media (max-width: 700px) {
+  .main-nav { display: none; }
 }
 </style>
 </body>
