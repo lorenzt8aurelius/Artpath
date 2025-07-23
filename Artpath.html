@@ -7,6 +7,25 @@
 </head>
 <body>
 
+<!-- Hero Gradient Section -->
+<div class="hero-gradient hero-section">
+  <h1 class="hero-heading">Welcome to ArtPath</h1>
+  <button class="hero-join-btn" id="openModalBtn">Join as Artist</button>
+</div>
+
+<!-- Registration Modal -->
+<div id="registerModal" class="modal hidden">
+  <div class="modal-content">
+    <span class="close-modal" id="closeModalBtn">&times;</span>
+    <h2>Join as Artist</h2>
+    <form id="registerForm">
+      <input type="text" placeholder="Name" required />
+      <input type="email" placeholder="Email" required />
+      <input type="password" placeholder="Password" required />
+      <button type="submit">Register</button>
+    </form>
+  </div>
+</div>
 
   <button onclick="history.back()" class="back-button">← Back</button>
   <!-- Navbar -->
@@ -90,6 +109,23 @@
   </p>
 </footer>
 
-<script src="Landingpage.js"></script>
+<script>
+// Modal open/close logic
+const openModalBtn = document.getElementById('openModalBtn');
+const closeModalBtn = document.getElementById('closeModalBtn');
+const registerModal = document.getElementById('registerModal');
+
+openModalBtn.addEventListener('click', () => {
+  registerModal.classList.remove('hidden');
+});
+closeModalBtn.addEventListener('click', () => {
+  registerModal.classList.add('hidden');
+});
+window.addEventListener('click', (e) => {
+  if (e.target === registerModal) {
+    registerModal.classList.add('hidden');
+  }
+});
+</script>
 </body>
 </html>
