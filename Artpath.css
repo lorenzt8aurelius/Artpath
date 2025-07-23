@@ -448,3 +448,29 @@ footer a:hover {
   background: #00033D;
   box-shadow: 0 0 24px 4px rgba(6,0,171,0.28);
 }
+.guest-option-restyled {
+  text-align: center;
+  margin: 48px 0 0 0;
+  font-size: 0.98rem;
+  color: #bbb;
+  opacity: 0.65;
+  transition: opacity 0.2s;
+}
+.guest-option-restyled:hover {
+  opacity: 1;
+}
+.guest-link {
+  color: #bbb;
+  text-decoration: underline dotted;
+  margin-left: 4px;
+  opacity: 0.8;
+  font-size: 0.98rem;
+  transition: color 0.2s, opacity 0.2s;
+  font-weight: 500;
+}
+.guest-link:hover {
+  color: #fff;
+  opacity: 1;
+  text-decoration: underline;
+  cursor: pointer;
+}
