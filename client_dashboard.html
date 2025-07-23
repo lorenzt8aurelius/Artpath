@@ -87,12 +87,104 @@
       background-clip: text;
       text-fill-color: transparent;
     }
+    .messages-section {
+      padding: 0;
+    }
+    .messages-container {
+      display: flex;
+      background: #181a2a;
+      border-radius: 10px;
+      box-shadow: 0 2px 12px rgba(24,26,42,0.10);
+      overflow: hidden;
+      min-height: 320px;
+    }
+    .conversation-list {
+      width: 180px;
+      background: #23243a;
+      border-right: 1.5px solid #2e3150;
+      display: flex;
+      flex-direction: column;
+    }
+    .conversation {
+      padding: 18px 16px;
+      color: #a3a8c9;
+      cursor: pointer;
+      border-bottom: 1px solid #181a2a;
+      transition: background 0.2s, color 0.2s;
+    }
+    .conversation.active, .conversation:hover {
+      background: #0600AB;
+      color: #fff;
+    }
+    .chat-window {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 18px 18px 12px 18px;
+    }
+    .chat-messages {
+      flex: 1;
+      overflow-y: auto;
+      margin-bottom: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .message {
+      max-width: 70%;
+      padding: 10px 16px;
+      border-radius: 16px;
+      font-size: 1.01rem;
+      line-height: 1.5;
+      margin-bottom: 2px;
+    }
+    .from-them {
+      background: #23243a;
+      color: #a3a8c9;
+      align-self: flex-start;
+    }
+    .from-me {
+      background: #0600AB;
+      color: #fff;
+      align-self: flex-end;
+    }
+    .chat-input-row {
+      display: flex;
+      gap: 8px;
+    }
+    .chat-input {
+      flex: 1;
+      padding: 10px 14px;
+      border-radius: 8px;
+      border: 1px solid #2e3150;
+      background: #23243a;
+      color: #fff;
+      font-size: 1rem;
+      outline: none;
+    }
+    .chat-send-btn {
+      background: #0600AB;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 10px 22px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .chat-send-btn:hover {
+      background: #00033D;
+    }
     @media (max-width: 900px) {
       .dashboard-container { flex-direction: column; }
       .dashboard-sidebar { width: 100%; flex-direction: row; padding: 0; }
       .dashboard-sidebar a { flex: 1; text-align: center; padding: 16px 0; }
       .dashboard-main { padding: 32px 8px; }
       .dashboard-search input { width: 100%; }
+      .messages-container { flex-direction: column; }
+      .conversation-list { width: 100%; flex-direction: row; border-right: none; border-bottom: 1.5px solid #2e3150; }
+      .conversation { flex: 1; text-align: center; border-bottom: none; border-right: 1px solid #181a2a; }
     }
   </style>
 </head>
@@ -118,9 +210,25 @@
         <h3 class="highlight">My Commissions</h3>
         <p>Your commissions will appear here.</p>
       </div>
-      <div class="dashboard-section">
+      <div class="dashboard-section messages-section">
         <h3 class="highlight">Messages</h3>
-        <p>Your messages will appear here.</p>
+        <div class="messages-container">
+          <div class="conversation-list">
+            <div class="conversation active">Artist: Alex Rivera</div>
+            <div class="conversation">Artist: Casey</div>
+            <div class="conversation">Artist: Jordan</div>
+          </div>
+          <div class="chat-window">
+            <div class="chat-messages">
+              <div class="message from-them">Hello! How can I help you with your commission idea?</div>
+              <div class="message from-me">Hi Alex, I love your style! Can you do a portrait in watercolor?</div>
+            </div>
+            <div class="chat-input-row">
+              <input type="text" class="chat-input" placeholder="Type your message..." />
+              <button class="chat-send-btn">Send</button>
+            </div>
+          </div>
+        </div>
       </div>
     </main>
   </div>
