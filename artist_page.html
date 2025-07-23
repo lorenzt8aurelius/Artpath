@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Artist Page – ArtPath</title>
+  <link rel="stylesheet" href="Artpath.css">
+  <style>
+    body {
+      background: linear-gradient(180deg, #23243a 0%, #181a2a 100%);
+      color: #e3e6f3;
+    }
+    .artist-header {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      margin: 48px 0 32px 0;
+      justify-content: center;
+    }
+    .artist-avatar {
+      width: 96px;
+      height: 96px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid #0600AB;
+      box-shadow: 0 2px 16px rgba(6,0,171,0.18);
+    }
+    .artist-name {
+      font-size: 2.2rem;
+      font-weight: 800;
+      letter-spacing: 1px;
+      background: linear-gradient(90deg, #0600AB 0%, #00033D 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-fill-color: transparent;
+    }
+    .artist-actions {
+      display: flex;
+      gap: 18px;
+      justify-content: center;
+      margin-bottom: 36px;
+    }
+    .artist-actions button {
+      background: #0600AB;
+      color: #fff;
+      font-size: 1.08rem;
+      font-weight: 700;
+      padding: 12px 28px;
+      border: none;
+      border-radius: 8px;
+      box-shadow: 0 0 12px 2px rgba(6,0,171,0.12);
+      cursor: pointer;
+      transition: background 0.2s, box-shadow 0.2s;
+    }
+    .artist-actions button:hover {
+      background: #00033D;
+      box-shadow: 0 0 24px 4px rgba(6,0,171,0.18);
+    }
+    .art-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 24px;
+      max-width: 1100px;
+      margin: 0 auto 48px auto;
+      padding: 0 16px;
+    }
+    .art-card {
+      background: #23243a;
+      border-radius: 12px;
+      box-shadow: 0 2px 12px rgba(24,26,42,0.10);
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: box-shadow 0.2s;
+    }
+    .art-card img {
+      width: 100%;
+      max-width: 320px;
+      border-radius: 8px;
+      margin-bottom: 12px;
+      box-shadow: 0 2px 8px rgba(6,0,171,0.10);
+    }
+    .art-card .art-title {
+      color: #a3a8c9;
+      font-size: 1.08rem;
+      margin-top: 0;
+      margin-bottom: 0;
+      text-align: center;
+    }
+    /* Commission Modal */
+    .modal {
+      position: fixed;
+      z-index: 2000;
+      left: 0;
+      top: 0;
+      width: 100vw;
+      height: 100vh;
+      overflow: auto;
+      background: rgba(0, 3, 61, 0.75);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .modal.hidden { display: none; }
+    .modal-content {
+      background: #181a2a;
+      color: #fff;
+      padding: 40px 32px 32px 32px;
+      border-radius: 16px;
+      box-shadow: 0 8px 32px rgba(6,0,171,0.25);
+      min-width: 320px;
+      max-width: 90vw;
+      position: relative;
+      text-align: center;
+    }
+    .close-modal {
+      position: absolute;
+      top: 18px;
+      right: 22px;
+      font-size: 2rem;
+      color: #a3a8c9;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+    .close-modal:hover { color: #fff; }
+    .commission-form {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      margin-top: 18px;
+    }
+    .commission-form select, .commission-form textarea {
+      padding: 12px 16px;
+      border-radius: 6px;
+      border: 1px solid #2e3150;
+      background: #23243a;
+      color: #fff;
+      font-size: 1rem;
+      outline: none;
+      transition: border 0.2s;
+    }
+    .commission-form select:focus, .commission-form textarea:focus {
+      border: 1.5px solid #0600AB;
+    }
+    .commission-form button {
+      background: #0600AB;
+      color: #fff;
+      font-size: 1.1rem;
+      font-weight: 700;
+      padding: 12px 0;
+      border: none;
+      border-radius: 8px;
+      box-shadow: 0 0 12px 2px rgba(6,0,171,0.18);
+      cursor: pointer;
+      transition: box-shadow 0.2s, background 0.2s;
+      outline: none;
+      margin-top: 8px;
+    }
+    .commission-form button:hover {
+      background: #00033D;
+      box-shadow: 0 0 24px 4px rgba(6,0,171,0.28);
+    }
+    @media (max-width: 700px) {
+      .artist-header { flex-direction: column; gap: 12px; }
+      .art-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="artist-header">
+    <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Artist Avatar" class="artist-avatar">
+    <span class="artist-name">Alex Rivera</span>
+  </div>
+  <div class="artist-actions">
+    <button>Message Artist</button>
+    <button>Call</button>
+    <button id="openCommissionModal">Commission Now</button>
+  </div>
+  <div class="art-grid">
+    <div class="art-card">
+      <img src="https://via.placeholder.com/320x220?text=Artwork+1" alt="Artwork 1">
+      <div class="art-title">Sunset Overdrive</div>
+    </div>
+    <div class="art-card">
+      <img src="https://via.placeholder.com/320x220?text=Artwork+2" alt="Artwork 2">
+      <div class="art-title">Dreamscape</div>
+    </div>
+    <div class="art-card">
+      <img src="https://via.placeholder.com/320x220?text=Artwork+3" alt="Artwork 3">
+      <div class="art-title">Urban Muse</div>
+    </div>
+    <div class="art-card">
+      <img src="https://via.placeholder.com/320x220?text=Artwork+4" alt="Artwork 4">
+      <div class="art-title">Forest Spirit</div>
+    </div>
+  </div>
+  <!-- Commission Modal -->
+  <div id="commissionModal" class="modal hidden">
+    <div class="modal-content">
+      <span class="close-modal" id="closeCommissionModal">&times;</span>
+      <h2 class="highlight">Commission Request</h2>
+      <form class="commission-form">
+        <select required>
+          <option value="">Select Price Tier</option>
+          <option value="basic">Basic – $50</option>
+          <option value="standard">Standard – $100</option>
+          <option value="premium">Premium – $200</option>
+        </select>
+        <textarea rows="4" placeholder="Describe your commission (details, style, deadline, etc.)" required></textarea>
+        <button type="submit">Send Request</button>
+      </form>
+    </div>
+  </div>
+  <script>
+    // Commission Modal logic
+    const openCommissionModal = document.getElementById('openCommissionModal');
+    const closeCommissionModal = document.getElementById('closeCommissionModal');
+    const commissionModal = document.getElementById('commissionModal');
+    openCommissionModal.addEventListener('click', () => {
+      commissionModal.classList.remove('hidden');
+    });
+    closeCommissionModal.addEventListener('click', () => {
+      commissionModal.classList.add('hidden');
+    });
+    window.addEventListener('click', (e) => {
+      if (e.target === commissionModal) {
+        commissionModal.classList.add('hidden');
+      }
+    });
+  </script>
+</body>
+</html> 
