@@ -6,23 +6,48 @@
   <link rel="stylesheet" href="Artpath.css">
 </head>
 <body>
+  <!-- Auth Modal -->
+  <div id="authModal" class="modal hidden">
+    <div class="modal-content">
+      <div class="auth-tabs">
+        <button id="showLoginTab" class="auth-tab active">Login</button>
+        <button id="showRegisterTab" class="auth-tab">Register</button>
+      </div>
+      <form id="loginForm" class="auth-form">
+        <input type="text" id="loginName" placeholder="Name" required />
+        <input type="password" id="loginPassword" placeholder="Password" required />
+        <button type="submit">Login</button>
+      </form>
+      <form id="registerForm" class="auth-form hidden">
+        <input type="text" id="registerName" placeholder="Name" required />
+        <input type="email" id="registerEmail" placeholder="Email" required />
+        <input type="password" id="registerPassword" placeholder="Password" required />
+        <button type="submit">Register</button>
+      </form>
+      <button class="close-modal" id="closeAuthModal">×</button>
+    </div>
+  </div>
+
   <header class="navbar sticky-navbar">
     <div class="logo">ArtPath</div>
-    <nav class="main-nav">
-      <a href="artist_dashboard.html" class="main-nav-link">My Studio</a>
-      <a href="client_dashboard.html" class="main-nav-link">Find Artists</a>
-      <a href="artist_page.html" class="main-nav-link">Spotlight</a>
+    <nav class="main-nav" id="mainNav">
+      <a href="artist_dashboard.html" class="main-nav-link protected-link">My Studio</a>
+      <a href="client_dashboard.html" class="main-nav-link protected-link">Find Artists</a>
+      <a href="artist_page.html" class="main-nav-link protected-link">Spotlight</a>
     </nav>
+    <div id="authArea">
+      <button id="openAuthModal" class="menu-toggle">Login / Register</button>
+    </div>
     <button class="menu-toggle" onclick="toggleSidebar()">☰ Menu</button>
   </header>
 
   <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
   <div class="sidebar" id="sidebar">
     <button class="close-sidebar" onclick="closeSidebar()">×</button>
-    <a href="#" id="loginSidebarLink">Login</a>
-    <a href="artist_dashboard.html">My Studio</a>
-    <a href="client_dashboard.html">Find Artists</a>
-    <a href="artist_page.html">Spotlight</a>
+    <a href="#" id="sidebarAuthLink">Login / Register</a>
+    <a href="artist_dashboard.html" class="protected-link">My Studio</a>
+    <a href="client_dashboard.html" class="protected-link">Find Artists</a>
+    <a href="artist_page.html" class="protected-link">Spotlight</a>
     <a href="#">Home</a>
     <a href="#">Settings</a>
     <a href="#">Learn</a>
@@ -125,6 +150,93 @@
         registerModal.classList.add('hidden');
       }
     });
+
+    // Auth modal logic
+    const authModal = document.getElementById('authModal');
+    const openAuthModal = document.getElementById('openAuthModal');
+    const closeAuthModal = document.getElementById('closeAuthModal');
+    const sidebarAuthLink = document.getElementById('sidebarAuthLink');
+    const showLoginTab = document.getElementById('showLoginTab');
+    const showRegisterTab = document.getElementById('showRegisterTab');
+    const loginForm = document.getElementById('loginForm');
+    const registerForm = document.getElementById('registerForm');
+    const mainNav = document.getElementById('mainNav');
+    const authArea = document.getElementById('authArea');
+
+    function showAuthModal(tab) {
+      authModal.classList.remove('hidden');
+      if (tab === 'register') {
+        loginForm.classList.add('hidden');
+        registerForm.classList.remove('hidden');
+        showLoginTab.classList.remove('active');
+        showRegisterTab.classList.add('active');
+      } else {
+        loginForm.classList.remove('hidden');
+        registerForm.classList.add('hidden');
+        showLoginTab.classList.add('active');
+        showRegisterTab.classList.remove('active');
+      }
+    }
+    if (openAuthModal) openAuthModal.onclick = () => showAuthModal('login');
+    if (sidebarAuthLink) sidebarAuthLink.onclick = (e) => { e.preventDefault(); closeSidebar(); showAuthModal('login'); };
+    if (closeAuthModal) closeAuthModal.onclick = () => authModal.classList.add('hidden');
+    showLoginTab.onclick = () => showAuthModal('login');
+    showRegisterTab.onclick = () => showAuthModal('register');
+    window.addEventListener('click', (e) => {
+      if (e.target === authModal) authModal.classList.add('hidden');
+    });
+
+    // Auth logic (localStorage demo)
+    function setUser(name) {
+      localStorage.setItem('artpathUser', name);
+      updateAuthUI();
+    }
+    function getUser() {
+      return localStorage.getItem('artpathUser');
+    }
+    function logout() {
+      localStorage.removeItem('artpathUser');
+      updateAuthUI();
+    }
+    function updateAuthUI() {
+      const user = getUser();
+      // Show/hide nav links
+      document.querySelectorAll('.protected-link').forEach(link => {
+        link.style.display = user ? '' : 'none';
+      });
+      // Show welcome/logout or login/register
+      if (user) {
+        authArea.innerHTML = `<span class='welcome-msg'>Welcome, ${user}</span> <button class='menu-toggle' id='logoutBtn'>Logout</button>`;
+        document.getElementById('logoutBtn').onclick = logout;
+        if (sidebarAuthLink) sidebarAuthLink.textContent = 'Logout';
+        sidebarAuthLink.onclick = (e) => { e.preventDefault(); logout(); closeSidebar(); };
+      } else {
+        authArea.innerHTML = `<button id='openAuthModal' class='menu-toggle'>Login / Register</button>`;
+        document.getElementById('openAuthModal').onclick = () => showAuthModal('login');
+        if (sidebarAuthLink) sidebarAuthLink.textContent = 'Login / Register';
+        sidebarAuthLink.onclick = (e) => { e.preventDefault(); closeSidebar(); showAuthModal('login'); };
+      }
+    }
+    loginForm.onsubmit = (e) => {
+      e.preventDefault();
+      const name = document.getElementById('loginName').value.trim();
+      const pass = document.getElementById('loginPassword').value;
+      if (name && pass) {
+        setUser(name);
+        authModal.classList.add('hidden');
+      }
+    };
+    registerForm.onsubmit = (e) => {
+      e.preventDefault();
+      const name = document.getElementById('registerName').value.trim();
+      const email = document.getElementById('registerEmail').value.trim();
+      const pass = document.getElementById('registerPassword').value;
+      if (name && email && pass) {
+        setUser(name);
+        authModal.classList.add('hidden');
+      }
+    };
+    updateAuthUI();
   </script>
 <style>
 .nav-highlight {
