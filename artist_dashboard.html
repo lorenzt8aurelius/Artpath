@@ -86,7 +86,6 @@
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
-      text-fill-color: transparent;
     }
     .messages-section {
       padding: 0;
@@ -177,6 +176,74 @@
     .chat-send-btn:hover {
       background: #00033D;
     }
+    .commissions-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 12px;
+      background: #181a2a;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 2px 12px rgba(24,26,42,0.10);
+    }
+    .commissions-table th, .commissions-table td {
+      padding: 14px 10px;
+      text-align: left;
+      color: #e3e6f3;
+    }
+    .commissions-table th {
+      background: #23243a;
+      color: #a3a8c9;
+      font-weight: 700;
+    }
+    .commissions-table tr:not(:last-child) {
+      border-bottom: 1px solid #2e3150;
+    }
+    .status {
+      padding: 4px 12px;
+      border-radius: 8px;
+      font-size: 0.98rem;
+      font-weight: 600;
+    }
+    .status.pending {
+      background: #0600AB;
+      color: #fff;
+    }
+    .status.accepted {
+      background: #1bbf6b;
+      color: #fff;
+    }
+    .status.declined {
+      background: #c0392b;
+      color: #fff;
+    }
+    .accept-btn, .decline-btn {
+      padding: 7px 16px;
+      border: none;
+      border-radius: 6px;
+      font-weight: 600;
+      margin-right: 6px;
+      cursor: pointer;
+      font-size: 0.98rem;
+      transition: background 0.2s, color 0.2s;
+    }
+    .accept-btn {
+      background: #1bbf6b;
+      color: #fff;
+    }
+    .accept-btn:disabled {
+      background: #1bbf6b99;
+      color: #fff;
+      cursor: not-allowed;
+    }
+    .decline-btn {
+      background: #c0392b;
+      color: #fff;
+    }
+    .decline-btn:disabled {
+      background: #c0392b99;
+      color: #fff;
+      cursor: not-allowed;
+    }
     @media (max-width: 900px) {
       .dashboard-container { flex-direction: column; }
       .dashboard-sidebar { width: 100%; flex-direction: row; padding: 0; }
@@ -205,7 +272,49 @@
       </div>
       <div class="dashboard-section">
         <h3 class="highlight">Commission Requests</h3>
-        <p>No commission requests yet.</p>
+        <table class="commissions-table">
+          <thead>
+            <tr>
+              <th>Client</th>
+              <th>Type</th>
+              <th>Price</th>
+              <th>Status</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Jamie</td>
+              <td>Portrait</td>
+              <td>$100</td>
+              <td><span class="status pending">Pending</span></td>
+              <td>
+                <button class="accept-btn">Accept</button>
+                <button class="decline-btn">Decline</button>
+              </td>
+            </tr>
+            <tr>
+              <td>Morgan</td>
+              <td>Landscape</td>
+              <td>$200</td>
+              <td><span class="status accepted">Accepted</span></td>
+              <td>
+                <button class="accept-btn" disabled>Accept</button>
+                <button class="decline-btn" disabled>Decline</button>
+              </td>
+            </tr>
+            <tr>
+              <td>Taylor</td>
+              <td>Anime Style</td>
+              <td>$80</td>
+              <td><span class="status declined">Declined</span></td>
+              <td>
+                <button class="accept-btn" disabled>Accept</button>
+                <button class="decline-btn" disabled>Decline</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
       <div class="dashboard-section">
         <h3 class="highlight">Earnings</h3>
