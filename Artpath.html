@@ -26,7 +26,7 @@
     <nav class="main-nav">
       <a href="artist_dashboard.html" class="main-nav-link">My Studio</a>
       <a href="client_dashboard.html" class="main-nav-link">Find Artists</a>
-      <a href="artist_page.html" class="main-nav-link">Featured Artist</a>
+      <a href="artist_page.html" class="main-nav-link">Spotlight</a>
     </nav>
     <button class="menu-toggle" onclick="toggleSidebar()"> ☰ Menu</button>
   </header>
@@ -37,53 +37,44 @@
     <a href="#" id="loginSidebarLink">Login</a>
     <a href="artist_dashboard.html">My Studio</a>
     <a href="client_dashboard.html">Find Artists</a>
-    <a href="artist_page.html">Featured Artist</a>
+    <a href="artist_page.html">Spotlight</a>
     <a href="#">Home</a>
     <a href="#">Settings</a>
     <a href="#">Learn</a>
     <a href="#">Portfolio</a>
   </div>
 
-  <!-- Hero / Welcome Section -->
-  <section class="welcome-section">
-    <h1>WELCOME TO ARTPATH!</h1>
-    <p>A place to grow, be seen, and share your art with the world – one step at a time.</p>
-
-    <div class="choice-cards">
-
-        <!-- Experienced Artist Card -->
-      <div class="card">
-        <!-- Portfolio Icon -->
-        <svg class="card-icon" width="70" height="70" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
-          <rect x="6" y="16" width="52" height="36" fill="none" stroke="#6366f1" stroke-width="4" rx="4"/>
-          <line x1="6" y1="16" x2="6" y2="8" stroke="#6366f1" stroke-width="4"/>
-          <line x1="58" y1="16" x2="58" y2="8" stroke="#6366f1" stroke-width="4"/>
-        </svg>
-        <h3>I’m an artist</h3>
-        <p>Build your online portfolio and connect with clients.</p>
-        <button onclick="startPortfolio()">Start Your Portfolio</button>
+  <div class="centered-container fade-in">
+    <section class="welcome-section">
+      <h1>WELCOME TO ARTPATH!</h1>
+      <p>A place to grow, be seen, and share your art with the world – one step at a time.</p>
+      <div class="choice-cards">
+        <div class="card" tabindex="0" role="button" aria-label="I'm an artist. Build your online portfolio and connect with clients." onclick="startPortfolio()" style="cursor:pointer;">
+          <svg class="card-icon" width="70" height="70" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+            <rect x="6" y="16" width="52" height="36" fill="none" stroke="#bfc2d1" stroke-width="4" rx="4"/>
+            <line x1="6" y1="16" x2="6" y2="8" stroke="#bfc2d1" stroke-width="4"/>
+            <line x1="58" y1="16" x2="58" y2="8" stroke="#bfc2d1" stroke-width="4"/>
+          </svg>
+          <h3>I’m an artist</h3>
+          <p>Build your online portfolio and connect with clients.</p>
+          <button onclick="startPortfolio()">Start Your Portfolio</button>
+        </div>
+        <div class="card" tabindex="0" role="button" aria-label="Beginner. Take step-by-step courses to grow your skills confidently." onclick="startLearning()" style="cursor:pointer;">
+          <svg class="card-icon" width="70" height="70" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 52 L24 40 52 12 60 20 32 48Z" fill="none" stroke="#bfc2d1" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+            <text x="30" y="24" fill="#bfc2d1" font-size="16" font-family="Montserrat, Arial, sans-serif" text-anchor="middle" alignment-baseline="middle">?</text>
+          </svg>
+          <h3>Beginner?</h3>
+          <p>Take step-by-step courses to grow your skills confidently.</p>
+          <button onclick="startLearning()">Start Learning</button>
+        </div>
       </div>
-
-      <!-- Beginner Card -->
-      <div class="card">
-        <!-- Pencil + Question Mark Icon -->
-        <svg class="card-icon" width="70" height="70" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
-          <path d="M12 52 L24 40 52 12 60 20 32 48Z" fill="none" stroke="#6366f1" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-          <text x="30" y="24" fill="#6366f1" font-size="16" font-family="Segoe UI, sans-serif" text-anchor="middle" alignment-baseline="middle">?</text>
-        </svg>
-        <h3>Beginner?</h3>
-        <p>Take step-by-step courses to grow your skills confidently.</p>
-        <button onclick="startLearning()">Start Learning</button>
-      </div>
-
+    </section>
+    <div class="guest-option-restyled">
+      <span>Just exploring? </span>
+      <a href="#" class="guest-link">Continue as Guest</a>
     </div>
-
-    <!-- Guest Option -->
-    <div class="guest-option">
-      <p>Just exploring?</p>
-      <button onclick="continueAsGuest()">Continue as Guest</button>
-    </div>
-  </section>
+  </div>
 
   <!-- Featured Art Section -->
   <section class="art-gallery">
