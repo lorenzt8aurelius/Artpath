@@ -7,17 +7,10 @@
 </head>
 <body>
 
-<!-- Hero Gradient Section -->
-<div class="hero-gradient hero-section">
-  <h1 class="hero-heading">Welcome to ArtPath</h1>
-  <button class="hero-join-btn" id="openModalBtn">Join as Artist</button>
-</div>
-
-<!-- Registration Modal -->
+<!-- Registration Modal (for Login) -->
 <div id="registerModal" class="modal hidden">
   <div class="modal-content">
     <span class="close-modal" id="closeModalBtn">&times;</span>
-    <h2>Join as Artist</h2>
     <form id="registerForm">
       <input type="text" placeholder="Name" required />
       <input type="email" placeholder="Email" required />
@@ -36,8 +29,8 @@
   <!-- Slide-Out Sidebar -->
   <div class="sidebar" id="sidebar">
     <a href="#" onclick="closeSidebar()">✕ Close</a>
+    <a href="#" id="loginSidebarLink">Login</a>
     <a href="#">Home</a>
-    <a href="#">Login</a>
     <a href="#">Settings</a>
     <a href="#">Learn</a>
     <a href="#">Portfolio</a>
@@ -115,12 +108,13 @@
 </footer>
 
 <script>
-// Modal open/close logic
-const openModalBtn = document.getElementById('openModalBtn');
+// Modal open/close logic for Login in sidebar
+const loginSidebarLink = document.getElementById('loginSidebarLink');
 const closeModalBtn = document.getElementById('closeModalBtn');
 const registerModal = document.getElementById('registerModal');
 
-openModalBtn.addEventListener('click', () => {
+loginSidebarLink.addEventListener('click', (e) => {
+  e.preventDefault();
   registerModal.classList.remove('hidden');
 });
 closeModalBtn.addEventListener('click', () => {
