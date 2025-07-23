@@ -256,6 +256,20 @@
   </style>
 </head>
 <body>
+  <!-- Upload Art Modal -->
+  <div id="uploadArtModal" class="modal hidden">
+    <div class="modal-content">
+      <button class="close-modal" id="closeUploadArtModal">×</button>
+      <h2 class="highlight">Upload Artwork</h2>
+      <form id="uploadArtForm">
+        <input type="file" id="artImage" accept="image/*" required />
+        <input type="text" id="artTitle" placeholder="Title" required />
+        <textarea id="artDesc" placeholder="Description" rows="3" required></textarea>
+        <button type="submit">Upload</button>
+      </form>
+      <div id="uploadArtMsg" class="auth-message"></div>
+    </div>
+  </div>
   <div class="dashboard-container">
     <nav class="dashboard-sidebar">
       <a href="#" class="active">Portfolio</a>
@@ -266,8 +280,8 @@
     <main class="dashboard-main">
       <div class="dashboard-welcome highlight">Welcome, [Name]</div>
       <div class="dashboard-actions">
+        <button id="openUploadArtModal">Upload Art</button>
         <button>Set Up Profile</button>
-        <button>Upload Art</button>
         <button>View My Page</button>
       </div>
       <div class="dashboard-section">
@@ -317,30 +331,156 @@
         </table>
       </div>
       <div class="dashboard-section">
-        <h3 class="highlight">Earnings</h3>
-        <p>Your earnings will appear here.</p>
+        <h3 class="highlight">My Portfolio</h3>
+        <div id="portfolioGrid" class="art-grid"></div>
       </div>
       <div class="dashboard-section messages-section">
         <h3 class="highlight">Messages</h3>
         <div class="messages-container">
-          <div class="conversation-list">
-            <div class="conversation active">Client: Jamie</div>
-            <div class="conversation">Client: Morgan</div>
-            <div class="conversation">Client: Taylor</div>
-          </div>
+          <div class="conversation-list" id="artistConvoList"></div>
           <div class="chat-window">
-            <div class="chat-messages">
-              <div class="message from-them">Hi, I love your work! Are you available for a commission?</div>
-              <div class="message from-me">Thank you! Yes, I am. What do you have in mind?</div>
-            </div>
+            <div class="chat-messages" id="artistChatMessages"></div>
             <div class="chat-input-row">
-              <input type="text" class="chat-input" placeholder="Type your message..." />
-              <button class="chat-send-btn">Send</button>
+              <input type="text" class="chat-input" id="artistChatInput" placeholder="Type your message..." />
+              <button class="chat-send-btn" id="artistSendBtn">Send</button>
             </div>
           </div>
         </div>
       </div>
     </main>
   </div>
+<script>
+// Upload Art Modal logic
+const uploadArtModal = document.getElementById('uploadArtModal');
+const openUploadArtModal = document.getElementById('openUploadArtModal');
+const closeUploadArtModal = document.getElementById('closeUploadArtModal');
+const uploadArtForm = document.getElementById('uploadArtForm');
+const uploadArtMsg = document.getElementById('uploadArtMsg');
+const portfolioGrid = document.getElementById('portfolioGrid');
+
+function showUploadArtModal() {
+  uploadArtModal.classList.remove('hidden');
+  uploadArtMsg.textContent = '';
+  uploadArtForm.reset();
+}
+function hideUploadArtModal() {
+  uploadArtModal.classList.add('hidden');
+}
+if (openUploadArtModal) openUploadArtModal.onclick = showUploadArtModal;
+if (closeUploadArtModal) closeUploadArtModal.onclick = hideUploadArtModal;
+window.addEventListener('click', (e) => {
+  if (e.target === uploadArtModal) hideUploadArtModal();
+});
+
+function getPortfolio() {
+  return JSON.parse(localStorage.getItem('artpathPortfolio') || '[]');
+}
+function setPortfolio(items) {
+  localStorage.setItem('artpathPortfolio', JSON.stringify(items));
+}
+function renderPortfolio() {
+  const items = getPortfolio();
+  portfolioGrid.innerHTML = items.length ? '' : '<p style="color:#bfc2d1;text-align:center;">No artworks yet.</p>';
+  items.forEach((item, idx) => {
+    const div = document.createElement('div');
+    div.className = 'art-card';
+    div.innerHTML = `<img src="${item.img}" alt="${item.title}" /><div class="art-title">${item.title}</div><div class="art-desc">${item.desc}</div><button class='delete-art-btn' data-idx='${idx}'>Delete</button>`;
+    portfolioGrid.appendChild(div);
+  });
+  document.querySelectorAll('.delete-art-btn').forEach(btn => {
+    btn.onclick = function() {
+      const idx = +this.getAttribute('data-idx');
+      const items = getPortfolio();
+      items.splice(idx, 1);
+      setPortfolio(items);
+      renderPortfolio();
+    };
+  });
+}
+renderPortfolio();
+
+uploadArtForm.onsubmit = (e) => {
+  e.preventDefault();
+  uploadArtMsg.textContent = '';
+  const file = document.getElementById('artImage').files[0];
+  const title = document.getElementById('artTitle').value.trim();
+  const desc = document.getElementById('artDesc').value.trim();
+  if (!file || !title || !desc) {
+    uploadArtMsg.textContent = 'Please fill in all fields.';
+    return;
+  }
+  const reader = new FileReader();
+  reader.onload = function(evt) {
+    const img = evt.target.result;
+    const items = getPortfolio();
+    items.unshift({ img, title, desc });
+    setPortfolio(items);
+    renderPortfolio();
+    uploadArtMsg.textContent = 'Artwork uploaded!';
+    setTimeout(hideUploadArtModal, 900);
+  };
+  reader.readAsDataURL(file);
+};
+
+// Messaging system (demo, localStorage)
+const artistConvoList = document.getElementById('artistConvoList');
+const artistChatMessages = document.getElementById('artistChatMessages');
+const artistChatInput = document.getElementById('artistChatInput');
+const artistSendBtn = document.getElementById('artistSendBtn');
+
+const ARTIST_USER = getUser() || 'Artist';
+const ARTIST_CONVOS_KEY = 'artpathArtistConvos';
+const ARTIST_MSGS_KEY = 'artpathArtistMsgs';
+
+function getArtistConvos() {
+  return JSON.parse(localStorage.getItem(ARTIST_CONVOS_KEY) || '[{"name":"Jamie"},{"name":"Morgan"},{"name":"Taylor"}]');
+}
+function setArtistConvos(convos) {
+  localStorage.setItem(ARTIST_CONVOS_KEY, JSON.stringify(convos));
+}
+function getArtistMsgs() {
+  return JSON.parse(localStorage.getItem(ARTIST_MSGS_KEY) || '{}');
+}
+function setArtistMsgs(msgs) {
+  localStorage.setItem(ARTIST_MSGS_KEY, JSON.stringify(msgs));
+}
+let currentConvo = getArtistConvos()[0]?.name || '';
+function renderArtistConvos() {
+  const convos = getArtistConvos();
+  artistConvoList.innerHTML = '';
+  convos.forEach(c => {
+    const div = document.createElement('div');
+    div.className = 'conversation' + (c.name === currentConvo ? ' active' : '');
+    div.textContent = 'Client: ' + c.name;
+    div.onclick = () => { currentConvo = c.name; renderArtistConvos(); renderArtistMsgs(); };
+    artistConvoList.appendChild(div);
+  });
+}
+function renderArtistMsgs() {
+  const msgs = getArtistMsgs()[currentConvo] || [];
+  artistChatMessages.innerHTML = '';
+  msgs.forEach(m => {
+    const div = document.createElement('div');
+    div.className = 'message ' + (m.from === ARTIST_USER ? 'from-me' : 'from-them');
+    div.textContent = m.text;
+    artistChatMessages.appendChild(div);
+  });
+  artistChatMessages.scrollTop = artistChatMessages.scrollHeight;
+}
+artistSendBtn.onclick = sendArtistMsg;
+artistChatInput.onkeydown = e => { if (e.key === 'Enter') sendArtistMsg(); };
+function sendArtistMsg() {
+  const text = artistChatInput.value.trim();
+  if (!text) return;
+  const msgs = getArtistMsgs();
+  msgs[currentConvo] = msgs[currentConvo] || [];
+  msgs[currentConvo].push({ from: ARTIST_USER, text });
+  setArtistMsgs(msgs);
+  artistChatInput.value = '';
+  renderArtistMsgs();
+}
+renderArtistConvos();
+renderArtistMsgs();
+</script>
 </body>
 </html> 
