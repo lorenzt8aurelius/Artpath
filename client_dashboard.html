@@ -85,7 +85,6 @@
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
-      text-fill-color: transparent;
     }
     .messages-section {
       padding: 0;
@@ -176,6 +175,42 @@
     .chat-send-btn:hover {
       background: #00033D;
     }
+    .commissions-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 18px;
+    }
+    .commissions-table th, .commissions-table td {
+      padding: 12px 16px;
+      text-align: left;
+      border-bottom: 1px solid #2e3150;
+    }
+    .commissions-table th {
+      color: #a3a8c9;
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+    .commissions-table td {
+      color: #e3e6f3;
+      font-size: 0.95rem;
+    }
+    .status {
+      padding: 4px 8px;
+      border-radius: 6px;
+      font-weight: 600;
+    }
+    .status.pending {
+      background-color: #FFD700;
+      color: #333;
+    }
+    .status.accepted {
+      background-color: #4CAF50;
+      color: #fff;
+    }
+    .status.declined {
+      background-color: #F44336;
+      color: #fff;
+    }
     @media (max-width: 900px) {
       .dashboard-container { flex-direction: column; }
       .dashboard-sidebar { width: 100%; flex-direction: row; padding: 0; }
@@ -208,7 +243,36 @@
       </div>
       <div class="dashboard-section">
         <h3 class="highlight">My Commissions</h3>
-        <p>Your commissions will appear here.</p>
+        <table class="commissions-table">
+          <thead>
+            <tr>
+              <th>Artist</th>
+              <th>Type</th>
+              <th>Price</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Alex Rivera</td>
+              <td>Portrait</td>
+              <td>$100</td>
+              <td><span class="status pending">Pending</span></td>
+            </tr>
+            <tr>
+              <td>Casey</td>
+              <td>Landscape</td>
+              <td>$200</td>
+              <td><span class="status accepted">Accepted</span></td>
+            </tr>
+            <tr>
+              <td>Jordan</td>
+              <td>Anime Style</td>
+              <td>$80</td>
+              <td><span class="status declined">Declined</span></td>
+            </tr>
+          </tbody>
+        </table>
       </div>
       <div class="dashboard-section messages-section">
         <h3 class="highlight">Messages</h3>
