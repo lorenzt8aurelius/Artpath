@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Client Dashboard – ArtPath</title>
+  <link rel="stylesheet" href="Artpath.css">
+  <style>
+    .dashboard-container {
+      display: flex;
+      min-height: 100vh;
+      background: linear-gradient(180deg, #23243a 0%, #181a2a 100%);
+    }
+    .dashboard-sidebar {
+      width: 220px;
+      background: #181a2a;
+      color: #a3a8c9;
+      display: flex;
+      flex-direction: column;
+      padding: 40px 0 0 0;
+      box-shadow: 2px 0 16px rgba(24,26,42,0.10);
+      min-height: 100vh;
+    }
+    .dashboard-sidebar a {
+      color: #a3a8c9;
+      text-decoration: none;
+      padding: 18px 32px;
+      font-size: 1.08rem;
+      font-weight: 500;
+      transition: background 0.2s, color 0.2s;
+    }
+    .dashboard-sidebar a:hover, .dashboard-sidebar a.active {
+      background: #23243a;
+      color: #fff;
+    }
+    .dashboard-main {
+      flex: 1;
+      padding: 60px 40px 40px 40px;
+      color: #e3e6f3;
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+    .dashboard-welcome {
+      font-size: 2.2rem;
+      font-weight: 700;
+      margin-bottom: 18px;
+    }
+    .dashboard-search {
+      margin-bottom: 24px;
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+    .dashboard-search input {
+      padding: 12px 16px;
+      border-radius: 6px;
+      border: 1px solid #2e3150;
+      background: #23243a;
+      color: #fff;
+      font-size: 1rem;
+      outline: none;
+      transition: border 0.2s;
+      width: 260px;
+    }
+    .dashboard-search input:focus {
+      border: 1.5px solid #0600AB;
+    }
+    .dashboard-section {
+      background: #23243a;
+      border-radius: 12px;
+      padding: 32px 24px;
+      margin-bottom: 18px;
+      box-shadow: 0 2px 12px rgba(24,26,42,0.10);
+    }
+    .dashboard-section h3 {
+      margin-top: 0;
+      color: #a3a8c9;
+      font-size: 1.3rem;
+      margin-bottom: 18px;
+    }
+    .highlight {
+      font-weight: 800;
+      letter-spacing: 1px;
+      background: linear-gradient(90deg, #0600AB 0%, #00033D 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-fill-color: transparent;
+    }
+    @media (max-width: 900px) {
+      .dashboard-container { flex-direction: column; }
+      .dashboard-sidebar { width: 100%; flex-direction: row; padding: 0; }
+      .dashboard-sidebar a { flex: 1; text-align: center; padding: 16px 0; }
+      .dashboard-main { padding: 32px 8px; }
+      .dashboard-search input { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <div class="dashboard-container">
+    <nav class="dashboard-sidebar">
+      <a href="#" class="active">Explore Artists</a>
+      <a href="#">Search by Style</a>
+      <a href="#">Saved Artists</a>
+      <a href="#">My Commissions</a>
+      <a href="#">Messages</a>
+    </nav>
+    <main class="dashboard-main">
+      <div class="dashboard-welcome highlight">Explore Artists</div>
+      <div class="dashboard-search">
+        <input type="text" placeholder="Search by style (e.g. watercolor, anime, realism)" />
+      </div>
+      <div class="dashboard-section">
+        <h3 class="highlight">Saved Artists</h3>
+        <p>You haven't saved any artists yet.</p>
+      </div>
+      <div class="dashboard-section">
+        <h3 class="highlight">My Commissions</h3>
+        <p>Your commissions will appear here.</p>
+      </div>
+      <div class="dashboard-section">
+        <h3 class="highlight">Messages</h3>
+        <p>Your messages will appear here.</p>
+      </div>
+    </main>
+  </div>
+</body>
+</html> 
