@@ -244,6 +244,116 @@
       color: #fff;
       cursor: not-allowed;
     }
+    .profile-section {
+      background: #23243a;
+      border-radius: 12px;
+      padding: 32px 24px;
+      margin-bottom: 18px;
+      box-shadow: 0 2px 12px rgba(24,26,42,0.10);
+    }
+    .profile-avatar-row {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+    .profile-avatar {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid #0600AB;
+    }
+    .profile-form-group {
+      margin-bottom: 18px;
+    }
+    .profile-form-group label {
+      display: block;
+      font-size: 0.95rem;
+      color: #a3a8c9;
+      margin-bottom: 8px;
+    }
+    .profile-form-group input,
+    .profile-form-group textarea {
+      width: 100%;
+      padding: 12px 16px;
+      border: 1px solid #2e3150;
+      border-radius: 8px;
+      background: #23243a;
+      color: #fff;
+      font-size: 1rem;
+      outline: none;
+    }
+    .profile-form-group input:focus,
+    .profile-form-group textarea:focus {
+      border-color: #0600AB;
+    }
+    .profile-form-group button {
+      background: #0600AB;
+      color: #fff;
+      font-size: 1.08rem;
+      font-weight: 600;
+      padding: 12px 28px;
+      border: none;
+      border-radius: 8px;
+      box-shadow: 0 0 12px 2px rgba(6,0,171,0.12);
+      cursor: pointer;
+      transition: background 0.2s, box-shadow 0.2s;
+    }
+    .profile-form-group button:hover {
+      background: #00033D;
+      box-shadow: 0 0 24px 4px rgba(6,0,171,0.18);
+    }
+    .profile-form-group button:disabled {
+      background: #0600AB99;
+      color: #fff;
+      cursor: not-allowed;
+    }
+    .earnings-section {
+      background: #23243a;
+      border-radius: 12px;
+      padding: 32px 24px;
+      margin-bottom: 18px;
+      box-shadow: 0 2px 12px rgba(24,26,42,0.10);
+    }
+    .earnings-summary {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid #2e3150;
+    }
+    .earnings-total-label {
+      font-size: 1.1rem;
+      color: #a3a8c9;
+    }
+    .earnings-total {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #1bbf6b;
+    }
+    .earnings-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #181a2a;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 2px 12px rgba(24,26,42,0.10);
+    }
+    .earnings-table th, .earnings-table td {
+      padding: 14px 10px;
+      text-align: left;
+      color: #e3e6f3;
+    }
+    .earnings-table th {
+      background: #23243a;
+      color: #a3a8c9;
+      font-weight: 700;
+    }
+    .earnings-table tr:not(:last-child) {
+      border-bottom: 1px solid #2e3150;
+    }
     @media (max-width: 900px) {
       .dashboard-container { flex-direction: column; }
       .dashboard-sidebar { width: 100%; flex-direction: row; padding: 0; }
@@ -334,6 +444,29 @@
         <h3 class="highlight">My Portfolio</h3>
         <div id="portfolioGrid" class="art-grid"></div>
       </div>
+      <div class="dashboard-section profile-section">
+        <h3 class="highlight">My Profile</h3>
+        <form id="profileForm">
+          <div class="profile-avatar-row">
+            <img id="profileAvatar" class="profile-avatar" src="https://randomuser.me/api/portraits/men/32.jpg" alt="Avatar" />
+            <input type="file" id="profileAvatarInput" accept="image/*" />
+          </div>
+          <div class="profile-form-group">
+            <label for="profileName">Your Name</label>
+            <input type="text" id="profileName" placeholder="Your Name" required />
+          </div>
+          <div class="profile-form-group">
+            <label for="profileBio">Short Bio</label>
+            <textarea id="profileBio" placeholder="Short Bio" rows="2"></textarea>
+          </div>
+          <div class="profile-form-group">
+            <label for="profileStyles">Styles (comma separated)</label>
+            <input type="text" id="profileStyles" placeholder="Styles (comma separated)" />
+          </div>
+          <button type="submit">Save Profile</button>
+          <div id="profileMsg" class="auth-message"></div>
+        </form>
+      </div>
       <div class="dashboard-section messages-section">
         <h3 class="highlight">Messages</h3>
         <div class="messages-container">
@@ -346,6 +479,25 @@
             </div>
           </div>
         </div>
+      </div>
+      <div class="dashboard-section earnings-section">
+        <h3 class="highlight">Earnings</h3>
+        <div class="earnings-summary">
+          <span class="earnings-total-label">Total Earnings:</span>
+          <span class="earnings-total" id="earningsTotal">$0</span>
+        </div>
+        <table class="earnings-table">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Client</th>
+              <th>Type</th>
+              <th>Amount</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody id="earningsTableBody"></tbody>
+        </table>
       </div>
     </main>
   </div>
@@ -481,6 +633,70 @@ function sendArtistMsg() {
 }
 renderArtistConvos();
 renderArtistMsgs();
+
+// Profile setup/edit logic
+const profileForm = document.getElementById('profileForm');
+const profileAvatar = document.getElementById('profileAvatar');
+const profileAvatarInput = document.getElementById('profileAvatarInput');
+const profileName = document.getElementById('profileName');
+const profileBio = document.getElementById('profileBio');
+const profileStyles = document.getElementById('profileStyles');
+const profileMsg = document.getElementById('profileMsg');
+
+const PROFILE_KEY = 'artpathArtistProfile';
+function getProfile() {
+  return JSON.parse(localStorage.getItem(PROFILE_KEY) || '{}');
+}
+function setProfile(p) {
+  localStorage.setItem(PROFILE_KEY, JSON.stringify(p));
+}
+function renderProfile() {
+  const p = getProfile();
+  profileAvatar.src = p.avatar || 'https://randomuser.me/api/portraits/men/32.jpg';
+  profileName.value = p.name || '';
+  profileBio.value = p.bio || '';
+  profileStyles.value = p.styles || '';
+}
+profileAvatarInput.onchange = function() {
+  const file = this.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = function(evt) {
+    profileAvatar.src = evt.target.result;
+  };
+  reader.readAsDataURL(file);
+};
+profileForm.onsubmit = function(e) {
+  e.preventDefault();
+  const p = {
+    avatar: profileAvatar.src,
+    name: profileName.value.trim(),
+    bio: profileBio.value.trim(),
+    styles: profileStyles.value.trim()
+  };
+  setProfile(p);
+  profileMsg.textContent = 'Profile saved!';
+  setTimeout(() => { profileMsg.textContent = ''; }, 1200);
+};
+renderProfile();
+
+// Earnings summary/history (demo)
+const earningsTotal = document.getElementById('earningsTotal');
+const earningsTableBody = document.getElementById('earningsTableBody');
+const EARNINGS_KEY = 'artpathEarnings';
+function getEarnings() {
+  return JSON.parse(localStorage.getItem(EARNINGS_KEY) || '[{"date":"2024-06-01","client":"Jamie","type":"Portrait","amount":100,"status":"Paid"},{"date":"2024-05-28","client":"Morgan","type":"Landscape","amount":200,"status":"Paid"},{"date":"2024-05-20","client":"Taylor","type":"Anime Style","amount":80,"status":"Pending"}]');
+}
+function setEarnings(items) {
+  localStorage.setItem(EARNINGS_KEY, JSON.stringify(items));
+}
+function renderEarnings() {
+  const items = getEarnings();
+  const total = items.filter(e => e.status === 'Paid').reduce((sum, e) => sum + e.amount, 0);
+  earningsTotal.textContent = `$${total}`;
+  earningsTableBody.innerHTML = items.map(e => `<tr><td>${e.date}</td><td>${e.client}</td><td>${e.type}</td><td>$${e.amount}</td><td><span class="status ${e.status.toLowerCase()}">${e.status}</span></td></tr>`).join('');
+}
+renderEarnings();
 </script>
 </body>
 </html> 
