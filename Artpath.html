@@ -13,6 +13,7 @@
         <button id="showLoginTab" class="auth-tab active">Login</button>
         <button id="showRegisterTab" class="auth-tab">Register</button>
       </div>
+      <div id="authMessage" class="auth-message"></div>
       <form id="loginForm" class="auth-form">
         <input type="text" id="loginName" placeholder="Name" required />
         <input type="password" id="loginPassword" placeholder="Password" required />
@@ -21,7 +22,7 @@
       <form id="registerForm" class="auth-form hidden">
         <input type="text" id="registerName" placeholder="Name" required />
         <input type="email" id="registerEmail" placeholder="Email" required />
-        <input type="password" id="registerPassword" placeholder="Password" required />
+        <input type="password" id="registerPassword" placeholder="Password (min 6 chars)" required />
         <button type="submit">Register</button>
       </form>
       <button class="close-modal" id="closeAuthModal">×</button>
@@ -55,9 +56,21 @@
   </div>
 
   <div class="centered-container fade-in">
+    <section class="hero-section fiverr-hero">
+      <h1 class="fiverr-headline">Find the perfect artist for your next project</h1>
+      <p class="fiverr-subheadline">Grow, be seen, and share your art with the world – one step at a time.</p>
+      <form class="fiverr-search-bar" onsubmit="handleSearch(); return false;">
+        <input type="text" id="searchInput" placeholder="Try 'portrait', 'digital', 'logo'..." aria-label="Search artists or styles" />
+        <button type="submit">Search</button>
+      </form>
+      <div class="fiverr-trust-signals">
+        <div class="trust-badge"><span>★</span> 10K+ artists joined</div>
+        <div class="trust-badge"><span>✔</span> Secure payments</div>
+        <div class="trust-badge"><span>⏱</span> Fast response</div>
+      </div>
+    </section>
     <section class="welcome-section">
-      <h1>WELCOME TO ARTPATH!</h1>
-      <p>A place to grow, be seen, and share your art with the world – one step at a time.</p>
+      <h2>Get Started</h2>
       <div class="choice-cards">
         <div class="card" tabindex="0" role="button" aria-label="I'm an artist. Build your online portfolio and connect with clients." onclick="startPortfolio()" style="cursor:pointer;">
           <svg class="card-icon" width="70" height="70" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
@@ -102,10 +115,10 @@
   <section class="art-gallery">
     <h2>Featured Artworks (Coming Soon)</h2>
     <div class="art-grid">
-      <div class="art-card"><img src="https://via.placeholder.com/300x200?text=Artwork+1" alt="Placeholder Art 1" /></div>
-      <div class="art-card"><img src="https://via.placeholder.com/300x200?text=Artwork+2" alt="Placeholder Art 2" /></div>
-      <div class="art-card"><img src="https://via.placeholder.com/300x200?text=Artwork+3" alt="Placeholder Art 3" /></div>
-      <div class="art-card"><img src="https://via.placeholder.com/300x200?text=Artwork+4" alt="Placeholder Art 4" /></div>
+      <div class="art-card"><img src="https://via.placeholder.com/300x200?text=Artwork+1" alt="Placeholder Art 1" loading="lazy" /></div>
+      <div class="art-card"><img src="https://via.placeholder.com/300x200?text=Artwork+2" alt="Placeholder Art 2" loading="lazy" /></div>
+      <div class="art-card"><img src="https://via.placeholder.com/300x200?text=Artwork+3" alt="Placeholder Art 3" loading="lazy" /></div>
+      <div class="art-card"><img src="https://via.placeholder.com/300x200?text=Artwork+4" alt="Placeholder Art 4" loading="lazy" /></div>
     </div>
   </section>
 
@@ -162,6 +175,7 @@
     const registerForm = document.getElementById('registerForm');
     const mainNav = document.getElementById('mainNav');
     const authArea = document.getElementById('authArea');
+    const authMessage = document.getElementById('authMessage');
 
     function showAuthModal(tab) {
       authModal.classList.remove('hidden');
@@ -185,6 +199,17 @@
     window.addEventListener('click', (e) => {
       if (e.target === authModal) authModal.classList.add('hidden');
     });
+
+    function showAuthMessage(msg, type = 'error') {
+      authMessage.textContent = msg;
+      authMessage.className = 'auth-message ' + type;
+      if (type === 'success') {
+        setTimeout(() => { authMessage.textContent = ''; }, 1200);
+      }
+    }
+    function clearAuthMessage() {
+      authMessage.textContent = '';
+    }
 
     // Auth logic (localStorage demo)
     function setUser(name) {
@@ -219,22 +244,44 @@
     }
     loginForm.onsubmit = (e) => {
       e.preventDefault();
+      clearAuthMessage();
       const name = document.getElementById('loginName').value.trim();
       const pass = document.getElementById('loginPassword').value;
-      if (name && pass) {
-        setUser(name);
-        authModal.classList.add('hidden');
+      if (!name || !pass) {
+        showAuthMessage('Please enter your name and password.');
+        return;
       }
+      if (pass.length < 6) {
+        showAuthMessage('Password must be at least 6 characters.');
+        return;
+      }
+      // Simulate login (check if user exists in localStorage)
+      // For demo, just allow any name/password
+      setUser(name);
+      showAuthMessage('Login successful!', 'success');
+      setTimeout(() => { authModal.classList.add('hidden'); }, 900);
     };
     registerForm.onsubmit = (e) => {
       e.preventDefault();
+      clearAuthMessage();
       const name = document.getElementById('registerName').value.trim();
       const email = document.getElementById('registerEmail').value.trim();
       const pass = document.getElementById('registerPassword').value;
-      if (name && email && pass) {
-        setUser(name);
-        authModal.classList.add('hidden');
+      if (!name || !email || !pass) {
+        showAuthMessage('Please fill in all fields.');
+        return;
       }
+      if (!/^\S+@\S+\.\S+$/.test(email)) {
+        showAuthMessage('Please enter a valid email address.');
+        return;
+      }
+      if (pass.length < 6) {
+        showAuthMessage('Password must be at least 6 characters.');
+        return;
+      }
+      setUser(name);
+      showAuthMessage('Registration successful!', 'success');
+      setTimeout(() => { authModal.classList.add('hidden'); }, 900);
     };
     updateAuthUI();
   </script>
