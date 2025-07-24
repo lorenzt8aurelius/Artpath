@@ -3,8 +3,8 @@
 body {
   margin: 0;
   font-family: 'Inter', 'Open Sans', 'Montserrat', 'Segoe UI', Arial, sans-serif;
-  background: #f7f7f7;
-  color: #232323;
+  background: linear-gradient(135deg, #181921 0%, #23243a 100%);
+  color: #eaeaea;
   min-height: 100vh;
 }
 
