@@ -274,6 +274,13 @@
     </div>
   </section>
 
+  <!-- Final Call-to-Action (CTA) Banner -->
+  <section class="final-cta-section" style="margin: 56px 0 0 0; padding: 48px 0 48px 0; background: linear-gradient(90deg, #1DBF73 0%, #60aaff 100%); border-radius: 18px; box-shadow: 0 2px 24px rgba(24, 25, 33, 0.10); display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;">
+    <h2 style="color: #fff; font-size: 2.2rem; font-weight: 900; margin-bottom: 16px; letter-spacing: 1.5px;">Ready to start your creative journey?</h2>
+    <div style="color: #fff; font-size: 1.18rem; margin-bottom: 28px; opacity: 0.95;">Join ArtPath today and unlock your artistic potential!</div>
+    <button onclick="showAuthModal('register')" style="background: #23243a; color: #fff; font-size: 1.25rem; font-weight: 700; padding: 18px 48px; border-radius: 32px; border: none; box-shadow: 0 2px 12px 0 rgba(24,25,33,0.10); cursor: pointer; transition: background 0.18s, transform 0.18s;">Get Started</button>
+  </section>
+
   <footer>
     <p>© 2025 ArtPath. All rights reserved.</p>
     <p>
@@ -283,6 +290,23 @@
     </p>
   </footer>
 
+  <!-- Floating Help/Chat Button -->
+  <button id="helpChatBtn" style="position: fixed; bottom: 32px; right: 32px; z-index: 3000; background: linear-gradient(90deg, #1DBF73 0%, #60aaff 100%); color: #fff; border: none; border-radius: 50%; width: 62px; height: 62px; box-shadow: 0 4px 24px rgba(24,25,33,0.18); display: flex; align-items: center; justify-content: center; font-size: 2rem; cursor: pointer; transition: background 0.18s, transform 0.18s;">
+    <span style="pointer-events: none;">💬</span>
+  </button>
+  <div id="helpChatModal" class="modal hidden" style="z-index: 4000;">
+    <div class="modal-content" style="min-width: 320px; max-width: 90vw; text-align: center;">
+      <button class="close-modal" id="closeHelpChatModal" style="position: absolute; top: 18px; right: 18px; font-size: 2rem; background: none; border: none; color: #fff; cursor: pointer;">×</button>
+      <h3 style="color: #1DBF73; margin-bottom: 12px;">Need Help?</h3>
+      <div style="color: #bfc2d1; margin-bottom: 18px;">We're here to help! Send us a message and our team will get back to you soon.</div>
+      <form id="helpChatForm" style="display: flex; flex-direction: column; gap: 12px; align-items: center;">
+        <input type="email" id="helpChatEmail" placeholder="Your email" required style="padding: 10px; border-radius: 6px; border: 1px solid #23243a; width: 90%; max-width: 320px;" />
+        <textarea id="helpChatMessage" placeholder="How can we help you?" required style="padding: 10px; border-radius: 6px; border: 1px solid #23243a; width: 90%; max-width: 320px; min-height: 80px;"></textarea>
+        <button type="submit" style="background: #1DBF73; color: #fff; border: none; border-radius: 24px; padding: 10px 32px; font-weight: 700; font-size: 1.08rem; cursor: pointer;">Send Message</button>
+      </form>
+      <div id="helpChatThanks" style="display:none; color:#1DBF73; margin-top:18px; font-weight:700;">Thank you! We'll be in touch soon.</div>
+    </div>
+  </div>
   <script src="Landingpage.js"></script>
   <script>
     // Sidebar open/close logic
