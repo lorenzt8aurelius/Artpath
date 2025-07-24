@@ -16,8 +16,47 @@ function startLearning() {
 }
 
 function continueAsGuest() {
+  localStorage.setItem('artpathGuest', 'true');
+  localStorage.removeItem('artpathUser');
+  updateAuthUI();
   alert("You're now exploring as a guest!");
-  // TODO: window.location.href = "explore.html";
+}
+
+function getUser() {
+  return localStorage.getItem('artpathUser');
+}
+
+function logout() {
+  localStorage.removeItem('artpathUser');
+  localStorage.removeItem('artpathGuest');
+  updateAuthUI();
+}
+
+function updateAuthUI() {
+  const authArea = document.getElementById('authArea');
+  const sidebarAuthLink = document.getElementById('sidebarAuthLink');
+  const user = getUser();
+  const isGuest = localStorage.getItem('artpathGuest') === 'true';
+  // Show/hide nav links
+  document.querySelectorAll('.protected-link').forEach(link => {
+    link.style.display = user ? '' : 'none';
+  });
+  // Show welcome/logout or login/register
+  if (user) {
+    authArea.innerHTML = `<span class='welcome-msg'>Welcome, ${user}</span> <button class='menu-toggle' id='logoutBtn'>Logout</button>`;
+    document.getElementById('logoutBtn').onclick = logout;
+    if (sidebarAuthLink) sidebarAuthLink.textContent = 'Logout';
+    if (sidebarAuthLink) sidebarAuthLink.onclick = (e) => { e.preventDefault(); logout(); closeSidebar(); };
+  } else if (isGuest) {
+    authArea.innerHTML = `<span class='welcome-msg'>Exploring as Guest</span>`;
+    if (sidebarAuthLink) sidebarAuthLink.textContent = 'Continue as Guest';
+    if (sidebarAuthLink) sidebarAuthLink.onclick = (e) => { e.preventDefault(); closeSidebar(); };
+  } else {
+    authArea.innerHTML = `<button id='openAuthModal' class='menu-toggle'>Login / Register</button>`;
+    document.getElementById('openAuthModal').onclick = () => showAuthModal('login');
+    if (sidebarAuthLink) sidebarAuthLink.textContent = 'Login / Register';
+    if (sidebarAuthLink) sidebarAuthLink.onclick = (e) => { e.preventDefault(); closeSidebar(); showAuthModal('login'); };
+  }
 }
 
 // ========== Sidebar Menu Toggle ==========
@@ -108,3 +147,47 @@ function fadeInOnScroll() {
   }
 }
 window.addEventListener('DOMContentLoaded', fadeInOnScroll);
+document.addEventListener('DOMContentLoaded', updateAuthUI);
+
+// ===== Dynamic Art Gallery =====
+const artworks = [
+  { title: 'Dreamscape', artist: 'Jamie L.', url: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80', category: 'portrait' },
+  { title: 'Digital Muse', artist: 'Priya S.', url: 'https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=400&q=80', category: 'digital' },
+  { title: 'Logo Flow', artist: 'Alex R.', url: 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=400&q=80', category: 'logo' },
+  { title: 'Serenity', artist: 'Morgan T.', url: 'https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=400&q=80', category: 'portrait' },
+  { title: 'Neon Dreams', artist: 'Chris P.', url: 'https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=400&q=80', category: 'digital' },
+  { title: 'Brand Spark', artist: 'Taylor K.', url: 'https://images.unsplash.com/photo-1465101178521-c1a9136a3b99?auto=format&fit=crop&w=400&q=80', category: 'logo' },
+];
+
+function renderGallery(filter = 'all') {
+  const grid = document.getElementById('artGrid');
+  if (!grid) return;
+  grid.innerHTML = '';
+  const filtered = filter === 'all' ? artworks : artworks.filter(a => a.category === filter);
+  if (filtered.length === 0) {
+    grid.innerHTML = '<div style="color:#bfc2d1; text-align:center; width:100%;">No artworks found for this category.</div>';
+    return;
+  }
+  filtered.forEach(art => {
+    const card = document.createElement('div');
+    card.className = 'art-card';
+    card.innerHTML = `
+      <img src="${art.url}" alt="${art.title}" loading="lazy" />
+      <div class="art-title" style="font-weight:700; color:#fff; margin-top:8px;">${art.title}</div>
+      <div class="art-artist" style="color:#bfc2d1; font-size:0.98rem;">by ${art.artist}</div>
+    `;
+    grid.appendChild(card);
+  });
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  renderGallery();
+  const filterBtns = document.querySelectorAll('.gallery-filter-btn');
+  filterBtns.forEach(btn => {
+    btn.onclick = function() {
+      filterBtns.forEach(b => { b.style.background = '#23243a'; b.style.color = '#eaeaea'; });
+      this.style.background = '#1DBF73'; this.style.color = '#fff';
+      renderGallery(this.dataset.filter);
+    };
+  });
+});
