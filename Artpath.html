@@ -56,13 +56,25 @@
   </div>
 
   <div class="centered-container fade-in">
-    <section class="hero-section fiverr-hero">
-      <h1 class="fiverr-headline">Find the perfect artist for your next project</h1>
-      <p class="fiverr-subheadline">Grow, be seen, and share your art with the world – one step at a time.</p>
-      <form class="fiverr-search-bar" onsubmit="handleSearch(); return false;">
-        <input type="text" id="searchInput" placeholder="Try 'portrait', 'digital', 'logo'..." aria-label="Search artists or styles" />
-        <button type="submit">Search</button>
-      </form>
+    <section class="hero-section fiverr-hero" style="display: flex; align-items: center; justify-content: space-between; gap: 40px; flex-wrap: wrap;">
+      <div style="flex: 1 1 340px; min-width: 320px;">
+        <h1 class="fiverr-headline">Find the perfect artist for your next project</h1>
+        <p class="fiverr-subheadline">Grow, be seen, and share your art with the world – one step at a time.</p>
+        <form class="fiverr-search-bar" onsubmit="handleSearch(); return false;" style="margin-bottom: 18px;">
+          <input type="text" id="searchInput" placeholder="Try 'portrait', 'digital', 'logo'..." aria-label="Search artists or styles" />
+          <button type="submit">Search</button>
+        </form>
+        <button class="hero-cta-btn" style="background: #1DBF73; color: #fff; font-size: 1.25rem; font-weight: 700; padding: 16px 40px; border-radius: 32px; border: none; margin-bottom: 18px; box-shadow: 0 2px 12px 0 rgba(29,191,115,0.10); cursor: pointer; transition: background 0.18s, transform 0.18s;">Get Started</button>
+        <div class="hero-social-proof" style="display: flex; align-items: center; gap: 14px; margin-top: 8px;">
+          <span style="font-size: 1.08rem; color: #bfc2d1;">Trusted by 5,000+ artists</span>
+          <span style="color: #FFD700; font-size: 1.2rem;">
+            ★★★★★
+          </span>
+        </div>
+      </div>
+      <div style="flex: 1 1 320px; min-width: 260px; display: flex; justify-content: center; align-items: center;">
+        <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=480&q=80" alt="Artistic illustration" style="max-width: 340px; width: 100%; border-radius: 18px; box-shadow: 0 4px 32px rgba(24, 25, 33, 0.18); background: #23243a;" loading="lazy" />
+      </div>
     </section>
     <section class="welcome-section">
       <h2>Get Started</h2>
@@ -90,7 +102,7 @@
     </section>
     <div class="guest-option-restyled">
       <span>Just exploring? </span>
-      <a href="#" class="guest-link">Continue as Guest</a>
+      <a href="#" class="guest-link" onclick="continueAsGuest(); return false;">Continue as Guest</a>
     </div>
   </div>
 
