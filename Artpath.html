@@ -195,13 +195,55 @@
     </div>
   </div>
 
-  <section class="art-gallery">
-    <h2>Featured Artworks (Coming Soon)</h2>
-    <div class="art-grid">
-      <div class="art-card"><img src="https://via.placeholder.com/300x200?text=Artwork+1" alt="Placeholder Art 1" loading="lazy" /></div>
-      <div class="art-card"><img src="https://via.placeholder.com/300x200?text=Artwork+2" alt="Placeholder Art 2" loading="lazy" /></div>
-      <div class="art-card"><img src="https://via.placeholder.com/300x200?text=Artwork+3" alt="Placeholder Art 3" loading="lazy" /></div>
-      <div class="art-card"><img src="https://via.placeholder.com/300x200?text=Artwork+4" alt="Placeholder Art 4" loading="lazy" /></div>
+  <!-- Portfolio / Showcase Section -->
+  <section class="art-gallery" id="artGallerySection">
+    <h2>Featured Artworks</h2>
+    <div id="galleryFilters" style="margin-bottom: 24px; display: flex; gap: 18px; justify-content: center;">
+      <button class="gallery-filter-btn" data-filter="all" style="background: #1DBF73; color: #fff; border: none; border-radius: 18px; padding: 8px 22px; font-weight: 700; cursor: pointer;">All</button>
+      <button class="gallery-filter-btn" data-filter="portrait" style="background: #23243a; color: #eaeaea; border: none; border-radius: 18px; padding: 8px 22px; font-weight: 700; cursor: pointer;">Portrait</button>
+      <button class="gallery-filter-btn" data-filter="digital" style="background: #23243a; color: #eaeaea; border: none; border-radius: 18px; padding: 8px 22px; font-weight: 700; cursor: pointer;">Digital</button>
+      <button class="gallery-filter-btn" data-filter="logo" style="background: #23243a; color: #eaeaea; border: none; border-radius: 18px; padding: 8px 22px; font-weight: 700; cursor: pointer;">Logo</button>
+    </div>
+    <div class="art-grid" id="artGrid"></div>
+  </section>
+
+  <!-- Pricing Section -->
+  <section class="pricing-section" style="margin: 48px 0 0 0; padding: 48px 0 32px 0; background: rgba(36, 38, 58, 0.92); border-radius: 18px; box-shadow: 0 2px 24px rgba(24, 25, 33, 0.10);">
+    <h2 style="text-align: center; color: #fff; font-size: 2.1rem; font-weight: 800; margin-bottom: 36px; letter-spacing: 1.5px;">Simple, Transparent Pricing</h2>
+    <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 36px;">
+      <div class="pricing-card" style="background: #23243a; border-radius: 16px; box-shadow: 0 2px 12px rgba(24, 25, 33, 0.18); padding: 40px 28px; width: 300px; text-align: center; color: #eaeaea; display: flex; flex-direction: column; align-items: center;">
+        <h3 style="font-size: 1.3rem; font-weight: 800; color: #1DBF73; margin-bottom: 8px;">Free</h3>
+        <div style="font-size: 2.2rem; font-weight: 900; color: #fff; margin-bottom: 16px;">$0<span style="font-size:1.1rem; color:#bfc2d1; font-weight:400;">/mo</span></div>
+        <ul style="list-style:none; padding:0; margin:0 0 18px 0; color:#bfc2d1; font-size:1.05rem; text-align:left;">
+          <li>✔ Build your portfolio</li>
+          <li>✔ Access free courses</li>
+          <li>✔ Join the community</li>
+          <li>✔ Limited client connections</li>
+        </ul>
+        <button style="background:#1DBF73; color:#fff; border:none; border-radius:24px; padding:12px 32px; font-weight:700; font-size:1.08rem; cursor:pointer; margin-top:auto;">Get Started</button>
+      </div>
+      <div class="pricing-card" style="background: #23243a; border-radius: 16px; box-shadow: 0 2px 12px rgba(24, 25, 33, 0.18); padding: 40px 28px; width: 300px; text-align: center; color: #eaeaea; display: flex; flex-direction: column; align-items: center; border: 2.5px solid #1DBF73;">
+        <h3 style="font-size: 1.3rem; font-weight: 800; color: #60aaff; margin-bottom: 8px;">Pro</h3>
+        <div style="font-size: 2.2rem; font-weight: 900; color: #fff; margin-bottom: 16px;">$9<span style="font-size:1.1rem; color:#bfc2d1; font-weight:400;">/mo</span></div>
+        <ul style="list-style:none; padding:0; margin:0 0 18px 0; color:#bfc2d1; font-size:1.05rem; text-align:left;">
+          <li>✔ Everything in Free</li>
+          <li>✔ Unlimited client connections</li>
+          <li>✔ Priority support</li>
+          <li>✔ Advanced analytics</li>
+        </ul>
+        <button style="background:#60aaff; color:#fff; border:none; border-radius:24px; padding:12px 32px; font-weight:700; font-size:1.08rem; cursor:pointer; margin-top:auto;">Upgrade to Pro</button>
+      </div>
+      <div class="pricing-card" style="background: #23243a; border-radius: 16px; box-shadow: 0 2px 12px rgba(24, 25, 33, 0.18); padding: 40px 28px; width: 300px; text-align: center; color: #eaeaea; display: flex; flex-direction: column; align-items: center;">
+        <h3 style="font-size: 1.3rem; font-weight: 800; color: #FFD700; margin-bottom: 8px;">Team</h3>
+        <div style="font-size: 2.2rem; font-weight: 900; color: #fff; margin-bottom: 16px;">$29<span style="font-size:1.1rem; color:#bfc2d1; font-weight:400;">/mo</span></div>
+        <ul style="list-style:none; padding:0; margin:0 0 18px 0; color:#bfc2d1; font-size:1.05rem; text-align:left;">
+          <li>✔ Everything in Pro</li>
+          <li>✔ Team management</li>
+          <li>✔ Custom branding</li>
+          <li>✔ Dedicated support</li>
+        </ul>
+        <button style="background:#FFD700; color:#23243a; border:none; border-radius:24px; padding:12px 32px; font-weight:700; font-size:1.08rem; cursor:pointer; margin-top:auto;">Contact Us</button>
+      </div>
     </div>
   </section>
 
