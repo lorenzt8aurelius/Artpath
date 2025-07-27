@@ -2,56 +2,565 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>My Art Portfolio – ArtPath</title>
+  <title>My Profile – ArtPath</title>
   <link rel="stylesheet" href="Artpath.css" />
+  <style>
+    .profile-container {
+      max-width: 800px;
+      margin: 120px auto 40px auto;
+      padding: 0 24px;
+    }
+    
+    .profile-section {
+      background: rgba(36, 38, 58, 0.92);
+      border-radius: 16px;
+      padding: 32px;
+      margin-bottom: 24px;
+      box-shadow: 0 4px 24px rgba(24, 25, 33, 0.18);
+    }
+    
+    .profile-header {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      margin-bottom: 32px;
+    }
+    
+    .profile-picture {
+      width: 120px;
+      height: 120px;
+      border-radius: 12px;
+      object-fit: cover;
+      border: 3px solid #1DBF73;
+      background: #23243a;
+    }
+    
+    .profile-picture-container {
+      position: relative;
+    }
+    
+    .file-upload-container {
+      margin-top: 12px;
+    }
+    
+    .file-upload-container input[type="file"] {
+      display: none;
+    }
+    
+    .file-upload-btn {
+      background: #1DBF73;
+      color: #fff;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: background 0.2s;
+    }
+    
+    .file-upload-btn:hover {
+      background: #17a964;
+    }
+    
+    .file-name {
+      color: #bfc2d1;
+      font-size: 0.9rem;
+      margin-top: 4px;
+    }
+    
+    .profile-info {
+      flex: 1;
+    }
+    
+    .profile-info h1 {
+      color: #fff;
+      font-size: 2rem;
+      margin-bottom: 8px;
+      font-weight: 700;
+    }
+    
+    .form-group {
+      margin-bottom: 20px;
+    }
+    
+    .form-group label {
+      display: block;
+      color: #fff;
+      font-weight: 600;
+      margin-bottom: 8px;
+      font-size: 1rem;
+    }
+    
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 12px 16px;
+      border-radius: 8px;
+      border: 1px solid #2e3150;
+      background: #23243a;
+      color: #fff;
+      font-size: 1rem;
+      outline: none;
+      transition: border 0.2s;
+      box-sizing: border-box;
+    }
+    
+    .form-group input:focus,
+    .form-group textarea:focus {
+      border-color: #60aaff;
+    }
+    
+    .form-group textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+    
+    .save-btn {
+      background: #1DBF73;
+      color: #fff;
+      border: none;
+      padding: 12px 32px;
+      border-radius: 8px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    
+    .save-btn:hover {
+      background: #17a964;
+    }
+    
+    .save-btn:disabled {
+      background: #666;
+      cursor: not-allowed;
+    }
+    
+    .messages-section {
+      background: rgba(36, 38, 58, 0.92);
+      border-radius: 16px;
+      padding: 32px;
+      box-shadow: 0 4px 24px rgba(24, 25, 33, 0.18);
+    }
+    
+    .messages-section h2 {
+      color: #fff;
+      font-size: 1.5rem;
+      margin-bottom: 24px;
+      font-weight: 700;
+    }
+    
+    .message-input-container {
+      display: flex;
+      gap: 12px;
+      align-items: flex-end;
+    }
+    
+    .message-input {
+      flex: 1;
+      padding: 12px 16px;
+      border-radius: 8px;
+      border: 1px solid #2e3150;
+      background: #23243a;
+      color: #fff;
+      font-size: 1rem;
+      outline: none;
+      resize: none;
+      min-height: 44px;
+      max-height: 120px;
+    }
+    
+    .message-input:focus {
+      border-color: #60aaff;
+    }
+    
+    .send-btn {
+      background: #1DBF73;
+      color: #fff;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+      white-space: nowrap;
+    }
+    
+    .send-btn:hover {
+      background: #17a964;
+    }
+    
+    .send-btn:disabled {
+      background: #666;
+      cursor: not-allowed;
+    }
+    
+    .messages-list {
+      margin-top: 24px;
+      max-height: 300px;
+      overflow-y: auto;
+    }
+    
+    .message-item {
+      background: #23243a;
+      border-radius: 8px;
+      padding: 16px;
+      margin-bottom: 12px;
+      border-left: 4px solid #1DBF73;
+    }
+    
+    .message-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+    
+    .message-sender {
+      color: #1DBF73;
+      font-weight: 600;
+    }
+    
+    .message-time {
+      color: #bfc2d1;
+      font-size: 0.9rem;
+    }
+    
+    .message-content {
+      color: #eaeaea;
+      line-height: 1.5;
+    }
+    
+    .success-message {
+      background: rgba(29, 191, 115, 0.1);
+      border: 1px solid #1DBF73;
+      color: #1DBF73;
+      padding: 12px 16px;
+      border-radius: 8px;
+      margin-bottom: 16px;
+      display: none;
+    }
+    
+    .error-message {
+      background: rgba(255, 77, 79, 0.1);
+      border: 1px solid #ff4d4f;
+      color: #ff4d4f;
+      padding: 12px 16px;
+      border-radius: 8px;
+      margin-bottom: 16px;
+      display: none;
+    }
+    
+    @media (max-width: 768px) {
+      .profile-header {
+        flex-direction: column;
+        text-align: center;
+      }
+      
+      .profile-picture {
+        width: 100px;
+        height: 100px;
+      }
+      
+      .message-input-container {
+        flex-direction: column;
+      }
+      
+      .send-btn {
+        align-self: flex-end;
+      }
+    }
+  </style>
 </head>
 <body>
-
-  <header class="navbar">
-    <button onclick="history.back()" class="back-button">← Back</button>
-    <div class="logo">ArtPath</div>
-    <button class="menu-toggle" onclick="toggleSidebar()">☰ Menu</button>
-    <div class="sidebar" id="sidebar">
-      <a href="#" onclick="closeSidebar()">✕ Close</a>
-      <a href="index.html">Home</a>
-      <a href="learn.html">Learn</a>
-      <a href="portfolio.html">Portfolio</a>
-      <a href="#">Login</a>
+  <!-- Auth Modal -->
+  <div id="authModal" class="modal hidden">
+    <div class="modal-content">
+      <div class="auth-tabs">
+        <button id="showLoginTab" class="auth-tab active">Login</button>
+        <button id="showRegisterTab" class="auth-tab">Register</button>
+      </div>
+      <div id="authMessage" class="auth-message"></div>
+      <form id="loginForm" class="auth-form">
+        <input type="text" id="loginName" placeholder="Name" required />
+        <input type="password" id="loginPassword" placeholder="Password" required />
+        <button type="submit">Login</button>
+      </form>
+      <form id="registerForm" class="auth-form hidden">
+        <input type="text" id="registerName" placeholder="Name" required />
+        <input type="email" id="registerEmail" placeholder="Email" required />
+        <input type="password" id="registerPassword" placeholder="Password (min 6 chars)" required />
+        <button type="submit">Register</button>
+      </form>
+      <button class="close-modal" id="closeAuthModal">×</button>
     </div>
+  </div>
+
+  <header class="navbar sticky-navbar">
+    <div class="logo">ArtPath</div>
+    <nav class="main-nav" id="mainNav">
+      <a href="artist_dashboard.html" class="main-nav-link protected-link">My Studio</a>
+      <a href="client_dashboard.html" class="main-nav-link protected-link">Find Artists</a>
+      <a href="artist_page.html" class="main-nav-link protected-link">Spotlight</a>
+    </nav>
+    <div id="authArea">
+      <button id="openAuthModal" class="menu-toggle">Login / Register</button>
+    </div>
+    <button class="menu-toggle" onclick="toggleSidebar()">☰ Menu</button>
   </header>
 
-  <main class="main-content" style="flex-direction: column; align-items: center;">
-    <section class="portfolio-dashboard card" style="max-width: 600px; width: 100%; margin-top: 120px; padding: 40px 32px; text-align: center;">
-      <h1 style="font-size: 2.2rem; margin-bottom: 0.5rem;">Welcome, Lorenzo!</h1>
-      <p style="color: #b3b3b3; margin-bottom: 2.5rem;">Here’s your personal portfolio dashboard.</p>
-      <div style="display: flex; flex-wrap: wrap; gap: 32px; justify-content: center;">
-        <div class="card" style="flex: 1 1 260px; min-width: 220px; max-width: 320px; padding: 2rem 1rem; text-align: center;">
-          <h3 style="margin-bottom: 1rem;">📤 Upload Your Artwork</h3>
-          <input type="file" id="artUpload" accept="image/*" onchange="previewArt()" style="margin-bottom: 10px; width: 100%;" />
-          <div id="previewArea" style="margin-top: 10px;"></div>
+  <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
+  <div class="sidebar" id="sidebar">
+    <button class="close-sidebar" onclick="closeSidebar()">×</button>
+    <a href="#" id="sidebarAuthLink">Login / Register</a>
+    <a href="artist_dashboard.html" class="protected-link">My Studio</a>
+    <a href="client_dashboard.html" class="protected-link">Find Artists</a>
+    <a href="artist_page.html" class="protected-link">Spotlight</a>
+    <a href="Artpath.html">Home</a>
+    <a href="portfolio.html" class="active">Portfolio</a>
+    <a href="learn.html">Learn</a>
+  </div>
+
+  <div class="profile-container">
+    <!-- Profile Section -->
+    <section class="profile-section">
+      <h2 style="color: #fff; font-size: 1.8rem; margin-bottom: 24px; font-weight: 700;">My Profile</h2>
+      
+      <div class="profile-header">
+        <div class="profile-picture-container">
+          <img id="profilePicture" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&q=80" alt="Profile Picture" class="profile-picture" />
+          <div class="file-upload-container">
+            <label for="profilePictureUpload" class="file-upload-btn">Choose File</label>
+            <input type="file" id="profilePictureUpload" accept="image/*" onchange="handleProfilePictureUpload(event)" />
+            <div id="fileName" class="file-name">No file chosen</div>
+          </div>
         </div>
-        <div class="card" style="flex: 1 1 260px; min-width: 220px; max-width: 320px; padding: 2rem 1rem; text-align: center;">
-          <h3 style="margin-bottom: 1rem;">📈 Your Stats</h3>
-          <p style="margin-bottom: 1.5rem;">0 artworks | 0 likes | 0 commissions</p>
-          <button style="width: 100%;">View Dashboard</button>
+        
+        <div class="profile-info">
+          <div class="form-group">
+            <label for="profileName">Your Name</label>
+            <input type="text" id="profileName" value="Your Name" />
+          </div>
+          
+          <div class="form-group">
+            <label for="profileBio">Short Bio</label>
+            <textarea id="profileBio" placeholder="Tell us about yourself and your art...">Short Bio</textarea>
+          </div>
+          
+          <div class="form-group">
+            <label for="profileStyles">Styles (comma separated)</label>
+            <input type="text" id="profileStyles" value="Styles (comma separated)" />
+          </div>
+          
+          <button id="saveProfileBtn" class="save-btn" onclick="saveProfile()">Save Profile</button>
         </div>
       </div>
-      <div class="card" style="margin-top: 32px; padding: 2rem 1rem; max-width: 320px; margin-left: auto; margin-right: auto;">
-        <h3 style="margin-bottom: 1rem;">🎨 Your Art Uploads</h3>
-        <p>You haven’t uploaded any art yet.</p>
-        <button style="width: 100%;">Upload Artwork</button>
+      
+      <div id="saveMessage" class="success-message">Profile saved successfully!</div>
+      <div id="errorMessage" class="error-message">Error saving profile. Please try again.</div>
+    </section>
+
+    <!-- Messages Section -->
+    <section class="messages-section">
+      <h2>Messages</h2>
+      
+      <div class="message-input-container">
+        <textarea 
+          id="messageInput" 
+          class="message-input" 
+          placeholder="Type your message..." 
+          onkeydown="handleMessageKeydown(event)"
+        ></textarea>
+        <button id="sendMessageBtn" class="send-btn" onclick="sendMessage()">Send</button>
+      </div>
+      
+      <div id="messagesList" class="messages-list">
+        <!-- Messages will be populated here -->
       </div>
     </section>
-  </main>
+  </div>
 
   <script src="Landingpage.js"></script>
+  <script>
+    // Profile Management
+    let profileData = {
+      name: 'Your Name',
+      bio: 'Short Bio',
+      styles: 'Styles (comma separated)',
+      picture: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&q=80'
+    };
 
-  <footer style="text-align:center; padding: 40px 20px; background-color: #1a1a1a; color: #888;">
+    // Load profile data from localStorage
+    function loadProfile() {
+      const saved = localStorage.getItem('artpathProfile');
+      if (saved) {
+        profileData = JSON.parse(saved);
+        document.getElementById('profileName').value = profileData.name;
+        document.getElementById('profileBio').value = profileData.bio;
+        document.getElementById('profileStyles').value = profileData.styles;
+        document.getElementById('profilePicture').src = profileData.picture;
+      }
+    }
+
+    // Save profile data
+    function saveProfile() {
+      const name = document.getElementById('profileName').value.trim();
+      const bio = document.getElementById('profileBio').value.trim();
+      const styles = document.getElementById('profileStyles').value.trim();
+      
+      if (!name) {
+        showError('Please enter your name');
+        return;
+      }
+      
+      profileData.name = name;
+      profileData.bio = bio;
+      profileData.styles = styles;
+      
+      localStorage.setItem('artpathProfile', JSON.stringify(profileData));
+      showSuccess('Profile saved successfully!');
+      
+      // Update user name in auth system if logged in
+      const user = getUser();
+      if (user) {
+        localStorage.setItem('artpathUser', name);
+        updateAuthUI();
+      }
+    }
+
+    // Handle profile picture upload
+    function handleProfilePictureUpload(event) {
+      const file = event.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          document.getElementById('profilePicture').src = e.target.result;
+          profileData.picture = e.target.result;
+          document.getElementById('fileName').textContent = file.name;
+        };
+        reader.readAsDataURL(file);
+      }
+    }
+
+    // Show success message
+    function showSuccess(message) {
+      const successEl = document.getElementById('saveMessage');
+      successEl.textContent = message;
+      successEl.style.display = 'block';
+      setTimeout(() => {
+        successEl.style.display = 'none';
+      }, 3000);
+    }
+
+    // Show error message
+    function showError(message) {
+      const errorEl = document.getElementById('errorMessage');
+      errorEl.textContent = message;
+      errorEl.style.display = 'block';
+      setTimeout(() => {
+        errorEl.style.display = 'none';
+      }, 3000);
+    }
+
+    // Messages Management
+    let messages = [];
+
+    // Load messages from localStorage
+    function loadMessages() {
+      const saved = localStorage.getItem('artpathMessages');
+      if (saved) {
+        messages = JSON.parse(saved);
+        renderMessages();
+      }
+    }
+
+    // Send message
+    function sendMessage() {
+      const messageInput = document.getElementById('messageInput');
+      const message = messageInput.value.trim();
+      
+      if (!message) {
+        return;
+      }
+      
+      const user = getUser() || 'Anonymous';
+      const newMessage = {
+        id: Date.now(),
+        sender: user,
+        content: message,
+        timestamp: new Date().toLocaleString()
+      };
+      
+      messages.unshift(newMessage);
+      localStorage.setItem('artpathMessages', JSON.stringify(messages));
+      
+      messageInput.value = '';
+      renderMessages();
+      
+      // Auto-scroll to top
+      const messagesList = document.getElementById('messagesList');
+      messagesList.scrollTop = 0;
+    }
+
+    // Handle Enter key in message input
+    function handleMessageKeydown(event) {
+      if (event.key === 'Enter' && !event.shiftKey) {
+        event.preventDefault();
+        sendMessage();
+      }
+    }
+
+    // Render messages
+    function renderMessages() {
+      const messagesList = document.getElementById('messagesList');
+      messagesList.innerHTML = '';
+      
+      if (messages.length === 0) {
+        messagesList.innerHTML = '<p style="color: #bfc2d1; text-align: center; font-style: italic;">No messages yet. Start a conversation!</p>';
+        return;
+      }
+      
+      messages.forEach(message => {
+        const messageEl = document.createElement('div');
+        messageEl.className = 'message-item';
+        messageEl.innerHTML = `
+          <div class="message-header">
+            <span class="message-sender">${message.sender}</span>
+            <span class="message-time">${message.timestamp}</span>
+          </div>
+          <div class="message-content">${message.content}</div>
+        `;
+        messagesList.appendChild(messageEl);
+      });
+    }
+
+    // Initialize page
+    document.addEventListener('DOMContentLoaded', function() {
+      loadProfile();
+      loadMessages();
+      
+      // Auto-resize textarea
+      const messageInput = document.getElementById('messageInput');
+      messageInput.addEventListener('input', function() {
+        this.style.height = 'auto';
+        this.style.height = Math.min(this.scrollHeight, 120) + 'px';
+      });
+      
+      // Update profile name if user is logged in
+      const user = getUser();
+      if (user && user !== 'Your Name') {
+        document.getElementById('profileName').value = user;
+        profileData.name = user;
+      }
+    });
+  </script>
+
+  <footer>
     <p>© 2025 ArtPath. All rights reserved.</p>
     <p>
-      <a href="#" style="color: #6366f1; margin: 0 10px;">About</a>
-      <a href="#" style="color: #6366f1; margin: 0 10px;">FAQ</a>
-      <a href="#" style="color: #6366f1; margin: 0 10px;">Contact</a>
+      <a href="#">About</a>
+      <a href="#">FAQ</a>
+      <a href="#">Contact</a>
     </p>
   </footer>
 </body>
