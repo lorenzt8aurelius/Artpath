@@ -4,24 +4,66 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Start Your Journey – ArtPath</title>
-  <link rel="stylesheet" href="Artpath.css" />
+  <link rel="stylesheet" href="css/main.css" />
 </head>
 <body>
+  <!-- Auth Modal -->
+  <div id="authModal" class="modal hidden">
+    <div class="modal-content">
+      <div class="auth-tabs">
+        <button id="showLoginTab" class="auth-tab active">Login</button>
+        <button id="showRegisterTab" class="auth-tab">Register</button>
+      </div>
+      <div id="authMessage" class="auth-message"></div>
+      <form id="loginForm" class="auth-form">
+        <input type="text" id="loginName" placeholder="Name" required />
+        <input type="password" id="loginPassword" placeholder="Password" required />
+        <button type="submit">Login</button>
+      </form>
+      <form id="registerForm" class="auth-form hidden">
+        <input type="text" id="registerName" placeholder="Name" required />
+        <input type="email" id="registerEmail" placeholder="Email" required />
+        <input type="password" id="registerPassword" placeholder="Password (min 6 chars)" required />
+        <button type="submit">Register</button>
+      </form>
+      <button class="close-modal" id="closeAuthModal">×</button>
+    </div>
+  </div>
 
-  <button onclick="history.back()" class="back-button">← Back</button>
-  <!-- Navbar -->
-  <header class="navbar">
+  <header class="navbar sticky-navbar">
     <div class="logo">ArtPath</div>
+    <nav class="main-nav" id="mainNav">
+      <a href="artist_dashboard.html" class="main-nav-link protected-link">My Studio</a>
+      <a href="client_dashboard.html" class="main-nav-link protected-link">Find Artists</a>
+      <a href="artist_page.html" class="main-nav-link protected-link">Spotlight</a>
+    </nav>
+    <div id="authArea">
+      <button id="openAuthModal" class="menu-toggle">Login / Register</button>
+    </div>
+    <button class="menu-toggle" onclick="toggleSidebar()">☰ Menu</button>
   </header>
 
+  <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
+  <div class="sidebar" id="sidebar">
+    <button class="close-sidebar" onclick="closeSidebar()">×</button>
+    <a href="#" id="sidebarAuthLink">Login / Register</a>
+    <a href="artist_dashboard.html" class="protected-link">My Studio</a>
+    <a href="client_dashboard.html" class="protected-link">Find Artists</a>
+    <a href="artist_page.html" class="protected-link">Spotlight</a>
+    <a href="#">Home</a>
+    <a href="#">Settings</a>
+    <a href="#">Learn</a>
+    <a href="#">Portfolio</a>
+  </div>
+
   <!-- Welcome Section -->
-  <section class="welcome-section" style="padding-top: 100px;">
+  <section class="welcome-section">
     <h1>Pick Topics You Want to Learn</h1>
     <p>This helps us recommend the best creative paths for your journey.</p>
   </section>
 
   <!-- Topic Selection Grid -->
-  <section class="topic-grid" style="padding: 20px 40px; display: flex; flex-wrap: wrap; gap: 20px; justify-content: center;">
+  <section class="topic-grid">
     
     <div class="topic-card" onclick="selectTopic(this)">
       <img src="https://via.placeholder.com/300x120?text=Sketching" />
@@ -51,15 +93,20 @@
   </section>
 
   <!-- Button Row -->
-  <div style="text-align:center; margin-top: 30px;">
-    <button onclick="submitTopics()" style="padding: 12px 24px; background-color: #6366f1; color: white; border: none; border-radius: 6px; font-size: 1rem;">
+  <div class="button-row">
+    <button onclick="submitTopics()" class="primary-button">
       Show Me My Learning Plan →
     </button>
   </div>
 
   <!-- Footer -->
-  <footer style="text-align:center; padding: 40px 20px; background-color: #1a1a1a; color: #888; margin-top: 60px;">
+  <footer>
     <p>© 2025 ArtPath. All rights reserved.</p>
+    <p>
+      <a href="#">About</a>
+      <a href="#">FAQ</a>
+      <a href="#">Contact</a>
+    </p>
   </footer>
 
   <script>
@@ -85,35 +132,6 @@
       // Future: Redirect to a custom learning page or store selection in database
     }
   </script>
-
-  <style>
-    .topic-card {
-      width: 280px;
-      border: 1px solid #333;
-      border-radius: 10px;
-      overflow: hidden;
-      background-color: #1a1a1a;
-      color: white;
-      cursor: pointer;
-      transition: transform 0.2s ease, border-color 0.2s ease;
-    }
-
-    .topic-card img {
-      width: 100%;
-      height: 120px;
-      object-fit: cover;
-    }
-
-    .topic-card h3 {
-      margin: 12px;
-      font-size: 1.1rem;
-    }
-
-    .topic-card.selected {
-      border: 2px solid #6366f1;
-      transform: scale(1.03);
-    }
-  </style>
 
 </body>
 </html>
