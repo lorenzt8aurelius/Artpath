@@ -31,11 +31,13 @@
   </div>
 
   <header class="navbar sticky-navbar">
-    <div class="logo">ArtPath</div>
+    <div class="logo">
+      <span class="logo-text">ARTPATH</span>
+    </div>
     <nav class="main-nav" id="mainNav">
-      <a href="artist_dashboard.html" class="main-nav-link protected-link">My Studio</a>
-      <a href="client_dashboard.html" class="main-nav-link protected-link">Find Artists</a>
-      <a href="artist_page.html" class="main-nav-link protected-link">Spotlight</a>
+      <a href="artist_dashboard.html" class="main-nav-link">My Studio</a>
+      <a href="client_dashboard.html" class="main-nav-link">Find Artists</a>
+      <a href="artist_page.html" class="main-nav-link">Spotlight</a>
     </nav>
     <div id="authArea">
       <button id="openAuthModal" class="menu-toggle">Login / Register</button>
@@ -47,9 +49,9 @@
   <div class="sidebar" id="sidebar">
     <button class="close-sidebar" onclick="closeSidebar()">×</button>
     <a href="#" id="sidebarAuthLink">Login / Register</a>
-    <a href="artist_dashboard.html" class="protected-link">My Studio</a>
-    <a href="client_dashboard.html" class="protected-link">Find Artists</a>
-    <a href="artist_page.html" class="protected-link">Spotlight</a>
+    <a href="artist_dashboard.html">My Studio</a>
+    <a href="client_dashboard.html">Find Artists</a>
+    <a href="artist_page.html">Spotlight</a>
     <a href="#">Home</a>
     <a href="#">Settings</a>
     <a href="#">Learn</a>
@@ -109,6 +111,7 @@
     </p>
   </footer>
 
+  <script src="Landingpage.js"></script>
   <script>
     const selectedTopics = new Set();
 
@@ -131,6 +134,14 @@
       alert("Topics selected: " + Array.from(selectedTopics).join(", "));
       // Future: Redirect to a custom learning page or store selection in database
     }
+
+    // Initialize essential functions when page loads
+    document.addEventListener('DOMContentLoaded', function() {
+      // Ensure all functions from Landingpage.js are properly initialized
+      if (typeof updateAuthUI === 'function') {
+        updateAuthUI();
+      }
+    });
   </script>
 
 </body>
