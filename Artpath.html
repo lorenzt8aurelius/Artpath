@@ -56,30 +56,28 @@
   </div>
 
   <div class="centered-container fade-in">
-    <section class="hero-section fiverr-hero" style="display: flex; align-items: center; justify-content: space-between; gap: 40px; flex-wrap: wrap; background: rgba(36, 38, 58, 0.92); border-radius: 18px; box-shadow: 0 2px 24px rgba(24, 25, 33, 0.10); color: #eaeaea; padding: 60px 40px 40px 40px; margin-bottom: 40px;">
-      <div style="flex: 1 1 340px; min-width: 320px;">
+    <section class="hero-section fiverr-hero section-fade-in">
+      <div class="hero-content">
         <h1 class="fiverr-headline hero-headline-highlight">Find the perfect artist for your next project</h1>
         <p class="fiverr-subheadline">Grow, be seen, and share your art with the world – one step at a time.</p>
-        <form class="fiverr-search-bar" onsubmit="handleSearch(); return false;" style="margin-bottom: 18px;">
+        <form class="fiverr-search-bar" onsubmit="handleSearch(); return false;">
           <input type="text" id="searchInput" placeholder="Try 'portrait', 'digital', 'logo'..." aria-label="Search artists or styles" />
           <button type="submit">Search</button>
         </form>
-        <button class="hero-cta-btn" style="background: #1DBF73; color: #fff; font-size: 1.25rem; font-weight: 700; padding: 16px 40px; border-radius: 32px; border: none; margin-bottom: 18px; box-shadow: 0 2px 12px 0 rgba(29,191,115,0.10); cursor: pointer; transition: background 0.18s, transform 0.18s;">Get Started</button>
-        <div class="hero-social-proof" style="display: flex; align-items: center; gap: 14px; margin-top: 8px;">
-          <span style="font-size: 1.08rem; color: #bfc2d1;">Trusted by 5,000+ artists</span>
-          <span style="color: #FFD700; font-size: 1.2rem;">
-            ★★★★★
-          </span>
+        <button class="hero-cta-btn">Get Started</button>
+        <div class="hero-social-proof">
+          <span>Trusted by 5,000+ artists</span>
+          <span>★★★★★</span>
         </div>
       </div>
-      <div style="flex: 1 1 320px; min-width: 260px; display: flex; justify-content: center; align-items: center;">
-        <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=480&q=80" alt="Artistic illustration" style="max-width: 340px; width: 100%; border-radius: 18px; box-shadow: 0 4px 32px rgba(24, 25, 33, 0.18); background: #23243a;" loading="lazy" />
+      <div class="hero-image-container">
+        <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=480&q=80" alt="Artistic illustration" />
       </div>
     </section>
-    <section class="welcome-section">
+    <section class="welcome-section section-fade-in">
       <h2>Get Started</h2>
       <div class="choice-cards">
-        <div class="card" tabindex="0" role="button" aria-label="I'm an artist. Build your online portfolio and connect with clients." onclick="startPortfolio()" style="cursor:pointer;">
+        <div class="card card-fade-in" tabindex="0" role="button" aria-label="I'm an artist. Build your online portfolio and connect with clients." onclick="startPortfolio()">
           <svg class="card-icon" width="70" height="70" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
             <rect x="6" y="16" width="52" height="36" fill="none" stroke="#bfc2d1" stroke-width="4" rx="4"/>
             <line x1="6" y1="16" x2="6" y2="8" stroke="#bfc2d1" stroke-width="4"/>
@@ -89,7 +87,7 @@
           <p>Build your online portfolio and connect with clients.</p>
           <button onclick="startPortfolio()">Start Your Portfolio</button>
         </div>
-        <div class="card" tabindex="0" role="button" aria-label="Beginner. Take step-by-step courses to grow your skills confidently." onclick="startLearning()" style="cursor:pointer;">
+        <div class="card card-fade-in" tabindex="0" role="button" aria-label="Beginner. Take step-by-step courses to grow your skills confidently." onclick="startLearning()">
           <svg class="card-icon" width="70" height="70" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
             <path d="M12 52 L24 40 52 12 60 20 32 48Z" fill="none" stroke="#bfc2d1" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
             <text x="30" y="24" fill="#bfc2d1" font-size="16" font-family="Montserrat, Arial, sans-serif" text-anchor="middle" alignment-baseline="middle">?</text>
@@ -101,78 +99,74 @@
       </div>
     </section>
     <!-- Features / Benefits Section -->
-    <section class="features-section" style="margin: 48px 0 0 0; padding: 48px 0 32px 0; background: rgba(36, 38, 58, 0.92); border-radius: 18px; box-shadow: 0 2px 24px rgba(24, 25, 33, 0.10);">
-      <h2 style="text-align: center; color: #fff; font-size: 2.1rem; font-weight: 800; margin-bottom: 36px; letter-spacing: 1.5px;">Why Choose ArtPath?</h2>
-      <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 36px;">
-        <div class="feature-card" style="background: #23243a; border-radius: 16px; box-shadow: 0 2px 12px rgba(24, 25, 33, 0.18); padding: 36px 28px; width: 300px; text-align: center; color: #eaeaea; display: flex; flex-direction: column; align-items: center;">
-          <div style="font-size: 2.6rem; margin-bottom: 18px;">🎨</div>
-          <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 10px; color: #1DBF73;">Showcase Your Art</h3>
-          <p style="color: #bfc2d1; font-size: 1.05rem;">Build a beautiful online portfolio and get discovered by clients worldwide.</p>
+    <section class="features-section section-fade-in">
+      <h2>Why Choose ArtPath?</h2>
+      <div class="feature-cards">
+        <div class="feature-card card-fade-in">
+          <div>🎨</div>
+          <h3>Showcase Your Art</h3>
+          <p>Build a beautiful online portfolio and get discovered by clients worldwide.</p>
         </div>
-        <div class="feature-card" style="background: #23243a; border-radius: 16px; box-shadow: 0 2px 12px rgba(24, 25, 33, 0.18); padding: 36px 28px; width: 300px; text-align: center; color: #eaeaea; display: flex; flex-direction: column; align-items: center;">
-          <div style="font-size: 2.6rem; margin-bottom: 18px;">📚</div>
-          <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 10px; color: #60aaff;">Learn & Grow</h3>
-          <p style="color: #bfc2d1; font-size: 1.05rem;">Access step-by-step courses and resources to improve your skills.</p>
+        <div class="feature-card card-fade-in">
+          <div>📚</div>
+          <h3>Learn & Grow</h3>
+          <p>Access step-by-step courses and resources to improve your skills.</p>
         </div>
-        <div class="feature-card" style="background: #23243a; border-radius: 16px; box-shadow: 0 2px 12px rgba(24, 25, 33, 0.18); padding: 36px 28px; width: 300px; text-align: center; color: #eaeaea; display: flex; flex-direction: column; align-items: center;">
-          <div style="font-size: 2.6rem; margin-bottom: 18px;">🤝</div>
-          <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 10px; color: #FFD700;">Connect & Earn</h3>
-          <p style="color: #bfc2d1; font-size: 1.05rem;">Find new clients, get commissions, and grow your creative business.</p>
+        <div class="feature-card card-fade-in">
+          <div>🤝</div>
+          <h3>Connect & Earn</h3>
+          <p>Find new clients, get commissions, and grow your creative business.</p>
         </div>
       </div>
     </section>
     <!-- How It Works / Process Section -->
-    <section class="how-it-works-section" style="margin: 48px 0 0 0; padding: 48px 0 32px 0; background: rgba(36, 38, 58, 0.92); border-radius: 18px; box-shadow: 0 2px 24px rgba(24, 25, 33, 0.10);">
-      <h2 style="text-align: center; color: #fff; font-size: 2.1rem; font-weight: 800; margin-bottom: 36px; letter-spacing: 1.5px;">How It Works</h2>
-      <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 36px; align-items: flex-start;">
-        <div class="how-step" style="background: #23243a; border-radius: 16px; box-shadow: 0 2px 12px rgba(24, 25, 33, 0.18); padding: 36px 28px; width: 260px; text-align: center; color: #eaeaea; display: flex; flex-direction: column; align-items: center;">
-          <div style="font-size: 2.3rem; margin-bottom: 14px; background: #1DBF73; color: #fff; width: 48px; height: 48px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800;">1</div>
-          <h3 style="font-size: 1.15rem; font-weight: 700; margin-bottom: 8px; color: #1DBF73;">Sign Up or Explore</h3>
-          <p style="color: #bfc2d1; font-size: 1.01rem;">Create an account or browse as a guest to get started.</p>
+    <section class="how-it-works-section section-fade-in">
+      <h2>How It Works</h2>
+      <div class="how-steps">
+        <div class="how-step card-fade-in">
+          <div>1</div>
+          <h3>Sign Up or Explore</h3>
+          <p>Create an account or browse as a guest to get started.</p>
         </div>
-        <div class="how-step" style="background: #23243a; border-radius: 16px; box-shadow: 0 2px 12px rgba(24, 25, 33, 0.18); padding: 36px 28px; width: 260px; text-align: center; color: #eaeaea; display: flex; flex-direction: column; align-items: center;">
-          <div style="font-size: 2.3rem; margin-bottom: 14px; background: #60aaff; color: #fff; width: 48px; height: 48px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800;">2</div>
-          <h3 style="font-size: 1.15rem; font-weight: 700; margin-bottom: 8px; color: #60aaff;">Build & Share Your Portfolio</h3>
-          <p style="color: #bfc2d1; font-size: 1.01rem;">Upload your art and personalize your profile to showcase your talent.</p>
+        <div class="how-step card-fade-in">
+          <div>2</div>
+          <h3>Build & Share Your Portfolio</h3>
+          <p>Upload your art and personalize your profile to showcase your talent.</p>
         </div>
-        <div class="how-step" style="background: #23243a; border-radius: 16px; box-shadow: 0 2px 12px rgba(24, 25, 33, 0.18); padding: 36px 28px; width: 260px; text-align: center; color: #eaeaea; display: flex; flex-direction: column; align-items: center;">
-          <div style="font-size: 2.3rem; margin-bottom: 14px; background: #FFD700; color: #23243a; width: 48px; height: 48px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800;">3</div>
-          <h3 style="font-size: 1.15rem; font-weight: 700; margin-bottom: 8px; color: #FFD700;">Connect & Grow</h3>
-          <p style="color: #bfc2d1; font-size: 1.01rem;">Get discovered, find clients, and join the creative community.</p>
+        <div class="how-step card-fade-in">
+          <div>3</div>
+          <h3>Connect & Grow</h3>
+          <p>Get discovered, find clients, and join the creative community.</p>
         </div>
       </div>
     </section>
     <!-- About the Product / Story Section -->
-    <section class="about-section" style="margin: 48px 0 0 0; padding: 48px 0 32px 0; background: rgba(36, 38, 58, 0.92); border-radius: 18px; box-shadow: 0 2px 24px rgba(24, 25, 33, 0.10); display: flex; flex-direction: column; align-items: center;">
-      <h2 style="text-align: center; color: #fff; font-size: 2.1rem; font-weight: 800; margin-bottom: 24px; letter-spacing: 1.5px;">Our Story</h2>
-      <div style="max-width: 700px; color: #bfc2d1; font-size: 1.18rem; text-align: center; margin-bottom: 18px;">
-        ArtPath was created by artists, for artists. We believe every creative deserves a place to shine, learn, and earn—no matter their background or experience. Our mission is to empower artists to showcase their work, connect with clients, and grow their skills in a supportive, inspiring community.
-      </div>
-      <div style="margin-top: 18px; color: #60aaff; font-family: 'Montserrat', cursive; font-size: 1.1rem; opacity: 0.8;">
-        — The ArtPath Team
-      </div>
+    <section class="about-section section-fade-in">
+      <h2>Our Story</h2>
+      <p>ArtPath was created by artists, for artists. We believe every creative deserves a place to shine, learn, and earn—no matter their background or experience. Our mission is to empower artists to showcase their work, connect with clients, and grow their skills in a supportive, inspiring community.</p>
+      <div class="story-quote">— The ArtPath Team</div>
     </section>
     <!-- Social Proof / Testimonials Section -->
-    <section class="testimonials-section" style="margin: 48px 0 0 0; padding: 48px 0 32px 0; background: rgba(36, 38, 58, 0.92); border-radius: 18px; box-shadow: 0 2px 24px rgba(24, 25, 33, 0.10);">
-      <h2 style="text-align: center; color: #fff; font-size: 2.1rem; font-weight: 800; margin-bottom: 36px; letter-spacing: 1.5px;">What Artists Are Saying</h2>
-      <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 36px;">
-        <div class="testimonial-card" style="background: #23243a; border-radius: 16px; box-shadow: 0 2px 12px rgba(24, 25, 33, 0.18); padding: 32px 24px; width: 320px; text-align: center; color: #eaeaea; display: flex; flex-direction: column; align-items: center;">
-          <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Jamie L." style="width: 64px; height: 64px; border-radius: 50%; margin-bottom: 14px; object-fit: cover;" />
-          <div style="color: #FFD700; font-size: 1.2rem; margin-bottom: 6px;">★★★★★</div>
-          <p style="font-size: 1.08rem; color: #fff; margin-bottom: 10px;">“ArtPath helped me find my first client and build my dream portfolio!”</p>
-          <div style="color: #bfc2d1; font-size: 1rem; font-weight: 600;">Jamie L., Digital Artist</div>
+    <section class="testimonials-section section-fade-in">
+      <h2>What Artists Are Saying</h2>
+      <div class="testimonial-cards">
+        <div class="testimonial-card card-fade-in">
+          <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Jamie L." />
+          <div>★★★★★</div>
+          <p>“ArtPath helped me find my first client and build my dream portfolio!”</p>
+          <div>Jamie L., Digital Artist</div>
         </div>
-        <div class="testimonial-card" style="background: #23243a; border-radius: 16px; box-shadow: 0 2px 12px rgba(24, 25, 33, 0.18); padding: 32px 24px; width: 320px; text-align: center; color: #eaeaea; display: flex; flex-direction: column; align-items: center;">
-          <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Priya S." style="width: 64px; height: 64px; border-radius: 50%; margin-bottom: 14px; object-fit: cover;" />
-          <div style="color: #FFD700; font-size: 1.2rem; margin-bottom: 6px;">★★★★★</div>
-          <p style="font-size: 1.08rem; color: #fff; margin-bottom: 10px;">“The courses are easy to follow and the community is so supportive.”</p>
-          <div style="color: #bfc2d1; font-size: 1rem; font-weight: 600;">Priya S., Illustrator</div>
+        <div class="testimonial-card card-fade-in">
+          <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Priya S." />
+          <div>★★★★★</div>
+          <p>“The courses are easy to follow and the community is so supportive.”</p>
+          <div>Priya S., Illustrator</div>
         </div>
-        <div class="testimonial-card" style="background: #23243a; border-radius: 16px; box-shadow: 0 2px 12px rgba(24, 25, 33, 0.18); padding: 32px 24px; width: 320px; text-align: center; color: #eaeaea; display: flex; flex-direction: column; align-items: center;">
-          <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Alex R." style="width: 64px; height: 64px; border-radius: 50%; margin-bottom: 14px; object-fit: cover;" />
-          <div style="color: #FFD700; font-size: 1.2rem; margin-bottom: 6px;">★★★★★</div>
-          <p style="font-size: 1.08rem; color: #fff; margin-bottom: 10px;">“I love how simple it is to showcase my work and connect with clients.”</p>
-          <div style="color: #bfc2d1; font-size: 1rem; font-weight: 600;">Alex R., Concept Artist</div>
+        <div class="testimonial-card card-fade-in">
+          <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Alex R." />
+          <div>★★★★★</div>
+          <p>“I love how simple it is to showcase my work and connect with clients.”</p>
+          <div>Alex R., Concept Artist</div>
         </div>
       </div>
     </section>
@@ -196,89 +190,89 @@
   </div>
 
   <!-- Portfolio / Showcase Section -->
-  <section class="art-gallery" id="artGallerySection">
+  <section class="art-gallery section-fade-in" id="artGallerySection">
     <h2>Featured Artworks</h2>
     <div id="galleryFilters" style="margin-bottom: 24px; display: flex; gap: 18px; justify-content: center;">
-      <button class="gallery-filter-btn" data-filter="all" style="background: #1DBF73; color: #fff; border: none; border-radius: 18px; padding: 8px 22px; font-weight: 700; cursor: pointer;">All</button>
-      <button class="gallery-filter-btn" data-filter="portrait" style="background: #23243a; color: #eaeaea; border: none; border-radius: 18px; padding: 8px 22px; font-weight: 700; cursor: pointer;">Portrait</button>
-      <button class="gallery-filter-btn" data-filter="digital" style="background: #23243a; color: #eaeaea; border: none; border-radius: 18px; padding: 8px 22px; font-weight: 700; cursor: pointer;">Digital</button>
-      <button class="gallery-filter-btn" data-filter="logo" style="background: #23243a; color: #eaeaea; border: none; border-radius: 18px; padding: 8px 22px; font-weight: 700; cursor: pointer;">Logo</button>
+      <button class="gallery-filter-btn" data-filter="all">All</button>
+      <button class="gallery-filter-btn" data-filter="portrait">Portrait</button>
+      <button class="gallery-filter-btn" data-filter="digital">Digital</button>
+      <button class="gallery-filter-btn" data-filter="logo">Logo</button>
     </div>
     <div class="art-grid" id="artGrid"></div>
   </section>
 
   <!-- Pricing Section -->
-  <section class="pricing-section" style="margin: 48px 0 0 0; padding: 48px 0 32px 0; background: rgba(36, 38, 58, 0.92); border-radius: 18px; box-shadow: 0 2px 24px rgba(24, 25, 33, 0.10);">
-    <h2 style="text-align: center; color: #fff; font-size: 2.1rem; font-weight: 800; margin-bottom: 36px; letter-spacing: 1.5px;">Simple, Transparent Pricing</h2>
-    <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 36px;">
-      <div class="pricing-card" style="background: #23243a; border-radius: 16px; box-shadow: 0 2px 12px rgba(24, 25, 33, 0.18); padding: 40px 28px; width: 300px; text-align: center; color: #eaeaea; display: flex; flex-direction: column; align-items: center;">
-        <h3 style="font-size: 1.3rem; font-weight: 800; color: #1DBF73; margin-bottom: 8px;">Free</h3>
-        <div style="font-size: 2.2rem; font-weight: 900; color: #fff; margin-bottom: 16px;">$0<span style="font-size:1.1rem; color:#bfc2d1; font-weight:400;">/mo</span></div>
-        <ul style="list-style:none; padding:0; margin:0 0 18px 0; color:#bfc2d1; font-size:1.05rem; text-align:left;">
+  <section class="pricing-section section-fade-in">
+    <h2>Simple, Transparent Pricing</h2>
+    <div class="pricing-cards">
+      <div class="pricing-card card-fade-in">
+        <h3>Free</h3>
+        <div>$0<span>/mo</span></div>
+        <ul>
           <li>✔ Build your portfolio</li>
           <li>✔ Access free courses</li>
           <li>✔ Join the community</li>
           <li>✔ Limited client connections</li>
         </ul>
-        <button style="background:#1DBF73; color:#fff; border:none; border-radius:24px; padding:12px 32px; font-weight:700; font-size:1.08rem; cursor:pointer; margin-top:auto;">Get Started</button>
+        <button>Get Started</button>
       </div>
-      <div class="pricing-card" style="background: #23243a; border-radius: 16px; box-shadow: 0 2px 12px rgba(24, 25, 33, 0.18); padding: 40px 28px; width: 300px; text-align: center; color: #eaeaea; display: flex; flex-direction: column; align-items: center; border: 2.5px solid #1DBF73;">
-        <h3 style="font-size: 1.3rem; font-weight: 800; color: #60aaff; margin-bottom: 8px;">Pro</h3>
-        <div style="font-size: 2.2rem; font-weight: 900; color: #fff; margin-bottom: 16px;">$9<span style="font-size:1.1rem; color:#bfc2d1; font-weight:400;">/mo</span></div>
-        <ul style="list-style:none; padding:0; margin:0 0 18px 0; color:#bfc2d1; font-size:1.05rem; text-align:left;">
+      <div class="pricing-card card-fade-in" style="border: 2.5px solid #1DBF73;">
+        <h3>Pro</h3>
+        <div>$9<span>/mo</span></div>
+        <ul>
           <li>✔ Everything in Free</li>
           <li>✔ Unlimited client connections</li>
           <li>✔ Priority support</li>
           <li>✔ Advanced analytics</li>
         </ul>
-        <button style="background:#60aaff; color:#fff; border:none; border-radius:24px; padding:12px 32px; font-weight:700; font-size:1.08rem; cursor:pointer; margin-top:auto;">Upgrade to Pro</button>
+        <button>Upgrade to Pro</button>
       </div>
-      <div class="pricing-card" style="background: #23243a; border-radius: 16px; box-shadow: 0 2px 12px rgba(24, 25, 33, 0.18); padding: 40px 28px; width: 300px; text-align: center; color: #eaeaea; display: flex; flex-direction: column; align-items: center;">
-        <h3 style="font-size: 1.3rem; font-weight: 800; color: #FFD700; margin-bottom: 8px;">Team</h3>
-        <div style="font-size: 2.2rem; font-weight: 900; color: #fff; margin-bottom: 16px;">$29<span style="font-size:1.1rem; color:#bfc2d1; font-weight:400;">/mo</span></div>
-        <ul style="list-style:none; padding:0; margin:0 0 18px 0; color:#bfc2d1; font-size:1.05rem; text-align:left;">
+      <div class="pricing-card card-fade-in">
+        <h3>Team</h3>
+        <div>$29<span>/mo</span></div>
+        <ul>
           <li>✔ Everything in Pro</li>
           <li>✔ Team management</li>
           <li>✔ Custom branding</li>
           <li>✔ Dedicated support</li>
         </ul>
-        <button style="background:#FFD700; color:#23243a; border:none; border-radius:24px; padding:12px 32px; font-weight:700; font-size:1.08rem; cursor:pointer; margin-top:auto;">Contact Us</button>
+        <button>Contact Us</button>
       </div>
     </div>
   </section>
 
   <!-- FAQs Section -->
-  <section class="faqs-section" style="margin: 48px 0 0 0; padding: 48px 0 32px 0; background: rgba(36, 38, 58, 0.92); border-radius: 18px; box-shadow: 0 2px 24px rgba(24, 25, 33, 0.10);">
-    <h2 style="text-align: center; color: #fff; font-size: 2.1rem; font-weight: 800; margin-bottom: 36px; letter-spacing: 1.5px;">Frequently Asked Questions</h2>
-    <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 36px;">
-      <div class="faq-card" style="background: #23243a; border-radius: 16px; box-shadow: 0 2px 12px rgba(24, 25, 33, 0.18); padding: 32px 24px; width: 340px; color: #eaeaea; display: flex; flex-direction: column; align-items: flex-start;">
-        <div style="font-weight: 700; color: #1DBF73; font-size: 1.13rem; margin-bottom: 10px;">Is ArtPath free to use?</div>
-        <div style="color: #bfc2d1; font-size: 1.05rem;">Yes! You can start for free and upgrade anytime for more features.</div>
+  <section class="faqs-section section-fade-in">
+    <h2>Frequently Asked Questions</h2>
+    <div class="faq-cards">
+      <div class="faq-card card-fade-in">
+        <div>Is ArtPath free to use?</div>
+        <p>Yes! You can start for free and upgrade anytime for more features.</p>
       </div>
-      <div class="faq-card" style="background: #23243a; border-radius: 16px; box-shadow: 0 2px 12px rgba(24, 25, 33, 0.18); padding: 32px 24px; width: 340px; color: #eaeaea; display: flex; flex-direction: column; align-items: flex-start;">
-        <div style="font-weight: 700; color: #60aaff; font-size: 1.13rem; margin-bottom: 10px;">Can I sell my art on ArtPath?</div>
-        <div style="color: #bfc2d1; font-size: 1.05rem;">Yes, you can connect with clients and receive commissions directly.</div>
+      <div class="faq-card card-fade-in">
+        <div>Can I sell my art on ArtPath?</div>
+        <p>Yes, you can connect with clients and receive commissions directly.</p>
       </div>
-      <div class="faq-card" style="background: #23243a; border-radius: 16px; box-shadow: 0 2px 12px rgba(24, 25, 33, 0.18); padding: 32px 24px; width: 340px; color: #eaeaea; display: flex; flex-direction: column; align-items: flex-start;">
-        <div style="font-weight: 700; color: #FFD700; font-size: 1.13rem; margin-bottom: 10px;">Do I need to be a professional artist?</div>
-        <div style="color: #bfc2d1; font-size: 1.05rem;">No—ArtPath is for all skill levels, from beginners to pros.</div>
+      <div class="faq-card card-fade-in">
+        <div>Do I need to be a professional artist?</div>
+        <p>No—ArtPath is for all skill levels, from beginners to pros.</p>
       </div>
-      <div class="faq-card" style="background: #23243a; border-radius: 16px; box-shadow: 0 2px 12px rgba(24, 25, 33, 0.18); padding: 32px 24px; width: 340px; color: #eaeaea; display: flex; flex-direction: column; align-items: flex-start;">
-        <div style="font-weight: 700; color: #1DBF73; font-size: 1.13rem; margin-bottom: 10px;">How do I get started?</div>
-        <div style="color: #bfc2d1; font-size: 1.05rem;">Just sign up or continue as a guest to explore and build your portfolio.</div>
+      <div class="faq-card card-fade-in">
+        <div>How do I get started?</div>
+        <p>Just sign up or continue as a guest to explore and build your portfolio.</p>
       </div>
-      <div class="faq-card" style="background: #23243a; border-radius: 16px; box-shadow: 0 2px 12px rgba(24, 25, 33, 0.18); padding: 32px 24px; width: 340px; color: #eaeaea; display: flex; flex-direction: column; align-items: flex-start;">
-        <div style="font-weight: 700; color: #60aaff; font-size: 1.13rem; margin-bottom: 10px;">What payment methods do you accept?</div>
-        <div style="color: #bfc2d1; font-size: 1.05rem;">We accept all major credit cards for Pro and Team plans.</div>
+      <div class="faq-card card-fade-in">
+        <div>What payment methods do you accept?</div>
+        <p>We accept all major credit cards for Pro and Team plans.</p>
       </div>
     </div>
   </section>
 
   <!-- Final Call-to-Action (CTA) Banner -->
-  <section class="final-cta-section" style="margin: 56px 0 0 0; padding: 48px 0 48px 0; background: linear-gradient(90deg, #1DBF73 0%, #60aaff 100%); border-radius: 18px; box-shadow: 0 2px 24px rgba(24, 25, 33, 0.10); display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;">
-    <h2 style="color: #fff; font-size: 2.2rem; font-weight: 900; margin-bottom: 16px; letter-spacing: 1.5px;">Ready to start your creative journey?</h2>
-    <div style="color: #fff; font-size: 1.18rem; margin-bottom: 28px; opacity: 0.95;">Join ArtPath today and unlock your artistic potential!</div>
-    <button onclick="showAuthModal('register')" style="background: #23243a; color: #fff; font-size: 1.25rem; font-weight: 700; padding: 18px 48px; border-radius: 32px; border: none; box-shadow: 0 2px 12px 0 rgba(24,25,33,0.10); cursor: pointer; transition: background 0.18s, transform 0.18s;">Get Started</button>
+  <section class="final-cta-section section-fade-in">
+    <h2>Ready to start your creative journey?</h2>
+    <p>Join ArtPath today and unlock your artistic potential!</p>
+    <button onclick="showAuthModal('register')">Get Started</button>
   </section>
 
   <footer>
