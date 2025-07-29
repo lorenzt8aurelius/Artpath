@@ -1,0 +1,10 @@
+/* Main CSS File - Imports all component styles */
+
+/* Import all CSS files */
+@import url('base.css');
+@import url('navigation.css');
+@import url('auth.css');
+@import url('dashboard.css');
+@import url('landing.css');
+@import url('sections.css');
+@import url('footer.css'); 

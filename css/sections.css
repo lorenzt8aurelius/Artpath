@@ -1,0 +1,422 @@
+/* Landing Page Sections */
+
+/* Features Section */
+.features-section,
+.how-it-works-section,
+.about-section,
+.testimonials-section,
+.pricing-section,
+.faqs-section,
+.final-cta-section {
+  margin: 48px 0 0 0;
+  padding: 80px 60px 60px 60px;
+  background: rgba(5, 11, 44, 0.8);
+  border-radius: 18px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+  position: relative;
+  z-index: 1;
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(21, 58, 100, 0.3);
+  max-width: 1600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.features-section h2,
+.how-it-works-section h2,
+.about-section h2,
+.testimonials-section h2,
+.pricing-section h2,
+.faqs-section h2 {
+  text-align: center;
+  color: #fff;
+  font-size: 2.1rem;
+  font-weight: 800;
+  margin-bottom: 36px;
+  letter-spacing: 1.5px;
+}
+
+.feature-card,
+.how-step,
+.testimonial-card,
+.pricing-card,
+.faq-card {
+  background: rgba(10, 23, 64, 0.7);
+  border-radius: 18px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4), 0 2px 8px rgba(0,0,0,0.10);
+  transition: box-shadow 0.22s, border 0.22s, background 0.22s, transform 0.18s;
+  position: relative;
+  overflow: hidden;
+  color: #E0E0E0;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(21, 58, 100, 0.3);
+}
+
+.feature-card:hover, .feature-card:focus,
+.how-step:hover, .how-step:focus,
+.testimonial-card:hover, .testimonial-card:focus,
+.pricing-card:hover, .pricing-card:focus,
+.faq-card:hover, .faq-card:focus {
+  background: rgba(10, 23, 64, 0.9);
+  box-shadow: 0 16px 48px rgba(21, 58, 100, 0.4), 0 2px 8px rgba(0,0,0,0.10);
+  transform: scale(1.035);
+  outline: none;
+  border-color: rgba(21, 58, 100, 0.5);
+}
+
+.feature-card:active, .feature-card:focus:active,
+.how-step:active, .how-step:focus:active,
+.testimonial-card:active, .testimonial-card:focus:active,
+.pricing-card:active, .pricing-card:focus:active,
+.faq-card:active, .faq-card:focus:active {
+  transform: scale(0.98);
+  box-shadow: 0 8px 24px 0 rgba(96,170,255,0.10), 0 1px 4px rgba(0,0,0,0.10);
+}
+
+.feature-card {
+  width: 300px;
+  padding: 36px 28px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 0;
+}
+
+.how-step {
+  width: 260px;
+  padding: 36px 28px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 0;
+}
+
+.testimonial-card {
+  width: 320px;
+  padding: 36px 28px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 0;
+}
+
+.pricing-card {
+  width: 300px;
+  padding: 36px 28px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 0;
+}
+
+.faq-card {
+  width: 340px;
+  padding: 36px 28px;
+  align-items: flex-start;
+  text-align: left;
+  margin-bottom: 0;
+}
+
+.final-cta-section {
+  margin: 56px 0 0 0;
+  padding: 48px 0 48px 0;
+  background: linear-gradient(135deg, #0A1740 0%, #153A64 100%);
+  border-radius: 18px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(21, 58, 100, 0.4);
+}
+
+.final-cta-section h2 {
+  color: #fff;
+  font-size: 2.2rem;
+  font-weight: 900;
+  margin-bottom: 16px;
+  letter-spacing: 1.5px;
+}
+
+.final-cta-section button {
+  background: #23243a;
+  color: #fff;
+  font-size: 1.25rem;
+  font-weight: 700;
+  padding: 18px 48px;
+  border-radius: 32px;
+  border: none;
+  box-shadow: 0 2px 12px 0 rgba(24,25,33,0.10);
+  cursor: pointer;
+  transition: background 0.18s, transform 0.18s;
+}
+
+.final-cta-section button:hover {
+  background: #1a1b2a;
+  transform: scale(1.05);
+}
+
+.gallery-filter-btn {
+  background: #23243a;
+  color: #eaeaea;
+  border: none;
+  border-radius: 18px;
+  padding: 8px 22px;
+  font-weight: 700;
+  cursor: pointer;
+  font-size: 1.05rem;
+  margin: 0 4px;
+  transition: background 0.18s, color 0.18s;
+}
+
+.gallery-filter-btn.active,
+.gallery-filter-btn:focus {
+  background: #1DBF73;
+  color: #fff;
+}
+
+/* Section Grid Layouts */
+.feature-cards,
+.how-steps,
+.testimonial-cards,
+.pricing-cards,
+.faq-cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 32px;
+  margin-top: 24px;
+}
+
+/* About Section */
+.about-section p {
+  color: #bfc2d1;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-bottom: 24px;
+  text-align: center;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.founder-signature {
+  color: #D4C4A8;
+  font-style: italic;
+  font-weight: 500;
+  font-size: 1.1rem;
+  margin-top: 24px;
+  transition: all 0.3s ease;
+  cursor: default;
+}
+
+.founder-signature:hover {
+  color: #E0E0E0;
+  transform: translateY(-2px);
+  text-shadow: 0 2px 8px rgba(212, 196, 168, 0.3);
+}
+
+/* Testimonial Cards */
+.testimonial-card img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  margin-bottom: 16px;
+  border: 3px solid #D4C4A8;
+}
+
+.testimonial-card div:last-child {
+  color: #D4C4A8;
+  font-weight: 600;
+  margin-top: 8px;
+}
+
+/* Pricing Cards */
+.pricing-card div {
+  font-size: 2.5rem;
+  font-weight: 900;
+  color: #D4C4A8;
+  margin: 16px 0;
+}
+
+.pricing-card div span {
+  font-size: 1rem;
+  color: #bfc2d1;
+}
+
+.pricing-card ul {
+  list-style: none;
+  padding: 0;
+  margin: 24px 0;
+  text-align: left;
+}
+
+.pricing-card li {
+  margin: 8px 0;
+  color: #bfc2d1;
+}
+
+.pricing-card button {
+  background: #D4C4A8;
+  color: #050B2C;
+  border: none;
+  padding: 12px 32px;
+  border-radius: 24px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s;
+  width: 100%;
+}
+
+.pricing-card button:hover {
+  background: #C4B498;
+}
+
+/* FAQ Cards */
+.faq-card div:first-child {
+  color: #fff;
+  font-weight: 700;
+  font-size: 1.1rem;
+  margin-bottom: 12px;
+}
+
+.faq-card p {
+  color: #bfc2d1;
+  line-height: 1.5;
+}
+
+/* Section Spacing and Visual Separation */
+.features-section, .how-it-works-section, .about-section, .testimonials-section, .pricing-section, .faqs-section, .final-cta-section {
+  margin: 48px 0 0 0;
+  padding: 48px 0 32px 0;
+  background: rgba(36, 38, 58, 0.92);
+  border-radius: 18px;
+  box-shadow: 0 2px 24px rgba(24, 25, 33, 0.10);
+  position: relative;
+  z-index: 1;
+}
+
+/* Responsive Design */
+@media (max-width: 900px) {
+  .feature-card, .how-step, .testimonial-card, .pricing-card, .faq-card {
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    padding: 24px 8px;
+  }
+  
+  .features-section, .how-it-works-section, .about-section, .testimonials-section, .pricing-section, .faqs-section, .final-cta-section {
+    padding: 60px 40px 40px 40px;
+    margin: 24px 0 0 0;
+  }
+} 
+
+/* Topic Selection Page Styles */
+.topic-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 24px;
+  max-width: 1200px;
+  margin: 48px auto;
+  padding: 0 20px;
+}
+
+.topic-card {
+  background: rgba(10, 23, 64, 0.7);
+  border-radius: 18px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4), 0 2px 8px rgba(0,0,0,0.10);
+  transition: all 0.22s ease;
+  position: relative;
+  overflow: hidden;
+  color: #E0E0E0;
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(21, 58, 100, 0.3);
+  cursor: pointer;
+  text-align: center;
+}
+
+.topic-card:hover {
+  background: rgba(10, 23, 64, 0.9);
+  box-shadow: 0 16px 48px rgba(21, 58, 100, 0.4), 0 2px 8px rgba(0,0,0,0.10);
+  transform: scale(1.035);
+  border-color: rgba(21, 58, 100, 0.5);
+}
+
+.topic-card.selected {
+  background: rgba(21, 58, 100, 0.8);
+  border-color: #60AAFF;
+  box-shadow: 0 16px 48px rgba(96, 170, 255, 0.3), 0 2px 8px rgba(0,0,0,0.10);
+  transform: scale(1.02);
+}
+
+.topic-card img {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 12px 12px 0 0;
+}
+
+.topic-card h3 {
+  padding: 20px;
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #fff;
+}
+
+.button-row {
+  text-align: center;
+  margin: 48px 0;
+  padding: 0 20px;
+}
+
+.primary-button {
+  background: linear-gradient(135deg, #60AAFF 0%, #4A90E2 100%);
+  color: white;
+  border: none;
+  padding: 16px 32px;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.22s ease;
+  box-shadow: 0 8px 24px rgba(96, 170, 255, 0.3);
+  text-decoration: none;
+  display: inline-block;
+}
+
+.primary-button:hover {
+  background: linear-gradient(135deg, #4A90E2 0%, #357ABD 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(96, 170, 255, 0.4);
+}
+
+.primary-button:active {
+  transform: translateY(0);
+  box-shadow: 0 6px 20px rgba(96, 170, 255, 0.3);
+}
+
+/* Responsive adjustments for topic selection */
+@media (max-width: 768px) {
+  .topic-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    margin: 32px auto;
+  }
+  
+  .topic-card h3 {
+    padding: 16px;
+    font-size: 1.1rem;
+  }
+  
+  .primary-button {
+    padding: 14px 28px;
+    font-size: 1rem;
+  }
+} 

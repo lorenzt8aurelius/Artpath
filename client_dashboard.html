@@ -3,235 +3,58 @@
 <head>
   <meta charset="UTF-8">
   <title>Client Dashboard – ArtPath</title>
-  <link rel="stylesheet" href="Artpath.css">
-  <style>
-    .dashboard-container {
-      display: flex;
-      min-height: 100vh;
-      background: linear-gradient(180deg, #23243a 0%, #181a2a 100%);
-    }
-    .dashboard-sidebar {
-      width: 220px;
-      background: #181a2a;
-      color: #a3a8c9;
-      display: flex;
-      flex-direction: column;
-      padding: 40px 0 0 0;
-      box-shadow: 2px 0 16px rgba(24,26,42,0.10);
-      min-height: 100vh;
-    }
-    .dashboard-sidebar a {
-      color: #a3a8c9;
-      text-decoration: none;
-      padding: 18px 32px;
-      font-size: 1.08rem;
-      font-weight: 500;
-      transition: background 0.2s, color 0.2s;
-    }
-    .dashboard-sidebar a:hover, .dashboard-sidebar a.active {
-      background: #23243a;
-      color: #fff;
-    }
-    .dashboard-main {
-      flex: 1;
-      padding: 60px 40px 40px 40px;
-      color: #e3e6f3;
-      display: flex;
-      flex-direction: column;
-      gap: 32px;
-    }
-    .dashboard-welcome {
-      font-size: 2.2rem;
-      font-weight: 700;
-      margin-bottom: 18px;
-    }
-    .dashboard-search {
-      margin-bottom: 24px;
-      display: flex;
-      gap: 12px;
-      align-items: center;
-    }
-    .dashboard-search input {
-      padding: 12px 16px;
-      border-radius: 6px;
-      border: 1px solid #2e3150;
-      background: #23243a;
-      color: #fff;
-      font-size: 1rem;
-      outline: none;
-      transition: border 0.2s;
-      width: 260px;
-    }
-    .dashboard-search input:focus {
-      border: 1.5px solid #0600AB;
-    }
-    .dashboard-section {
-      background: #23243a;
-      border-radius: 12px;
-      padding: 32px 24px;
-      margin-bottom: 18px;
-      box-shadow: 0 2px 12px rgba(24,26,42,0.10);
-    }
-    .dashboard-section h3 {
-      margin-top: 0;
-      color: #a3a8c9;
-      font-size: 1.3rem;
-      margin-bottom: 18px;
-    }
-    .highlight {
-      font-weight: 800;
-      letter-spacing: 1px;
-      background: linear-gradient(90deg, #0600AB 0%, #00033D 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-    .messages-section {
-      padding: 0;
-    }
-    .messages-container {
-      display: flex;
-      background: #181a2a;
-      border-radius: 10px;
-      box-shadow: 0 2px 12px rgba(24,26,42,0.10);
-      overflow: hidden;
-      min-height: 320px;
-    }
-    .conversation-list {
-      width: 180px;
-      background: #23243a;
-      border-right: 1.5px solid #2e3150;
-      display: flex;
-      flex-direction: column;
-    }
-    .conversation {
-      padding: 18px 16px;
-      color: #a3a8c9;
-      cursor: pointer;
-      border-bottom: 1px solid #181a2a;
-      transition: background 0.2s, color 0.2s;
-    }
-    .conversation.active, .conversation:hover {
-      background: #0600AB;
-      color: #fff;
-    }
-    .chat-window {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      padding: 18px 18px 12px 18px;
-    }
-    .chat-messages {
-      flex: 1;
-      overflow-y: auto;
-      margin-bottom: 12px;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-    .message {
-      max-width: 70%;
-      padding: 10px 16px;
-      border-radius: 16px;
-      font-size: 1.01rem;
-      line-height: 1.5;
-      margin-bottom: 2px;
-    }
-    .from-them {
-      background: #23243a;
-      color: #a3a8c9;
-      align-self: flex-start;
-    }
-    .from-me {
-      background: #0600AB;
-      color: #fff;
-      align-self: flex-end;
-    }
-    .chat-input-row {
-      display: flex;
-      gap: 8px;
-    }
-    .chat-input {
-      flex: 1;
-      padding: 10px 14px;
-      border-radius: 8px;
-      border: 1px solid #2e3150;
-      background: #23243a;
-      color: #fff;
-      font-size: 1rem;
-      outline: none;
-    }
-    .chat-send-btn {
-      background: #0600AB;
-      color: #fff;
-      border: none;
-      border-radius: 8px;
-      padding: 10px 22px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: background 0.2s;
-    }
-    .chat-send-btn:hover {
-      background: #00033D;
-    }
-    .commissions-table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 18px;
-    }
-    .commissions-table th, .commissions-table td {
-      padding: 12px 16px;
-      text-align: left;
-      border-bottom: 1px solid #2e3150;
-    }
-    .commissions-table th {
-      color: #a3a8c9;
-      font-size: 0.9rem;
-      font-weight: 500;
-    }
-    .commissions-table td {
-      color: #e3e6f3;
-      font-size: 0.95rem;
-    }
-    .status {
-      padding: 4px 8px;
-      border-radius: 6px;
-      font-weight: 600;
-    }
-    .status.pending {
-      background-color: #FFD700;
-      color: #333;
-    }
-    .status.accepted {
-      background-color: #4CAF50;
-      color: #fff;
-    }
-    .status.declined {
-      background-color: #F44336;
-      color: #fff;
-    }
-    @media (max-width: 900px) {
-      .dashboard-container { flex-direction: column; }
-      .dashboard-sidebar { width: 100%; flex-direction: row; padding: 0; }
-      .dashboard-sidebar a { flex: 1; text-align: center; padding: 16px 0; }
-      .dashboard-main { padding: 32px 8px; }
-      .dashboard-search input { width: 100%; }
-      .messages-container { flex-direction: column; }
-      .conversation-list { width: 100%; flex-direction: row; border-right: none; border-bottom: 1.5px solid #2e3150; }
-      .conversation { flex: 1; text-align: center; border-bottom: none; border-right: 1px solid #181a2a; }
-    }
-  </style>
+  <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
-  <div class="dashboard-container">
-    <nav class="dashboard-sidebar">
-      <a href="#" class="active">Explore Artists</a>
-      <a href="#">Search by Style</a>
-      <a href="#">Saved Artists</a>
-      <a href="#">My Commissions</a>
-      <a href="#">Messages</a>
+  <!-- Auth Modal -->
+  <div id="authModal" class="modal hidden">
+    <div class="modal-content">
+      <div class="auth-tabs">
+        <button id="showLoginTab" class="auth-tab active">Login</button>
+        <button id="showRegisterTab" class="auth-tab">Register</button>
+      </div>
+      <div id="authMessage" class="auth-message"></div>
+      <form id="loginForm" class="auth-form">
+        <input type="text" id="loginName" placeholder="Name" required />
+        <input type="password" id="loginPassword" placeholder="Password" required />
+        <button type="submit">Login</button>
+      </form>
+      <form id="registerForm" class="auth-form hidden">
+        <input type="text" id="registerName" placeholder="Name" required />
+        <input type="email" id="registerEmail" placeholder="Email" required />
+        <input type="password" id="registerPassword" placeholder="Password (min 6 chars)" required />
+        <button type="submit">Register</button>
+      </form>
+      <button class="close-modal" id="closeAuthModal">×</button>
+    </div>
+  </div>
+
+  <header class="navbar sticky-navbar">
+    <div class="logo">ArtPath</div>
+    <nav class="main-nav" id="mainNav">
+      <a href="artist_dashboard.html" class="main-nav-link protected-link">My Studio</a>
+      <a href="client_dashboard.html" class="main-nav-link protected-link">Find Artists</a>
+      <a href="artist_page.html" class="main-nav-link protected-link">Spotlight</a>
     </nav>
+    <div id="authArea">
+      <button id="openAuthModal" class="menu-toggle">Login / Register</button>
+    </div>
+    <button class="menu-toggle" onclick="toggleSidebar()">☰ Menu</button>
+  </header>
+
+  <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
+  <div class="sidebar" id="sidebar">
+    <button class="close-sidebar" onclick="closeSidebar()">×</button>
+    <a href="#" id="sidebarAuthLink">Login / Register</a>
+    <a href="artist_dashboard.html" class="protected-link">My Studio</a>
+    <a href="client_dashboard.html" class="protected-link">Find Artists</a>
+    <a href="artist_page.html" class="protected-link">Spotlight</a>
+    <a href="#">Home</a>
+    <a href="#">Settings</a>
+    <a href="#">Learn</a>
+    <a href="#">Portfolio</a>
+  </div>
+  <div class="dashboard-container">
     <main class="dashboard-main">
       <div class="dashboard-welcome highlight">Explore Artists</div>
       <div class="dashboard-search">
@@ -277,24 +100,86 @@
       <div class="dashboard-section messages-section">
         <h3 class="highlight">Messages</h3>
         <div class="messages-container">
-          <div class="conversation-list">
-            <div class="conversation active">Artist: Alex Rivera</div>
-            <div class="conversation">Artist: Casey</div>
-            <div class="conversation">Artist: Jordan</div>
-          </div>
+          <div class="conversation-list" id="clientConvoList"></div>
           <div class="chat-window">
-            <div class="chat-messages">
-              <div class="message from-them">Hello! How can I help you with your commission idea?</div>
-              <div class="message from-me">Hi Alex, I love your style! Can you do a portrait in watercolor?</div>
-            </div>
+            <div class="chat-messages" id="clientChatMessages"></div>
             <div class="chat-input-row">
-              <input type="text" class="chat-input" placeholder="Type your message..." />
-              <button class="chat-send-btn">Send</button>
+              <input type="text" class="chat-input" id="clientChatInput" placeholder="Type your message..." />
+              <button class="chat-send-btn" id="clientSendBtn">Send</button>
             </div>
           </div>
         </div>
       </div>
     </main>
   </div>
+  <script>
+    // Messaging system (demo, localStorage)
+    const clientConvoList = document.getElementById('clientConvoList');
+    const clientChatMessages = document.getElementById('clientChatMessages');
+    const clientChatInput = document.getElementById('clientChatInput');
+    const clientSendBtn = document.getElementById('clientSendBtn');
+
+    const CLIENT_USER = getUser() || 'Client';
+    const CLIENT_CONVOS_KEY = 'artpathClientConvos';
+    const CLIENT_MSGS_KEY = 'artpathClientMsgs';
+
+    function getClientConvos() {
+      return JSON.parse(localStorage.getItem(CLIENT_CONVOS_KEY) || '[{"name":"Alex Rivera"},{"name":"Casey"},{"name":"Jordan"}]');
+    }
+    function setClientConvos(convos) {
+      localStorage.setItem(CLIENT_CONVOS_KEY, JSON.stringify(convos));
+    }
+    function getClientMsgs() {
+      return JSON.parse(localStorage.getItem(CLIENT_MSGS_KEY) || '{}');
+    }
+    function setClientMsgs(msgs) {
+      localStorage.setItem(CLIENT_MSGS_KEY, JSON.stringify(msgs));
+    }
+    let currentClientConvo = getClientConvos()[0]?.name || '';
+    function renderClientConvos() {
+      const convos = getClientConvos();
+      clientConvoList.innerHTML = '';
+      convos.forEach(c => {
+        const div = document.createElement('div');
+        div.className = 'conversation' + (c.name === currentClientConvo ? ' active' : '');
+        div.textContent = 'Artist: ' + c.name;
+        div.onclick = () => { currentClientConvo = c.name; renderClientConvos(); renderClientMsgs(); };
+        clientConvoList.appendChild(div);
+      });
+    }
+    function renderClientMsgs() {
+      const msgs = getClientMsgs()[currentClientConvo] || [];
+      clientChatMessages.innerHTML = '';
+      msgs.forEach(m => {
+        const div = document.createElement('div');
+        div.className = 'message ' + (m.from === CLIENT_USER ? 'from-me' : 'from-them');
+        div.textContent = m.text;
+        clientChatMessages.appendChild(div);
+      });
+      clientChatMessages.scrollTop = clientChatMessages.scrollHeight;
+    }
+    clientSendBtn.onclick = sendClientMsg;
+    clientChatInput.onkeydown = e => { if (e.key === 'Enter') sendClientMsg(); };
+    function sendClientMsg() {
+      const text = clientChatInput.value.trim();
+      if (!text) return;
+      const msgs = getClientMsgs();
+      msgs[currentClientConvo] = msgs[currentClientConvo] || [];
+      msgs[currentClientConvo].push({ from: CLIENT_USER, text });
+      setClientMsgs(msgs);
+      clientChatInput.value = '';
+      renderClientMsgs();
+    }
+    renderClientConvos();
+    renderClientMsgs();
+  </script>
+  <footer>
+    <p>© 2025 ArtPath. All rights reserved.</p>
+    <p>
+      <a href="#">About</a>
+      <a href="#">FAQ</a>
+      <a href="#">Contact</a>
+    </p>
+  </footer>
 </body>
 </html> 

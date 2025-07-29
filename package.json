@@ -1,0 +1,46 @@
+{
+  "name": "artpath",
+  "version": "1.0.0",
+  "description": "A modern web platform for artists to showcase their work, connect with clients, and grow their creative business",
+  "main": "Artpath.html",
+  "scripts": {
+    "start": "python -m http.server 8000",
+    "dev": "live-server --port=8000",
+    "build": "echo 'No build process required for static site'",
+    "test": "echo 'No tests specified'",
+    "lint": "echo 'No linter configured'",
+    "format": "prettier --write '**/*.{html,css,js}'"
+  },
+  "keywords": [
+    "art",
+    "portfolio",
+    "commission",
+    "artist",
+    "creative",
+    "web-platform",
+    "responsive",
+    "modern-ui"
+  ],
+  "author": "ArtPath Team",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/artpath.git"
+  },
+  "bugs": {
+    "url": "https://github.com/yourusername/artpath/issues"
+  },
+  "homepage": "https://yourusername.github.io/artpath",
+  "devDependencies": {
+    "live-server": "^1.2.2",
+    "prettier": "^2.8.8"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead"
+  ]
+} 

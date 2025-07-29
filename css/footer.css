@@ -1,0 +1,27 @@
+/* Footer Styles */
+
+footer {
+  background: #f7f7f7 !important;
+  color: #232323 !important;
+  font-family: 'Inter', 'Open Sans', Arial, sans-serif;
+  font-size: 1.02rem;
+  letter-spacing: 1px;
+  text-align: center;
+  padding: 48px 0 24px 0;
+  margin-top: 60px;
+  border-top: 1.5px solid #e3e6ea;
+  box-shadow: 0 -2px 12px 0 rgba(29,191,115,0.04);
+}
+
+footer a {
+  color: #1DBF73 !important;
+  margin: 0 18px;
+  text-decoration: none;
+  transition: color 0.2s;
+  font-size: 1.12rem;
+  letter-spacing: 1.2px;
+}
+
+footer a:hover {
+  color: #17a964 !important;
+} 

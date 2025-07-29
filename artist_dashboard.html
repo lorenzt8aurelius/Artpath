@@ -3,367 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <title>Artist Dashboard – ArtPath</title>
-  <link rel="stylesheet" href="Artpath.css">
-  <style>
-    .dashboard-container {
-      display: flex;
-      min-height: 100vh;
-      background: linear-gradient(180deg, #23243a 0%, #181a2a 100%);
-    }
-    .dashboard-sidebar {
-      width: 220px;
-      background: #181a2a;
-      color: #a3a8c9;
-      display: flex;
-      flex-direction: column;
-      padding: 40px 0 0 0;
-      box-shadow: 2px 0 16px rgba(24,26,42,0.10);
-      min-height: 100vh;
-    }
-    .dashboard-sidebar a {
-      color: #a3a8c9;
-      text-decoration: none;
-      padding: 18px 32px;
-      font-size: 1.08rem;
-      font-weight: 500;
-      transition: background 0.2s, color 0.2s;
-    }
-    .dashboard-sidebar a:hover, .dashboard-sidebar a.active {
-      background: #23243a;
-      color: #fff;
-    }
-    .dashboard-main {
-      flex: 1;
-      padding: 60px 40px 40px 40px;
-      color: #e3e6f3;
-      display: flex;
-      flex-direction: column;
-      gap: 32px;
-    }
-    .dashboard-welcome {
-      font-size: 2.2rem;
-      font-weight: 700;
-      margin-bottom: 18px;
-    }
-    .dashboard-actions {
-      display: flex;
-      gap: 18px;
-      margin-bottom: 24px;
-    }
-    .dashboard-actions button {
-      background: #0600AB;
-      color: #fff;
-      font-size: 1.08rem;
-      font-weight: 600;
-      padding: 12px 28px;
-      border: none;
-      border-radius: 8px;
-      box-shadow: 0 0 12px 2px rgba(6,0,171,0.12);
-      cursor: pointer;
-      transition: background 0.2s, box-shadow 0.2s;
-    }
-    .dashboard-actions button:hover {
-      background: #00033D;
-      box-shadow: 0 0 24px 4px rgba(6,0,171,0.18);
-    }
-    .dashboard-section {
-      background: #23243a;
-      border-radius: 12px;
-      padding: 32px 24px;
-      margin-bottom: 18px;
-      box-shadow: 0 2px 12px rgba(24,26,42,0.10);
-    }
-    .dashboard-section h3 {
-      margin-top: 0;
-      color: #a3a8c9;
-      font-size: 1.3rem;
-      margin-bottom: 18px;
-    }
-    .highlight {
-      font-weight: 800;
-      letter-spacing: 1px;
-      background: linear-gradient(90deg, #0600AB 0%, #00033D 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-    .messages-section {
-      padding: 0;
-    }
-    .messages-container {
-      display: flex;
-      background: #181a2a;
-      border-radius: 10px;
-      box-shadow: 0 2px 12px rgba(24,26,42,0.10);
-      overflow: hidden;
-      min-height: 320px;
-    }
-    .conversation-list {
-      width: 180px;
-      background: #23243a;
-      border-right: 1.5px solid #2e3150;
-      display: flex;
-      flex-direction: column;
-    }
-    .conversation {
-      padding: 18px 16px;
-      color: #a3a8c9;
-      cursor: pointer;
-      border-bottom: 1px solid #181a2a;
-      transition: background 0.2s, color 0.2s;
-    }
-    .conversation.active, .conversation:hover {
-      background: #0600AB;
-      color: #fff;
-    }
-    .chat-window {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      padding: 18px 18px 12px 18px;
-    }
-    .chat-messages {
-      flex: 1;
-      overflow-y: auto;
-      margin-bottom: 12px;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-    .message {
-      max-width: 70%;
-      padding: 10px 16px;
-      border-radius: 16px;
-      font-size: 1.01rem;
-      line-height: 1.5;
-      margin-bottom: 2px;
-    }
-    .from-them {
-      background: #23243a;
-      color: #a3a8c9;
-      align-self: flex-start;
-    }
-    .from-me {
-      background: #0600AB;
-      color: #fff;
-      align-self: flex-end;
-    }
-    .chat-input-row {
-      display: flex;
-      gap: 8px;
-    }
-    .chat-input {
-      flex: 1;
-      padding: 10px 14px;
-      border-radius: 8px;
-      border: 1px solid #2e3150;
-      background: #23243a;
-      color: #fff;
-      font-size: 1rem;
-      outline: none;
-    }
-    .chat-send-btn {
-      background: #0600AB;
-      color: #fff;
-      border: none;
-      border-radius: 8px;
-      padding: 10px 22px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: background 0.2s;
-    }
-    .chat-send-btn:hover {
-      background: #00033D;
-    }
-    .commissions-table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 12px;
-      background: #181a2a;
-      border-radius: 10px;
-      overflow: hidden;
-      box-shadow: 0 2px 12px rgba(24,26,42,0.10);
-    }
-    .commissions-table th, .commissions-table td {
-      padding: 14px 10px;
-      text-align: left;
-      color: #e3e6f3;
-    }
-    .commissions-table th {
-      background: #23243a;
-      color: #a3a8c9;
-      font-weight: 700;
-    }
-    .commissions-table tr:not(:last-child) {
-      border-bottom: 1px solid #2e3150;
-    }
-    .status {
-      padding: 4px 12px;
-      border-radius: 8px;
-      font-size: 0.98rem;
-      font-weight: 600;
-    }
-    .status.pending {
-      background: #0600AB;
-      color: #fff;
-    }
-    .status.accepted {
-      background: #1bbf6b;
-      color: #fff;
-    }
-    .status.declined {
-      background: #c0392b;
-      color: #fff;
-    }
-    .accept-btn, .decline-btn {
-      padding: 7px 16px;
-      border: none;
-      border-radius: 6px;
-      font-weight: 600;
-      margin-right: 6px;
-      cursor: pointer;
-      font-size: 0.98rem;
-      transition: background 0.2s, color 0.2s;
-    }
-    .accept-btn {
-      background: #1bbf6b;
-      color: #fff;
-    }
-    .accept-btn:disabled {
-      background: #1bbf6b99;
-      color: #fff;
-      cursor: not-allowed;
-    }
-    .decline-btn {
-      background: #c0392b;
-      color: #fff;
-    }
-    .decline-btn:disabled {
-      background: #c0392b99;
-      color: #fff;
-      cursor: not-allowed;
-    }
-    .profile-section {
-      background: #23243a;
-      border-radius: 12px;
-      padding: 32px 24px;
-      margin-bottom: 18px;
-      box-shadow: 0 2px 12px rgba(24,26,42,0.10);
-    }
-    .profile-avatar-row {
-      display: flex;
-      align-items: center;
-      gap: 15px;
-      margin-bottom: 20px;
-    }
-    .profile-avatar {
-      width: 80px;
-      height: 80px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 2px solid #0600AB;
-    }
-    .profile-form-group {
-      margin-bottom: 18px;
-    }
-    .profile-form-group label {
-      display: block;
-      font-size: 0.95rem;
-      color: #a3a8c9;
-      margin-bottom: 8px;
-    }
-    .profile-form-group input,
-    .profile-form-group textarea {
-      width: 100%;
-      padding: 12px 16px;
-      border: 1px solid #2e3150;
-      border-radius: 8px;
-      background: #23243a;
-      color: #fff;
-      font-size: 1rem;
-      outline: none;
-    }
-    .profile-form-group input:focus,
-    .profile-form-group textarea:focus {
-      border-color: #0600AB;
-    }
-    .profile-form-group button {
-      background: #0600AB;
-      color: #fff;
-      font-size: 1.08rem;
-      font-weight: 600;
-      padding: 12px 28px;
-      border: none;
-      border-radius: 8px;
-      box-shadow: 0 0 12px 2px rgba(6,0,171,0.12);
-      cursor: pointer;
-      transition: background 0.2s, box-shadow 0.2s;
-    }
-    .profile-form-group button:hover {
-      background: #00033D;
-      box-shadow: 0 0 24px 4px rgba(6,0,171,0.18);
-    }
-    .profile-form-group button:disabled {
-      background: #0600AB99;
-      color: #fff;
-      cursor: not-allowed;
-    }
-    .earnings-section {
-      background: #23243a;
-      border-radius: 12px;
-      padding: 32px 24px;
-      margin-bottom: 18px;
-      box-shadow: 0 2px 12px rgba(24,26,42,0.10);
-    }
-    .earnings-summary {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 20px;
-      padding-bottom: 15px;
-      border-bottom: 1px solid #2e3150;
-    }
-    .earnings-total-label {
-      font-size: 1.1rem;
-      color: #a3a8c9;
-    }
-    .earnings-total {
-      font-size: 1.8rem;
-      font-weight: 700;
-      color: #1bbf6b;
-    }
-    .earnings-table {
-      width: 100%;
-      border-collapse: collapse;
-      background: #181a2a;
-      border-radius: 10px;
-      overflow: hidden;
-      box-shadow: 0 2px 12px rgba(24,26,42,0.10);
-    }
-    .earnings-table th, .earnings-table td {
-      padding: 14px 10px;
-      text-align: left;
-      color: #e3e6f3;
-    }
-    .earnings-table th {
-      background: #23243a;
-      color: #a3a8c9;
-      font-weight: 700;
-    }
-    .earnings-table tr:not(:last-child) {
-      border-bottom: 1px solid #2e3150;
-    }
-    @media (max-width: 900px) {
-      .dashboard-container { flex-direction: column; }
-      .dashboard-sidebar { width: 100%; flex-direction: row; padding: 0; }
-      .dashboard-sidebar a { flex: 1; text-align: center; padding: 16px 0; }
-      .dashboard-main { padding: 32px 8px; }
-      .messages-container { flex-direction: column; }
-      .conversation-list { width: 100%; flex-direction: row; border-right: none; border-bottom: 1.5px solid #2e3150; }
-      .conversation { flex: 1; text-align: center; border-bottom: none; border-right: 1px solid #181a2a; }
-    }
-  </style>
+  <link rel="stylesheet" href="css/main.css">
+
 </head>
 <body>
   <!-- Auth Modal -->
@@ -390,11 +31,13 @@
   </div>
 
   <header class="navbar sticky-navbar">
-    <div class="logo">ArtPath</div>
+    <div class="logo">
+      <span class="logo-text">ARTPATH</span>
+    </div>
     <nav class="main-nav" id="mainNav">
-      <a href="artist_dashboard.html" class="main-nav-link protected-link">My Studio</a>
-      <a href="client_dashboard.html" class="main-nav-link protected-link">Find Artists</a>
-      <a href="artist_page.html" class="main-nav-link protected-link">Spotlight</a>
+      <a href="artist_dashboard.html" class="main-nav-link">My Studio</a>
+      <a href="client_dashboard.html" class="main-nav-link">Find Artists</a>
+      <a href="artist_page.html" class="main-nav-link">Spotlight</a>
     </nav>
     <div id="authArea">
       <button id="openAuthModal" class="menu-toggle">Login / Register</button>
@@ -406,13 +49,13 @@
   <div class="sidebar" id="sidebar">
     <button class="close-sidebar" onclick="closeSidebar()">×</button>
     <a href="#" id="sidebarAuthLink">Login / Register</a>
-    <a href="artist_dashboard.html" class="protected-link">My Studio</a>
-    <a href="client_dashboard.html" class="protected-link">Find Artists</a>
-    <a href="artist_page.html" class="protected-link">Spotlight</a>
-    <a href="#">Home</a>
+    <a href="artist_dashboard.html">My Studio</a>
+    <a href="client_dashboard.html">Find Artists</a>
+    <a href="artist_page.html">Spotlight</a>
+    <a href="Artpath.html">Home</a>
     <a href="#">Settings</a>
-    <a href="#">Learn</a>
-    <a href="#">Portfolio</a>
+    <a href="learn.html">Learn</a>
+    <a href="portfolio.html">Portfolio</a>
   </div>
   <!-- Upload Art Modal -->
   <div id="uploadArtModal" class="modal hidden">
@@ -746,5 +389,13 @@ function renderEarnings() {
 }
 renderEarnings();
 </script>
+<footer>
+  <p>© 2025 ArtPath. All rights reserved.</p>
+  <p>
+    <a href="#">About</a>
+    <a href="#">FAQ</a>
+    <a href="#">Contact</a>
+  </p>
+</footer>
 </body>
 </html> 

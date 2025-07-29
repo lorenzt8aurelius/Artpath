@@ -101,24 +101,16 @@
     <section class="welcome-section section-fade-in">
       <h2>Get Started</h2>
       <div class="choice-cards">
-        <div class="card card-fade-in artist-card" tabindex="0" role="button" aria-label="I'm an artist. Build your online portfolio and connect with clients." onclick="startPortfolio()">
-          <div class="card-header">
-            <svg class="card-icon" width="70" height="70" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
-              <rect x="6" y="16" width="52" height="36" fill="none" stroke="#bfc2d1" stroke-width="4" rx="4"/>
-              <line x1="6" y1="16" x2="6" y2="8" stroke="#bfc2d1" stroke-width="4"/>
-              <line x1="58" y1="16" x2="58" y2="8" stroke="#bfc2d1" stroke-width="4"/>
-            </svg>
-            <div class="card-badge">🎨</div>
-          </div>
+        <div class="card card-fade-in" tabindex="0" role="button" aria-label="I'm an artist. Build your online portfolio and connect with clients." onclick="startPortfolio()">
+          <svg class="card-icon" width="70" height="70" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+            <rect x="6" y="16" width="52" height="36" fill="none" stroke="#bfc2d1" stroke-width="4" rx="4"/>
+            <line x1="6" y1="16" x2="6" y2="8" stroke="#bfc2d1" stroke-width="4"/>
+            <line x1="58" y1="16" x2="58" y2="8" stroke="#bfc2d1" stroke-width="4"/>
+          </svg>
           <h3>I’m an artist</h3>
-          <p>Build your online portfolio and connect with clients worldwide. Showcase your talent and start earning from your art.</p>
-          <div class="card-features">
-            <div class="feature-item">✨ Professional Portfolio</div>
-            <div class="feature-item">💼 Commission Requests</div>
-            <div class="feature-item">📊 Analytics & Insights</div>
-            <div class="feature-item">🌍 Global Reach</div>
-          </div>
-          <button onclick="startPortfolio()" class="enhanced-btn">Start Your Portfolio →</button>
+          <p>Build your online portfolio and connect with clients.</p>
+
+          <button onclick="startPortfolio()">Start Your Portfolio</button>
         </div>
         <div class="card card-fade-in" tabindex="0" role="button" aria-label="Beginner. Take step-by-step courses to grow your skills confidently." onclick="startLearning()">
           <svg class="card-icon" width="70" height="70" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
@@ -393,108 +385,7 @@
   }
 }
 
-/* Enhanced Artist Card Styles */
-.artist-card {
-  position: relative;
-  overflow: hidden;
-  border: 2px solid rgba(96, 170, 255, 0.3);
-  background: linear-gradient(135deg, rgba(10, 23, 64, 0.8) 0%, rgba(21, 58, 100, 0.6) 100%);
-}
 
-.artist-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(96, 170, 255, 0.1), transparent);
-  transition: left 0.5s;
-}
-
-.artist-card:hover::before {
-  left: 100%;
-}
-
-.card-header {
-  position: relative;
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  margin-bottom: 20px;
-}
-
-.card-badge {
-  position: absolute;
-  top: -10px;
-  right: -10px;
-  background: linear-gradient(135deg, #60AAFF 0%, #4A90E2 100%);
-  color: white;
-  padding: 8px 12px;
-  border-radius: 20px;
-  font-size: 1.2rem;
-  box-shadow: 0 4px 12px rgba(96, 170, 255, 0.3);
-  animation: pulse 2s infinite;
-}
-
-@keyframes pulse {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.05); }
-}
-
-.card-features {
-  margin: 20px 0;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.feature-item {
-  color: #bfc2d1;
-  font-size: 0.9rem;
-  padding: 4px 0;
-  border-left: 2px solid rgba(96, 170, 255, 0.3);
-  padding-left: 12px;
-  transition: all 0.2s;
-}
-
-.feature-item:hover {
-  color: #60AAFF;
-  border-left-color: #60AAFF;
-  transform: translateX(4px);
-}
-
-.enhanced-btn {
-  background: linear-gradient(135deg, #60AAFF 0%, #4A90E2 100%);
-  color: white;
-  border: none;
-  padding: 12px 24px;
-  border-radius: 8px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.2s;
-  box-shadow: 0 4px 12px rgba(96, 170, 255, 0.3);
-  width: 100%;
-  margin-top: 16px;
-}
-
-.enhanced-btn:hover {
-  background: linear-gradient(135deg, #4A90E2 0%, #357ABD 100%);
-  transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(96, 170, 255, 0.4);
-}
-
-.artist-card h3 {
-  color: #60AAFF;
-  font-size: 1.4rem;
-  margin-bottom: 12px;
-}
-
-.artist-card p {
-  color: #bfc2d1;
-  line-height: 1.6;
-  margin-bottom: 16px;
-}
 
 
 </style>

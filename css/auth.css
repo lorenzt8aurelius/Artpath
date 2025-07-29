@@ -1,0 +1,208 @@
+/* Authentication Modal Styles */
+
+/* Modal Container */
+.modal {
+  position: fixed;
+  z-index: 2000;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: auto;
+  background: rgba(24, 25, 33, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.3s;
+}
+
+.modal.hidden {
+  display: none;
+}
+
+/* Modal Content */
+.modal-content {
+  background: linear-gradient(135deg, #050B2C 0%, #0A1740 100%);
+  color: #E0E0E0;
+  padding: 40px 32px 32px 32px;
+  border-radius: 20px;
+  box-shadow: 0 24px 64px rgba(0,0,0,0.6);
+  min-width: 400px;
+  max-width: 90vw;
+  position: relative;
+  text-align: center;
+  transition: all 0.3s cubic-bezier(.77,0,.18,1);
+  border: 1px solid rgba(21, 58, 100, 0.4);
+  backdrop-filter: blur(20px);
+}
+
+.modal-content h2 {
+  margin-bottom: 24px;
+  font-size: 1.8rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #D4C4A8 0%, #C4B498 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Close Modal Button */
+.close-modal {
+  position: absolute;
+  top: 18px;
+  right: 22px;
+  font-size: 2rem;
+  color: #a3a8c9;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.close-modal:hover {
+  color: #fff;
+}
+
+/* Auth Tabs */
+.auth-tabs {
+  display: flex;
+  margin-bottom: 24px;
+  border-radius: 8px;
+  background: #2e3150;
+  padding: 4px;
+}
+
+.auth-tab {
+  flex: 1;
+  background: none;
+  border: none;
+  color: #bfc2d1;
+  padding: 12px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.2s;
+}
+
+.auth-tab.active {
+  background: #D4C4A8;
+  color: #050B2C;
+}
+
+.auth-tab:hover:not(.active) {
+  color: #fff;
+}
+
+/* Auth Forms */
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  margin-top: 18px;
+}
+
+.auth-form.hidden {
+  display: none;
+}
+
+.auth-form input {
+  padding: 12px 16px;
+  border-radius: 6px;
+  border: 1px solid #2e3150;
+  background: #23243a;
+  color: #fff;
+  font-size: 1rem;
+  outline: none;
+  transition: border 0.2s;
+}
+
+.auth-form input:focus {
+  border: 1.5px solid #60aaff;
+}
+
+.auth-form button {
+  background: #D4C4A8;
+  color: #050B2C;
+  font-size: 1.1rem;
+  font-weight: 700;
+  padding: 12px 0;
+  border: none;
+  border-radius: 8px;
+  box-shadow: 0 0 12px 2px rgba(212,196,168,0.18);
+  cursor: pointer;
+  transition: box-shadow 0.2s, background 0.2s;
+  outline: none;
+  margin-top: 8px;
+}
+
+.auth-form button:hover {
+  background: #C4B498;
+  box-shadow: 0 0 24px 4px rgba(212,196,168,0.28);
+}
+
+/* Upload Art Modal */
+#uploadArtForm {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+#uploadArtForm input,
+#uploadArtForm textarea {
+  padding: 14px 18px;
+  border-radius: 10px;
+  border: 1px solid #2e3150;
+  background: rgba(35, 36, 58, 0.8);
+  color: #fff;
+  font-size: 1rem;
+  outline: none;
+  transition: all 0.3s;
+}
+
+#uploadArtForm input:focus,
+#uploadArtForm textarea:focus {
+  border-color: #60aaff;
+  box-shadow: 0 0 0 3px rgba(96, 170, 255, 0.1);
+}
+
+#uploadArtForm button {
+  background: linear-gradient(135deg, #D4C4A8 0%, #C4B498 100%);
+  color: #050B2C;
+  border: none;
+  padding: 14px 28px;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+  box-shadow: 0 4px 16px rgba(212, 196, 168, 0.3);
+  font-size: 1.1rem;
+}
+
+#uploadArtForm button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(212, 196, 168, 0.4);
+}
+
+/* File Input Styling */
+#uploadArtForm input[type="file"] {
+  position: relative;
+  cursor: pointer;
+  background: rgba(212, 196, 168, 0.1);
+  border: 2px dashed rgba(212, 196, 168, 0.3);
+  text-align: center;
+  padding: 20px;
+  transition: all 0.3s;
+}
+
+#uploadArtForm input[type="file"]:hover {
+  border-color: #D4C4A8;
+  background: rgba(212, 196, 168, 0.15);
+}
+
+#uploadArtForm input[type="file"]::before {
+  content: '📁 Choose Artwork Image';
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: #D4C4A8;
+} 
