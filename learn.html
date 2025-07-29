@@ -3,9 +3,199 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Start Learning</title>
+  <title>Learn Art Skills – ArtPath</title>
   <link rel="stylesheet" href="css/main.css" />
-  <script src="Landingpage.js" defer></script>
+  <style>
+    /* Hide logo icons */
+    .logo-icon {
+      display: none !important;
+    }
+    .logo::before,
+    .logo::after {
+      display: none !important;
+    }
+    
+    /* Enhanced learn page styles */
+    .learn-hero {
+      background: linear-gradient(135deg, #0A1740 0%, #153A64 100%);
+      padding: 120px 40px 80px 40px;
+      text-align: center;
+      color: white;
+      margin-bottom: 60px;
+    }
+    
+    .learn-hero h1 {
+      font-size: 3rem;
+      font-weight: 900;
+      margin-bottom: 20px;
+      letter-spacing: 1px;
+    }
+    
+    .learn-hero p {
+      font-size: 1.2rem;
+      color: #bfc2d1;
+      max-width: 600px;
+      margin: 0 auto 40px auto;
+      line-height: 1.6;
+    }
+    
+    .progress-indicator {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+      margin-bottom: 40px;
+    }
+    
+    .progress-step {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      color: #bfc2d1;
+      border: 2px solid rgba(255, 255, 255, 0.2);
+    }
+    
+    .progress-step.active {
+      background: #60AAFF;
+      color: white;
+      border-color: #60AAFF;
+    }
+    
+    .progress-step.completed {
+      background: #1DBF73;
+      color: white;
+      border-color: #1DBF73;
+    }
+    
+    .progress-line {
+      width: 60px;
+      height: 2px;
+      background: rgba(255, 255, 255, 0.2);
+    }
+    
+    .progress-line.active {
+      background: #60AAFF;
+    }
+    
+    .progress-line.completed {
+      background: #1DBF73;
+    }
+    
+    .learning-section {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    
+    .topic-card {
+      padding: 30px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 200px;
+      justify-content: center;
+    }
+    
+    .topic-card img {
+      width: 60px;
+      height: 60px;
+      margin-bottom: 20px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 12px;
+    }
+    
+    .topic-card h3 {
+      font-size: 1.3rem;
+      margin-bottom: 10px;
+    }
+    
+    .topic-card p {
+      color: #bfc2d1;
+      text-align: center;
+      line-height: 1.5;
+      margin: 0;
+    }
+    
+    .learning-path {
+      background: rgba(10, 23, 64, 0.7);
+      border-radius: 18px;
+      padding: 40px;
+      margin: 40px 0;
+      border: 1px solid rgba(21, 58, 100, 0.3);
+    }
+    
+    .learning-path h2 {
+      color: #fff;
+      font-size: 2rem;
+      margin-bottom: 30px;
+      text-align: center;
+    }
+    
+    .path-steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      margin-top: 30px;
+    }
+    
+    .path-step {
+      background: rgba(21, 58, 100, 0.3);
+      border-radius: 12px;
+      padding: 20px;
+      border-left: 4px solid #60AAFF;
+    }
+    
+    .path-step h4 {
+      color: #fff;
+      margin-bottom: 10px;
+      font-size: 1.1rem;
+    }
+    
+    .path-step p {
+      color: #bfc2d1;
+      font-size: 0.9rem;
+      line-height: 1.4;
+    }
+    
+    .continue-btn {
+      background: linear-gradient(135deg, #60AAFF 0%, #4A90E2 100%);
+      color: white;
+      border: none;
+      padding: 16px 40px;
+      border-radius: 12px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.22s ease;
+      box-shadow: 0 8px 24px rgba(96, 170, 255, 0.3);
+      margin-top: 30px;
+    }
+    
+    .continue-btn:hover {
+      background: linear-gradient(135deg, #4A90E2 0%, #357ABD 100%);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 32px rgba(96, 170, 255, 0.4);
+    }
+    
+    .continue-btn:disabled {
+      background: #666;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+    
+    .selected-count {
+      color: #60AAFF;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+  </style>
 </head>
 <body>
   <!-- Auth Modal -->
@@ -32,11 +222,13 @@
   </div>
 
   <header class="navbar sticky-navbar">
-    <div class="logo">ArtPath</div>
+    <div class="logo">
+      <span class="logo-text">ARTPATH</span>
+    </div>
     <nav class="main-nav" id="mainNav">
-      <a href="artist_dashboard.html" class="main-nav-link protected-link">My Studio</a>
-      <a href="client_dashboard.html" class="main-nav-link protected-link">Find Artists</a>
-      <a href="artist_page.html" class="main-nav-link protected-link">Spotlight</a>
+      <a href="artist_dashboard.html" class="main-nav-link">My Studio</a>
+      <a href="client_dashboard.html" class="main-nav-link">Find Artists</a>
+      <a href="artist_page.html" class="main-nav-link">Spotlight</a>
     </nav>
     <div id="authArea">
       <button id="openAuthModal" class="menu-toggle">Login / Register</button>
@@ -48,34 +240,78 @@
   <div class="sidebar" id="sidebar">
     <button class="close-sidebar" onclick="closeSidebar()">×</button>
     <a href="#" id="sidebarAuthLink">Login / Register</a>
-    <a href="artist_dashboard.html" class="protected-link">My Studio</a>
-    <a href="client_dashboard.html" class="protected-link">Find Artists</a>
-    <a href="artist_page.html" class="protected-link">Spotlight</a>
-    <a href="#">Home</a>
+    <a href="artist_dashboard.html">My Studio</a>
+    <a href="client_dashboard.html">Find Artists</a>
+    <a href="artist_page.html">Spotlight</a>
+    <a href="Artpath.html">Home</a>
     <a href="#">Settings</a>
-    <a href="#">Learn</a>
-    <a href="#">Portfolio</a>
+    <a href="learn.html">Learn</a>
+    <a href="portfolio.html">Portfolio</a>
   </div>
 
-  <main class="main-content" style="flex-direction: column; align-items: center;">
-    <section class="portfolio-dashboard card" style="max-width: 600px; width: 100%; margin-top: 120px; padding: 40px 32px; text-align: center;">
-      <img src="https://undraw.co/api/illustrations/2d1b7e7e-7e2e-4e2e-8e2e-7e2e4e2e8e2e" alt="Learning Illustration" style="width: 180px; margin-bottom: 1.5rem; border-radius: 12px; box-shadow: 0 2px 12px rgba(99,102,241,0.10);" />
-      <h1 class="section-heading">🎯 Choose What You Want to Learn</h1>
-      <p class="section-subtext">Select your interests below to personalize your learning journey.</p>
-      <div class="topic-grid" style="margin-bottom: 2.5rem;">
-        <div class="topic-card" onclick="toggleTopic('Sketching')">
-          <img src="sketching-icon.svg" alt="" style="width:32px; margin-bottom:8px;" />
-           Sketching
-        </div>
-        <div class="topic-card" onclick="toggleTopic('Charcoal Art')">Charcoal Art</div>
-        <div class="topic-card" onclick="toggleTopic('Inking')"> Inking</div>
-        <div class="topic-card" onclick="toggleTopic('Watercolor')"> Watercolor</div>
-        <div class="topic-card" onclick="toggleTopic('Acrylic')"> Acrylic Painting</div>
-        <div class="topic-card" onclick="toggleTopic('Anatomy')"> Anatomy for Artists</div>
+  <!-- Hero Section -->
+  <section class="learn-hero">
+    <div class="progress-indicator">
+      <div class="progress-step active">1</div>
+      <div class="progress-line"></div>
+      <div class="progress-step">2</div>
+      <div class="progress-line"></div>
+      <div class="progress-step">3</div>
+    </div>
+    <h1>🎨 Choose Your Learning Path</h1>
+    <p>Select the art skills you want to master. We'll create a personalized learning journey just for you.</p>
+  </section>
+
+  <!-- Learning Section -->
+  <section class="learning-section">
+    <div class="selected-count" id="selectedCount">Select at least one topic to continue</div>
+    
+    <div class="topic-grid">
+      <div class="topic-card" onclick="toggleTopic(this, 'Sketching')">
+        <img src="https://via.placeholder.com/60x60/60AAFF/FFFFFF?text=✏️" alt="Sketching" />
+        <h3>Sketching</h3>
+        <p>Master the fundamentals of drawing with pencil and paper. Learn perspective, shading, and composition.</p>
       </div>
-      <button id="continue-button" onclick="continueAfterTopics()" disabled>Continue</button>
-    </section>
-  </main>
+
+      <div class="topic-card" onclick="toggleTopic(this, 'Charcoal Art')">
+        <img src="https://via.placeholder.com/60x60/8B4513/FFFFFF?text=🖤" alt="Charcoal" />
+        <h3>Charcoal Art</h3>
+        <p>Create dramatic, expressive artwork with charcoal. Perfect for portraits and dramatic scenes.</p>
+      </div>
+
+      <div class="topic-card" onclick="toggleTopic(this, 'Watercolor')">
+        <img src="https://via.placeholder.com/60x60/4169E1/FFFFFF?text=💧" alt="Watercolor" />
+        <h3>Watercolor</h3>
+        <p>Learn the delicate art of watercolor painting. Master washes, blending, and color theory.</p>
+      </div>
+
+      <div class="topic-card" onclick="toggleTopic(this, 'Digital Art')">
+        <img src="https://via.placeholder.com/60x60/FF6B6B/FFFFFF?text=💻" alt="Digital Art" />
+        <h3>Digital Art</h3>
+        <p>Create stunning digital artwork using modern tools and techniques. Perfect for modern artists.</p>
+      </div>
+
+      <div class="topic-card" onclick="toggleTopic(this, 'Portfolio Building')">
+        <img src="https://via.placeholder.com/60x60/1DBF73/FFFFFF?text=📁" alt="Portfolio" />
+        <h3>Portfolio Building</h3>
+        <p>Learn how to showcase your work professionally and attract clients and opportunities.</p>
+      </div>
+
+      <div class="topic-card" onclick="toggleTopic(this, 'Social Media')">
+        <img src="https://via.placeholder.com/60x60/9C27B0/FFFFFF?text=📱" alt="Social Media" />
+        <h3>Social Media for Artists</h3>
+        <p>Build your online presence and grow your audience through effective social media strategies.</p>
+      </div>
+    </div>
+
+    <div class="button-row">
+      <button id="continueBtn" class="continue-btn" onclick="continueToLearningPath()" disabled>
+        Create My Learning Plan →
+      </button>
+    </div>
+  </section>
+
+  <!-- Footer -->
   <footer>
     <p>© 2025 ArtPath. All rights reserved.</p>
     <p>
@@ -84,5 +320,216 @@
       <a href="#">Contact</a>
     </p>
   </footer>
+
+  <script src="Landingpage.js"></script>
+  <script>
+    const selectedTopics = new Set();
+    const topicData = {
+      'Sketching': {
+        steps: [
+          { title: 'Basic Shapes', description: 'Learn to draw circles, squares, and triangles accurately' },
+          { title: 'Perspective', description: 'Master 1-point and 2-point perspective drawing' },
+          { title: 'Shading Techniques', description: 'Practice hatching, cross-hatching, and blending' },
+          { title: 'Still Life', description: 'Draw everyday objects to improve observation skills' }
+        ]
+      },
+      'Charcoal Art': {
+        steps: [
+          { title: 'Charcoal Types', description: 'Learn about vine, compressed, and pencil charcoal' },
+          { title: 'Basic Techniques', description: 'Master blending, erasing, and mark-making' },
+          { title: 'Portrait Drawing', description: 'Create expressive charcoal portraits' },
+          { title: 'Dramatic Lighting', description: 'Use light and shadow for emotional impact' }
+        ]
+      },
+      'Watercolor': {
+        steps: [
+          { title: 'Color Theory', description: 'Understand primary, secondary, and complementary colors' },
+          { title: 'Wet-on-Wet', description: 'Master the flowing watercolor technique' },
+          { title: 'Layering', description: 'Build depth with multiple transparent layers' },
+          { title: 'Landscape Painting', description: 'Create beautiful outdoor scenes' }
+        ]
+      },
+      'Digital Art': {
+        steps: [
+          { title: 'Software Basics', description: 'Learn Photoshop, Procreate, or Krita fundamentals' },
+          { title: 'Digital Brushes', description: 'Master different brush types and settings' },
+          { title: 'Layers & Masks', description: 'Organize your work with layers and masking' },
+          { title: 'Digital Painting', description: 'Create complete digital artworks' }
+        ]
+      },
+      'Portfolio Building': {
+        steps: [
+          { title: 'Curate Your Work', description: 'Select your best pieces for presentation' },
+          { title: 'Professional Photos', description: 'Learn to photograph your artwork properly' },
+          { title: 'Online Portfolio', description: 'Create a stunning digital portfolio website' },
+          { title: 'Artist Statement', description: 'Write compelling descriptions of your work' }
+        ]
+      },
+      'Social Media': {
+        steps: [
+          { title: 'Platform Strategy', description: 'Choose the right platforms for your art style' },
+          { title: 'Content Planning', description: 'Create a consistent posting schedule' },
+          { title: 'Engagement', description: 'Build relationships with your audience' },
+          { title: 'Analytics', description: 'Track your growth and optimize your strategy' }
+        ]
+      }
+    };
+
+    function toggleTopic(card, topicName) {
+      card.classList.toggle('selected');
+      
+      if (selectedTopics.has(topicName)) {
+        selectedTopics.delete(topicName);
+      } else {
+        selectedTopics.add(topicName);
+      }
+      
+      updateSelectedCount();
+      updateContinueButton();
+    }
+
+    function updateSelectedCount() {
+      const countElement = document.getElementById('selectedCount');
+      if (selectedTopics.size === 0) {
+        countElement.textContent = 'Select at least one topic to continue';
+        countElement.style.color = '#bfc2d1';
+      } else if (selectedTopics.size === 1) {
+        countElement.textContent = `1 topic selected`;
+        countElement.style.color = '#60AAFF';
+      } else {
+        countElement.textContent = `${selectedTopics.size} topics selected`;
+        countElement.style.color = '#60AAFF';
+      }
+    }
+
+    function updateContinueButton() {
+      const continueBtn = document.getElementById('continueBtn');
+      continueBtn.disabled = selectedTopics.size === 0;
+    }
+
+    function continueToLearningPath() {
+      if (selectedTopics.size === 0) {
+        alert('Please select at least one topic to continue.');
+        return;
+      }
+      
+      // Store selected topics in localStorage
+      localStorage.setItem('artpathSelectedTopics', JSON.stringify(Array.from(selectedTopics)));
+      
+      // Show learning path modal or redirect to learning dashboard
+      showLearningPath();
+    }
+
+    function showLearningPath() {
+      // Create modal content
+      const modalContent = document.createElement('div');
+      modalContent.className = 'modal-content';
+      modalContent.style.maxWidth = '800px';
+      modalContent.style.maxHeight = '80vh';
+      modalContent.style.overflowY = 'auto';
+      
+      let content = `
+        <h2 style="color: #fff; text-align: center; margin-bottom: 30px;">Your Personalized Learning Path</h2>
+        <div style="color: #bfc2d1; text-align: center; margin-bottom: 30px;">
+          Based on your selections: ${Array.from(selectedTopics).join(', ')}
+        </div>
+      `;
+      
+      // Add learning paths for each selected topic
+      Array.from(selectedTopics).forEach(topic => {
+        if (topicData[topic]) {
+          content += `
+            <div class="learning-path">
+              <h3 style="color: #60AAFF; margin-bottom: 20px;">${topic}</h3>
+              <div class="path-steps">
+          `;
+          
+          topicData[topic].steps.forEach((step, index) => {
+            content += `
+              <div class="path-step">
+                <h4>Step ${index + 1}: ${step.title}</h4>
+                <p>${step.description}</p>
+              </div>
+            `;
+          });
+          
+          content += `
+              </div>
+            </div>
+          `;
+        }
+      });
+      
+      content += `
+        <div style="text-align: center; margin-top: 30px;">
+          <button onclick="startLearningJourney()" class="continue-btn">
+            Start My Learning Journey
+          </button>
+          <button onclick="closeLearningModal()" style="background: #666; margin-left: 10px;" class="continue-btn">
+            Back to Selection
+          </button>
+        </div>
+      `;
+      
+      modalContent.innerHTML = content;
+      
+      // Create and show modal
+      const modal = document.createElement('div');
+      modal.className = 'modal';
+      modal.style.display = 'flex';
+      modal.appendChild(modalContent);
+      document.body.appendChild(modal);
+      
+      // Close modal when clicking outside
+      modal.addEventListener('click', function(e) {
+        if (e.target === modal) {
+          closeLearningModal();
+        }
+      });
+    }
+
+    function closeLearningModal() {
+      const modal = document.querySelector('.modal:not(#authModal)');
+      if (modal) {
+        modal.remove();
+      }
+    }
+
+    function startLearningJourney() {
+      // Redirect to a learning dashboard or course page
+      alert('Starting your learning journey! This would redirect to your personalized learning dashboard.');
+      // window.location.href = 'learning-dashboard.html';
+    }
+
+    // Initialize when page loads
+    document.addEventListener('DOMContentLoaded', function() {
+      updateAuthUI();
+      
+      // Check if topics were pre-selected from customFeed.html
+      const preSelectedTopics = localStorage.getItem('artpathSelectedTopics');
+      if (preSelectedTopics) {
+        try {
+          const topics = JSON.parse(preSelectedTopics);
+          topics.forEach(topic => {
+            selectedTopics.add(topic);
+            // Find and select the corresponding card
+            const cards = document.querySelectorAll('.topic-card');
+            cards.forEach(card => {
+              const cardTitle = card.querySelector('h3').textContent;
+              if (cardTitle === topic) {
+                card.classList.add('selected');
+              }
+            });
+          });
+        } catch (e) {
+          console.error('Error parsing pre-selected topics:', e);
+        }
+      }
+      
+      updateSelectedCount();
+      updateContinueButton();
+    });
+  </script>
+
 </body>
 </html>
