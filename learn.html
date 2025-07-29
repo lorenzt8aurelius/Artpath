@@ -4,21 +4,58 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Start Learning</title>
-  <link rel="stylesheet" href="Artpath.css" />
+  <link rel="stylesheet" href="css/main.css" />
   <script src="Landingpage.js" defer></script>
 </head>
 <body>
-  <header>
-    <nav class="navbar">
-      <button onclick="history.back()" class="back-button">← Back</button>
-      <a href="index.html" class="logo">ArtPath</a>
-      <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="learn.html" class="active">Learn</a></li>
-        <li><a href="portfolio.html">Portfolio</a></li>
-      </ul>
+  <!-- Auth Modal -->
+  <div id="authModal" class="modal hidden">
+    <div class="modal-content">
+      <div class="auth-tabs">
+        <button id="showLoginTab" class="auth-tab active">Login</button>
+        <button id="showRegisterTab" class="auth-tab">Register</button>
+      </div>
+      <div id="authMessage" class="auth-message"></div>
+      <form id="loginForm" class="auth-form">
+        <input type="text" id="loginName" placeholder="Name" required />
+        <input type="password" id="loginPassword" placeholder="Password" required />
+        <button type="submit">Login</button>
+      </form>
+      <form id="registerForm" class="auth-form hidden">
+        <input type="text" id="registerName" placeholder="Name" required />
+        <input type="email" id="registerEmail" placeholder="Email" required />
+        <input type="password" id="registerPassword" placeholder="Password (min 6 chars)" required />
+        <button type="submit">Register</button>
+      </form>
+      <button class="close-modal" id="closeAuthModal">×</button>
+    </div>
+  </div>
+
+  <header class="navbar sticky-navbar">
+    <div class="logo">ArtPath</div>
+    <nav class="main-nav" id="mainNav">
+      <a href="artist_dashboard.html" class="main-nav-link protected-link">My Studio</a>
+      <a href="client_dashboard.html" class="main-nav-link protected-link">Find Artists</a>
+      <a href="artist_page.html" class="main-nav-link protected-link">Spotlight</a>
     </nav>
+    <div id="authArea">
+      <button id="openAuthModal" class="menu-toggle">Login / Register</button>
+    </div>
+    <button class="menu-toggle" onclick="toggleSidebar()">☰ Menu</button>
   </header>
+
+  <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
+  <div class="sidebar" id="sidebar">
+    <button class="close-sidebar" onclick="closeSidebar()">×</button>
+    <a href="#" id="sidebarAuthLink">Login / Register</a>
+    <a href="artist_dashboard.html" class="protected-link">My Studio</a>
+    <a href="client_dashboard.html" class="protected-link">Find Artists</a>
+    <a href="artist_page.html" class="protected-link">Spotlight</a>
+    <a href="#">Home</a>
+    <a href="#">Settings</a>
+    <a href="#">Learn</a>
+    <a href="#">Portfolio</a>
+  </div>
 
   <main class="main-content" style="flex-direction: column; align-items: center;">
     <section class="portfolio-dashboard card" style="max-width: 600px; width: 100%; margin-top: 120px; padding: 40px 32px; text-align: center;">
@@ -30,7 +67,7 @@
           <img src="sketching-icon.svg" alt="" style="width:32px; margin-bottom:8px;" />
            Sketching
         </div>
-        <div class="topic-card" onclick="toggleTopic('Charcoal Art')">🖤 Charcoal Art</div>
+        <div class="topic-card" onclick="toggleTopic('Charcoal Art')">Charcoal Art</div>
         <div class="topic-card" onclick="toggleTopic('Inking')"> Inking</div>
         <div class="topic-card" onclick="toggleTopic('Watercolor')"> Watercolor</div>
         <div class="topic-card" onclick="toggleTopic('Acrylic')"> Acrylic Painting</div>
@@ -39,5 +76,13 @@
       <button id="continue-button" onclick="continueAfterTopics()" disabled>Continue</button>
     </section>
   </main>
+  <footer>
+    <p>© 2025 ArtPath. All rights reserved.</p>
+    <p>
+      <a href="#">About</a>
+      <a href="#">FAQ</a>
+      <a href="#">Contact</a>
+    </p>
+  </footer>
 </body>
 </html>
