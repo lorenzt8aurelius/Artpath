@@ -14,7 +14,7 @@ function handleSearch() {
 function startPortfolio() {
   const user = getUser();
   if (user) {
-    window.location.href = "artist_dashboard.html";
+    window.location.href = "artist_onboarding.html";
   } else {
     showAuthModal('register');
   }
@@ -52,9 +52,9 @@ function updateAuthUI() {
   const user = getUser();
   const isGuest = localStorage.getItem('artpathGuest') === 'true';
   
-  // Show/hide nav links
+  // Show/hide nav links - show for logged in users AND guests
   document.querySelectorAll('.protected-link').forEach(link => {
-    link.style.display = user ? '' : 'none';
+    link.style.display = (user || isGuest) ? '' : 'none';
   });
   
   // Update dashboard welcome message if on dashboard page
