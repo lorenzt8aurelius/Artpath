@@ -77,19 +77,19 @@
           </thead>
           <tbody>
             <tr>
-              <td>Alex Rivera</td>
+              <td>Artist 1</td>
               <td>Portrait</td>
               <td>$100</td>
               <td><span class="status pending">Pending</span></td>
             </tr>
             <tr>
-              <td>Casey</td>
+              <td>Artist 2</td>
               <td>Landscape</td>
               <td>$200</td>
               <td><span class="status accepted">Accepted</span></td>
             </tr>
             <tr>
-              <td>Jordan</td>
+              <td>Artist 3</td>
               <td>Anime Style</td>
               <td>$80</td>
               <td><span class="status declined">Declined</span></td>
@@ -124,7 +124,7 @@
     const CLIENT_MSGS_KEY = 'artpathClientMsgs';
 
     function getClientConvos() {
-      return JSON.parse(localStorage.getItem(CLIENT_CONVOS_KEY) || '[{"name":"Alex Rivera"},{"name":"Casey"},{"name":"Jordan"}]');
+      return JSON.parse(localStorage.getItem(CLIENT_CONVOS_KEY) || '[{"name":"Artist 1"},{"name":"Artist 2"},{"name":"Artist 3"}]');
     }
     function setClientConvos(convos) {
       localStorage.setItem(CLIENT_CONVOS_KEY, JSON.stringify(convos));
