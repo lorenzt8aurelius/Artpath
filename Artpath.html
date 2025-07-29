@@ -30,7 +30,34 @@
   </div>
 
   <header class="navbar sticky-navbar">
-    <div class="logo">ArtPath</div>
+    <div class="logo">
+      <svg class="logo-icon" width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+        <!-- Brush with paint stroke path -->
+        <defs>
+          <linearGradient id="brushGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#D4C4A8;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#C4B498;stop-opacity:1" />
+          </linearGradient>
+        </defs>
+        <!-- Paint stroke path -->
+        <path d="M4 20 Q8 16 12 18 T20 22 T28 20" 
+              stroke="url(#brushGradient)" 
+              stroke-width="3" 
+              fill="none" 
+              stroke-linecap="round"/>
+        <!-- Brush handle -->
+        <rect x="26" y="8" width="2" height="16" 
+              fill="url(#brushGradient)" 
+              rx="1"/>
+        <!-- Brush bristles -->
+        <path d="M4 20 L2 18 L6 16 L8 18 Z" 
+              fill="url(#brushGradient)"/>
+        <!-- Paint splatter effect -->
+        <circle cx="6" cy="22" r="1" fill="#D4C4A8" opacity="0.6"/>
+        <circle cx="10" cy="24" r="0.8" fill="#D4C4A8" opacity="0.4"/>
+      </svg>
+      <span class="logo-text">Art<span class="logo-highlight">Path</span></span>
+    </div>
     <nav class="main-nav" id="mainNav">
       <a href="artist_dashboard.html" class="main-nav-link protected-link">My Studio</a>
       <a href="client_dashboard.html" class="main-nav-link protected-link">Find Artists</a>
@@ -66,7 +93,7 @@
         </form>
         <button class="hero-cta-btn">Get Started</button>
         <div class="hero-social-proof">
-          <span>Trusted by 5,000+ artists</span>
+          <span>Trusted by artists</span>
           <span>★★★★★</span>
         </div>
       </div>
@@ -74,15 +101,24 @@
     <section class="welcome-section section-fade-in">
       <h2>Get Started</h2>
       <div class="choice-cards">
-        <div class="card card-fade-in" tabindex="0" role="button" aria-label="I'm an artist. Build your online portfolio and connect with clients." onclick="startPortfolio()">
-          <svg class="card-icon" width="70" height="70" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
-            <rect x="6" y="16" width="52" height="36" fill="none" stroke="#bfc2d1" stroke-width="4" rx="4"/>
-            <line x1="6" y1="16" x2="6" y2="8" stroke="#bfc2d1" stroke-width="4"/>
-            <line x1="58" y1="16" x2="58" y2="8" stroke="#bfc2d1" stroke-width="4"/>
-          </svg>
+        <div class="card card-fade-in artist-card" tabindex="0" role="button" aria-label="I'm an artist. Build your online portfolio and connect with clients." onclick="startPortfolio()">
+          <div class="card-header">
+            <svg class="card-icon" width="70" height="70" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+              <rect x="6" y="16" width="52" height="36" fill="none" stroke="#bfc2d1" stroke-width="4" rx="4"/>
+              <line x1="6" y1="16" x2="6" y2="8" stroke="#bfc2d1" stroke-width="4"/>
+              <line x1="58" y1="16" x2="58" y2="8" stroke="#bfc2d1" stroke-width="4"/>
+            </svg>
+            <div class="card-badge">🎨</div>
+          </div>
           <h3>I’m an artist</h3>
-          <p>Build your online portfolio and connect with clients.</p>
-          <button onclick="startPortfolio()">Start Your Portfolio</button>
+          <p>Build your online portfolio and connect with clients worldwide. Showcase your talent and start earning from your art.</p>
+          <div class="card-features">
+            <div class="feature-item">✨ Professional Portfolio</div>
+            <div class="feature-item">💼 Commission Requests</div>
+            <div class="feature-item">📊 Analytics & Insights</div>
+            <div class="feature-item">🌍 Global Reach</div>
+          </div>
+          <button onclick="startPortfolio()" class="enhanced-btn">Start Your Portfolio →</button>
         </div>
         <div class="card card-fade-in" tabindex="0" role="button" aria-label="Beginner. Take step-by-step courses to grow your skills confidently." onclick="startLearning()">
           <svg class="card-icon" width="70" height="70" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
@@ -276,157 +312,13 @@
   </div>
   <script src="Landingpage.js"></script>
   <script>
-    // Sidebar open/close logic
-    function toggleSidebar() {
-      document.getElementById('sidebar').classList.toggle('show');
-      document.getElementById('sidebarOverlay').classList.toggle('show');
-    }
-    function closeSidebar() {
-      document.getElementById('sidebar').classList.remove('show');
-      document.getElementById('sidebarOverlay').classList.remove('show');
-    }
-    // Modal open/close logic for Login in sidebar
-    const loginSidebarLink = document.getElementById('loginSidebarLink');
-    const closeModalBtn = document.getElementById('closeModalBtn');
-    const registerModal = document.getElementById('registerModal');
-    if (loginSidebarLink) {
-      loginSidebarLink.addEventListener('click', (e) => {
-        e.preventDefault();
-        registerModal.classList.remove('hidden');
-        closeSidebar();
-      });
-    }
-    if (closeModalBtn) {
-      closeModalBtn.addEventListener('click', () => {
-        registerModal.classList.add('hidden');
-      });
-    }
-    window.addEventListener('click', (e) => {
-      if (e.target === registerModal) {
-        registerModal.classList.add('hidden');
+    // Initialize essential functions that need to be available immediately
+    document.addEventListener('DOMContentLoaded', function() {
+      // Ensure all functions from Landingpage.js are properly initialized
+      if (typeof updateAuthUI === 'function') {
+        updateAuthUI();
       }
     });
-
-    // Auth modal logic
-    const authModal = document.getElementById('authModal');
-    const openAuthModal = document.getElementById('openAuthModal');
-    const closeAuthModal = document.getElementById('closeAuthModal');
-    const sidebarAuthLink = document.getElementById('sidebarAuthLink');
-    const showLoginTab = document.getElementById('showLoginTab');
-    const showRegisterTab = document.getElementById('showRegisterTab');
-    const loginForm = document.getElementById('loginForm');
-    const registerForm = document.getElementById('registerForm');
-    const mainNav = document.getElementById('mainNav');
-    const authArea = document.getElementById('authArea');
-    const authMessage = document.getElementById('authMessage');
-
-    function showAuthModal(tab) {
-      authModal.classList.remove('hidden');
-      if (tab === 'register') {
-        loginForm.classList.add('hidden');
-        registerForm.classList.remove('hidden');
-        showLoginTab.classList.remove('active');
-        showRegisterTab.classList.add('active');
-      } else {
-        loginForm.classList.remove('hidden');
-        registerForm.classList.add('hidden');
-        showLoginTab.classList.add('active');
-        showRegisterTab.classList.remove('active');
-      }
-    }
-    if (openAuthModal) openAuthModal.onclick = () => showAuthModal('login');
-    if (sidebarAuthLink) sidebarAuthLink.onclick = (e) => { e.preventDefault(); closeSidebar(); showAuthModal('login'); };
-    if (closeAuthModal) closeAuthModal.onclick = () => authModal.classList.add('hidden');
-    showLoginTab.onclick = () => showAuthModal('login');
-    showRegisterTab.onclick = () => showAuthModal('register');
-    window.addEventListener('click', (e) => {
-      if (e.target === authModal) authModal.classList.add('hidden');
-    });
-
-    function showAuthMessage(msg, type = 'error') {
-      authMessage.textContent = msg;
-      authMessage.className = 'auth-message ' + type;
-      if (type === 'success') {
-        setTimeout(() => { authMessage.textContent = ''; }, 1200);
-      }
-    }
-    function clearAuthMessage() {
-      authMessage.textContent = '';
-    }
-
-    // Auth logic (localStorage demo)
-    function setUser(name) {
-      localStorage.setItem('artpathUser', name);
-      updateAuthUI();
-    }
-    function getUser() {
-      return localStorage.getItem('artpathUser');
-    }
-    function logout() {
-      localStorage.removeItem('artpathUser');
-      updateAuthUI();
-    }
-    function updateAuthUI() {
-      const user = getUser();
-      // Show/hide nav links
-      document.querySelectorAll('.protected-link').forEach(link => {
-        link.style.display = user ? '' : 'none';
-      });
-      // Show welcome/logout or login/register
-      if (user) {
-        authArea.innerHTML = `<span class='welcome-msg'>Welcome, ${user}</span> <button class='menu-toggle' id='logoutBtn'>Logout</button>`;
-        document.getElementById('logoutBtn').onclick = logout;
-        if (sidebarAuthLink) sidebarAuthLink.textContent = 'Logout';
-        sidebarAuthLink.onclick = (e) => { e.preventDefault(); logout(); closeSidebar(); };
-      } else {
-        authArea.innerHTML = `<button id='openAuthModal' class='menu-toggle'>Login / Register</button>`;
-        document.getElementById('openAuthModal').onclick = () => showAuthModal('login');
-        if (sidebarAuthLink) sidebarAuthLink.textContent = 'Login / Register';
-        sidebarAuthLink.onclick = (e) => { e.preventDefault(); closeSidebar(); showAuthModal('login'); };
-      }
-    }
-    loginForm.onsubmit = (e) => {
-      e.preventDefault();
-      clearAuthMessage();
-      const name = document.getElementById('loginName').value.trim();
-      const pass = document.getElementById('loginPassword').value;
-      if (!name || !pass) {
-        showAuthMessage('Please enter your name and password.');
-        return;
-      }
-      if (pass.length < 6) {
-        showAuthMessage('Password must be at least 6 characters.');
-        return;
-      }
-      // Simulate login (check if user exists in localStorage)
-      // For demo, just allow any name/password
-      setUser(name);
-      showAuthMessage('Login successful!', 'success');
-      setTimeout(() => { authModal.classList.add('hidden'); }, 900);
-    };
-    registerForm.onsubmit = (e) => {
-      e.preventDefault();
-      clearAuthMessage();
-      const name = document.getElementById('registerName').value.trim();
-      const email = document.getElementById('registerEmail').value.trim();
-      const pass = document.getElementById('registerPassword').value;
-      if (!name || !email || !pass) {
-        showAuthMessage('Please fill in all fields.');
-        return;
-      }
-      if (!/^\S+@\S+\.\S+$/.test(email)) {
-        showAuthMessage('Please enter a valid email address.');
-        return;
-      }
-      if (pass.length < 6) {
-        showAuthMessage('Password must be at least 6 characters.');
-        return;
-      }
-      setUser(name);
-      showAuthMessage('Registration successful!', 'success');
-      setTimeout(() => { authModal.classList.add('hidden'); }, 900);
-    };
-    updateAuthUI();
   </script>
 <style>
 .nav-highlight {
@@ -499,6 +391,109 @@
   .hero-headline-highlight {
     font-size: 2rem;
   }
+}
+
+/* Enhanced Artist Card Styles */
+.artist-card {
+  position: relative;
+  overflow: hidden;
+  border: 2px solid rgba(96, 170, 255, 0.3);
+  background: linear-gradient(135deg, rgba(10, 23, 64, 0.8) 0%, rgba(21, 58, 100, 0.6) 100%);
+}
+
+.artist-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(96, 170, 255, 0.1), transparent);
+  transition: left 0.5s;
+}
+
+.artist-card:hover::before {
+  left: 100%;
+}
+
+.card-header {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 20px;
+}
+
+.card-badge {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  background: linear-gradient(135deg, #60AAFF 0%, #4A90E2 100%);
+  color: white;
+  padding: 8px 12px;
+  border-radius: 20px;
+  font-size: 1.2rem;
+  box-shadow: 0 4px 12px rgba(96, 170, 255, 0.3);
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+.card-features {
+  margin: 20px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.feature-item {
+  color: #bfc2d1;
+  font-size: 0.9rem;
+  padding: 4px 0;
+  border-left: 2px solid rgba(96, 170, 255, 0.3);
+  padding-left: 12px;
+  transition: all 0.2s;
+}
+
+.feature-item:hover {
+  color: #60AAFF;
+  border-left-color: #60AAFF;
+  transform: translateX(4px);
+}
+
+.enhanced-btn {
+  background: linear-gradient(135deg, #60AAFF 0%, #4A90E2 100%);
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 4px 12px rgba(96, 170, 255, 0.3);
+  width: 100%;
+  margin-top: 16px;
+}
+
+.enhanced-btn:hover {
+  background: linear-gradient(135deg, #4A90E2 0%, #357ABD 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(96, 170, 255, 0.4);
+}
+
+.artist-card h3 {
+  color: #60AAFF;
+  font-size: 1.4rem;
+  margin-bottom: 12px;
+}
+
+.artist-card p {
+  color: #bfc2d1;
+  line-height: 1.6;
+  margin-bottom: 16px;
 }
 </style>
 </body>
