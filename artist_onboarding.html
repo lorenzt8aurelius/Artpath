@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Artist Onboarding – ArtPath</title>
+  <link rel="stylesheet" href="css/main.css" />
+  <style>
+    /* Hide logo icons */
+    .logo-icon {
+      display: none !important;
+    }
+    .logo::before,
+    .logo::after {
+      display: none !important;
+    }
+    
+    /* Artist Onboarding Styles */
+    .onboarding-hero {
+      background: linear-gradient(135deg, #0A1740 0%, #153A64 100%);
+      padding: 120px 40px 80px 40px;
+      text-align: center;
+      color: white;
+      margin-bottom: 60px;
+    }
+    
+    .onboarding-hero h1 {
+      font-size: 3rem;
+      font-weight: 900;
+      margin-bottom: 20px;
+      letter-spacing: 1px;
+    }
+    
+    .onboarding-hero p {
+      font-size: 1.2rem;
+      color: #bfc2d1;
+      max-width: 600px;
+      margin: 0 auto 40px auto;
+      line-height: 1.6;
+    }
+    
+    .progress-indicator {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+      margin-bottom: 40px;
+    }
+    
+    .progress-step {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      color: #bfc2d1;
+      border: 2px solid rgba(255, 255, 255, 0.2);
+    }
+    
+    .progress-step.active {
+      background: #60AAFF;
+      color: white;
+      border-color: #60AAFF;
+    }
+    
+    .progress-step.completed {
+      background: #1DBF73;
+      color: white;
+      border-color: #1DBF73;
+    }
+    
+    .progress-line {
+      width: 60px;
+      height: 2px;
+      background: rgba(255, 255, 255, 0.2);
+    }
+    
+    .progress-line.active {
+      background: #60AAFF;
+    }
+    
+    .progress-line.completed {
+      background: #1DBF73;
+    }
+    
+    .onboarding-section {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    
+    .onboarding-card {
+      background: rgba(10, 23, 64, 0.7);
+      border-radius: 18px;
+      padding: 40px;
+      margin: 40px 0;
+      border: 1px solid rgba(21, 58, 100, 0.3);
+      text-align: center;
+    }
+    
+    .onboarding-card h2 {
+      color: #fff;
+      font-size: 2rem;
+      margin-bottom: 20px;
+    }
+    
+    .onboarding-card p {
+      color: #bfc2d1;
+      font-size: 1.1rem;
+      line-height: 1.6;
+      margin-bottom: 30px;
+    }
+    
+    .form-group {
+      margin-bottom: 24px;
+      text-align: left;
+    }
+    
+    .form-group label {
+      display: block;
+      color: #fff;
+      font-weight: 600;
+      margin-bottom: 8px;
+      font-size: 1rem;
+    }
+    
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      width: 100%;
+      padding: 12px 16px;
+      border-radius: 8px;
+      border: 1px solid rgba(21, 58, 100, 0.5);
+      background: rgba(21, 58, 100, 0.3);
+      color: #fff;
+      font-size: 1rem;
+      transition: border-color 0.2s;
+    }
+    
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      outline: none;
+      border-color: #60AAFF;
+    }
+    
+    .form-group textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+    
+    .upload-area {
+      border: 2px dashed rgba(96, 170, 255, 0.3);
+      border-radius: 12px;
+      padding: 40px 20px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s;
+      background: rgba(21, 58, 100, 0.2);
+    }
+    
+    .upload-area:hover {
+      border-color: #60AAFF;
+      background: rgba(21, 58, 100, 0.4);
+    }
+    
+    .upload-area.dragover {
+      border-color: #60AAFF;
+      background: rgba(96, 170, 255, 0.1);
+    }
+    
+    .upload-icon {
+      font-size: 3rem;
+      margin-bottom: 16px;
+      color: #60AAFF;
+    }
+    
+    .upload-text {
+      color: #bfc2d1;
+      font-size: 1.1rem;
+      margin-bottom: 8px;
+    }
+    
+    .upload-hint {
+      color: #8a8d9a;
+      font-size: 0.9rem;
+    }
+    
+    .art-preview {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 16px;
+      margin-top: 20px;
+    }
+    
+    .art-preview-item {
+      position: relative;
+      border-radius: 8px;
+      overflow: hidden;
+      aspect-ratio: 1;
+    }
+    
+    .art-preview-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    .remove-art {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      background: rgba(255, 0, 0, 0.8);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 24px;
+      height: 24px;
+      cursor: pointer;
+      font-size: 12px;
+    }
+    
+    .style-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 16px;
+    }
+    
+    .style-tag {
+      background: rgba(96, 170, 255, 0.2);
+      color: #60AAFF;
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      border: 1px solid rgba(96, 170, 255, 0.3);
+    }
+    
+    .style-tag:hover,
+    .style-tag.selected {
+      background: #60AAFF;
+      color: white;
+    }
+    
+    .continue-btn {
+      background: linear-gradient(135deg, #60AAFF 0%, #4A90E2 100%);
+      color: white;
+      border: none;
+      padding: 16px 40px;
+      border-radius: 12px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.22s ease;
+      box-shadow: 0 8px 24px rgba(96, 170, 255, 0.3);
+      margin-top: 30px;
+    }
+    
+    .continue-btn:hover {
+      background: linear-gradient(135deg, #4A90E2 0%, #357ABD 100%);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 32px rgba(96, 170, 255, 0.4);
+    }
+    
+    .continue-btn:disabled {
+      background: #666;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+    
+    .step-indicator {
+      color: #60AAFF;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+    
+    @media (max-width: 768px) {
+      .onboarding-hero h1 {
+        font-size: 2rem;
+      }
+      
+      .onboarding-card {
+        padding: 24px;
+        margin: 20px 0;
+      }
+      
+      .art-preview {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Auth Modal -->
+  <div id="authModal" class="modal hidden">
+    <div class="modal-content">
+      <div class="auth-tabs">
+        <button id="showLoginTab" class="auth-tab active">Login</button>
+        <button id="showRegisterTab" class="auth-tab">Register</button>
+      </div>
+      <div id="authMessage" class="auth-message"></div>
+      <form id="loginForm" class="auth-form">
+        <input type="text" id="loginName" placeholder="Name" required />
+        <input type="password" id="loginPassword" placeholder="Password" required />
+        <button type="submit">Login</button>
+      </form>
+      <form id="registerForm" class="auth-form hidden">
+        <input type="text" id="registerName" placeholder="Name" required />
+        <input type="email" id="registerEmail" placeholder="Email" required />
+        <input type="password" id="registerPassword" placeholder="Password (min 6 chars)" required />
+        <button type="submit">Register</button>
+      </form>
+      <button class="close-modal" id="closeAuthModal">×</button>
+    </div>
+  </div>
+
+  <header class="navbar sticky-navbar">
+    <div class="logo">
+      <span class="logo-text">ARTPATH</span>
+    </div>
+    <nav class="main-nav" id="mainNav">
+      <a href="artist_dashboard.html" class="main-nav-link">My Studio</a>
+      <a href="client_dashboard.html" class="main-nav-link">Find Artists</a>
+      <a href="artist_page.html" class="main-nav-link">Spotlight</a>
+    </nav>
+    <div id="authArea">
+      <button id="openAuthModal" class="menu-toggle">Login / Register</button>
+    </div>
+    <button class="menu-toggle" onclick="toggleSidebar()">☰ Menu</button>
+  </header>
+
+  <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
+  <div class="sidebar" id="sidebar">
+    <button class="close-sidebar" onclick="closeSidebar()">×</button>
+    <a href="#" id="sidebarAuthLink">Login / Register</a>
+    <a href="artist_dashboard.html">My Studio</a>
+    <a href="client_dashboard.html">Find Artists</a>
+    <a href="artist_page.html">Spotlight</a>
+    <a href="Artpath.html">Home</a>
+    <a href="#">Settings</a>
+    <a href="learn.html">Learn</a>
+    <a href="portfolio.html">Portfolio</a>
+  </div>
+
+  <!-- Hero Section -->
+  <section class="onboarding-hero">
+    <div class="progress-indicator">
+      <div class="progress-step active">1</div>
+      <div class="progress-line"></div>
+      <div class="progress-step">2</div>
+      <div class="progress-line"></div>
+      <div class="progress-step">3</div>
+    </div>
+    <h1>🎨 Set Up Your Artist Profile</h1>
+    <p>Let's create your professional portfolio and get you started on your artistic journey.</p>
+  </section>
+
+  <!-- Onboarding Section -->
+  <section class="onboarding-section">
+    <!-- Step 1: Basic Info -->
+    <div id="step1" class="onboarding-card">
+      <div class="step-indicator">Step 1 of 3</div>
+      <h2>Tell Us About Yourself</h2>
+      <p>Let's start with the basics. This information will help clients discover and connect with you.</p>
+      
+      <form id="basicInfoForm">
+        <div class="form-group">
+          <label for="artistName">Artist Name / Display Name</label>
+          <input type="text" id="artistName" placeholder="How should clients know you?" required />
+        </div>
+        
+        <div class="form-group">
+          <label for="artistBio">Artist Bio</label>
+          <textarea id="artistBio" placeholder="Tell us about your artistic journey, style, and what inspires you..." required></textarea>
+        </div>
+        
+        <div class="form-group">
+          <label for="artistLocation">Location</label>
+          <input type="text" id="artistLocation" placeholder="City, Country" required />
+        </div>
+        
+        <div class="form-group">
+          <label for="artistExperience">Years of Experience</label>
+          <select id="artistExperience" required>
+            <option value="">Select experience level</option>
+            <option value="beginner">Beginner (0-2 years)</option>
+            <option value="intermediate">Intermediate (3-5 years)</option>
+            <option value="advanced">Advanced (6-10 years)</option>
+            <option value="professional">Professional (10+ years)</option>
+          </select>
+        </div>
+        
+        <button type="button" class="continue-btn" onclick="nextStep(2)">Continue to Portfolio →</button>
+      </form>
+    </div>
+
+    <!-- Step 2: Portfolio -->
+    <div id="step2" class="onboarding-card" style="display: none;">
+      <div class="step-indicator">Step 2 of 3</div>
+      <h2>Showcase Your Art</h2>
+      <p>Upload your best artwork to showcase your talent and attract potential clients.</p>
+      
+      <div class="upload-area" id="uploadArea">
+        <div class="upload-icon">📁</div>
+        <div class="upload-text">Drag & drop your artwork here</div>
+        <div class="upload-hint">or click to browse files (JPG, PNG, max 5MB each)</div>
+        <input type="file" id="artUpload" multiple accept="image/*" style="display: none;" />
+      </div>
+      
+      <div class="art-preview" id="artPreview"></div>
+      
+      <div class="form-group">
+        <label for="portfolioDescription">Portfolio Description</label>
+        <textarea id="portfolioDescription" placeholder="Describe your portfolio, artistic style, and what clients can expect from your work..."></textarea>
+      </div>
+      
+      <div style="display: flex; gap: 16px; justify-content: center; margin-top: 30px;">
+        <button type="button" class="continue-btn" style="background: #666;" onclick="prevStep(1)">← Back</button>
+        <button type="button" class="continue-btn" onclick="nextStep(3)">Continue to Specialties →</button>
+      </div>
+    </div>
+
+    <!-- Step 3: Specialties -->
+    <div id="step3" class="onboarding-card" style="display: none;">
+      <div class="step-indicator">Step 3 of 3</div>
+      <h2>Define Your Specialties</h2>
+      <p>Select the types of art you specialize in. This helps clients find you for specific projects.</p>
+      
+      <div class="form-group">
+        <label>Art Styles & Specialties</label>
+        <div class="style-tags">
+          <div class="style-tag" onclick="toggleStyle(this)">Portrait</div>
+          <div class="style-tag" onclick="toggleStyle(this)">Landscape</div>
+          <div class="style-tag" onclick="toggleStyle(this)">Digital Art</div>
+          <div class="style-tag" onclick="toggleStyle(this)">Watercolor</div>
+          <div class="style-tag" onclick="toggleStyle(this)">Oil Painting</div>
+          <div class="style-tag" onclick="toggleStyle(this)">Sketching</div>
+          <div class="style-tag" onclick="toggleStyle(this)">Character Design</div>
+          <div class="style-tag" onclick="toggleStyle(this)">Logo Design</div>
+          <div class="style-tag" onclick="toggleStyle(this)">Illustration</div>
+          <div class="style-tag" onclick="toggleStyle(this)">Abstract</div>
+          <div class="style-tag" onclick="toggleStyle(this)">Realistic</div>
+          <div class="style-tag" onclick="toggleStyle(this)">Anime/Manga</div>
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label for="commissionRates">Commission Rates (Optional)</label>
+        <select id="commissionRates">
+          <option value="">Select your rate range</option>
+          <option value="budget">Budget ($10-50)</option>
+          <option value="standard">Standard ($50-200)</option>
+          <option value="premium">Premium ($200-500)</option>
+          <option value="luxury">Luxury ($500+)</option>
+        </select>
+      </div>
+      
+      <div class="form-group">
+        <label for="availability">Availability</label>
+        <select id="availability" required>
+          <option value="">Select availability</option>
+          <option value="available">Available for commissions</option>
+          <option value="limited">Limited availability</option>
+          <option value="not-available">Not currently taking commissions</option>
+        </select>
+      </div>
+      
+      <div style="display: flex; gap: 16px; justify-content: center; margin-top: 30px;">
+        <button type="button" class="continue-btn" style="background: #666;" onclick="prevStep(2)">← Back</button>
+        <button type="button" class="continue-btn" onclick="completeOnboarding()">Complete Setup →</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2025 ArtPath. All rights reserved.</p>
+    <p>
+      <a href="#">About</a>
+      <a href="#">FAQ</a>
+      <a href="#">Contact</a>
+    </p>
+  </footer>
+
+  <script src="Landingpage.js"></script>
+  <script>
+    let currentStep = 1;
+    let uploadedArt = [];
+    let selectedStyles = [];
+
+    function nextStep(step) {
+      if (step === 2 && !validateStep1()) return;
+      if (step === 3 && !validateStep2()) return;
+      
+      document.getElementById(`step${currentStep}`).style.display = 'none';
+      document.getElementById(`step${step}`).style.display = 'block';
+      currentStep = step;
+      
+      updateProgress();
+    }
+
+    function prevStep(step) {
+      document.getElementById(`step${currentStep}`).style.display = 'none';
+      document.getElementById(`step${step}`).style.display = 'block';
+      currentStep = step;
+      
+      updateProgress();
+    }
+
+    function updateProgress() {
+      const steps = document.querySelectorAll('.progress-step');
+      const lines = document.querySelectorAll('.progress-line');
+      
+      steps.forEach((step, index) => {
+        if (index + 1 < currentStep) {
+          step.classList.remove('active');
+          step.classList.add('completed');
+        } else if (index + 1 === currentStep) {
+          step.classList.add('active');
+          step.classList.remove('completed');
+        } else {
+          step.classList.remove('active', 'completed');
+        }
+      });
+      
+      lines.forEach((line, index) => {
+        if (index + 1 < currentStep) {
+          line.classList.add('completed');
+          line.classList.remove('active');
+        } else if (index + 1 === currentStep) {
+          line.classList.add('active');
+          line.classList.remove('completed');
+        } else {
+          line.classList.remove('active', 'completed');
+        }
+      });
+    }
+
+    function validateStep1() {
+      const name = document.getElementById('artistName').value.trim();
+      const bio = document.getElementById('artistBio').value.trim();
+      const location = document.getElementById('artistLocation').value.trim();
+      const experience = document.getElementById('artistExperience').value;
+      
+      if (!name || !bio || !location || !experience) {
+        alert('Please fill in all required fields.');
+        return false;
+      }
+      return true;
+    }
+
+    function validateStep2() {
+      if (uploadedArt.length === 0) {
+        alert('Please upload at least one artwork to showcase your talent.');
+        return false;
+      }
+      return true;
+    }
+
+    function toggleStyle(element) {
+      element.classList.toggle('selected');
+      const style = element.textContent;
+      
+      if (element.classList.contains('selected')) {
+        if (!selectedStyles.includes(style)) {
+          selectedStyles.push(style);
+        }
+      } else {
+        selectedStyles = selectedStyles.filter(s => s !== style);
+      }
+    }
+
+    function completeOnboarding() {
+      if (selectedStyles.length === 0) {
+        alert('Please select at least one art style.');
+        return;
+      }
+      
+      const availability = document.getElementById('availability').value;
+      if (!availability) {
+        alert('Please select your availability.');
+        return;
+      }
+      
+      // Save artist profile data
+      const artistProfile = {
+        name: document.getElementById('artistName').value,
+        bio: document.getElementById('artistBio').value,
+        location: document.getElementById('artistLocation').value,
+        experience: document.getElementById('artistExperience').value,
+        portfolio: uploadedArt,
+        portfolioDescription: document.getElementById('portfolioDescription').value,
+        styles: selectedStyles,
+        commissionRates: document.getElementById('commissionRates').value,
+        availability: availability,
+        createdAt: new Date().toISOString()
+      };
+      
+      localStorage.setItem('artpathArtistProfile', JSON.stringify(artistProfile));
+      
+      // Show completion message
+      alert('🎉 Congratulations! Your artist profile has been created successfully. You can now start receiving commission requests and building your client base.');
+      
+      // Redirect to dashboard
+      window.location.href = 'artist_dashboard.html';
+    }
+
+    // File upload handling
+    const uploadArea = document.getElementById('uploadArea');
+    const artUpload = document.getElementById('artUpload');
+    const artPreview = document.getElementById('artPreview');
+
+    uploadArea.addEventListener('click', () => artUpload.click());
+    
+    uploadArea.addEventListener('dragover', (e) => {
+      e.preventDefault();
+      uploadArea.classList.add('dragover');
+    });
+    
+    uploadArea.addEventListener('dragleave', () => {
+      uploadArea.classList.remove('dragover');
+    });
+    
+    uploadArea.addEventListener('drop', (e) => {
+      e.preventDefault();
+      uploadArea.classList.remove('dragover');
+      const files = e.dataTransfer.files;
+      handleFiles(files);
+    });
+    
+    artUpload.addEventListener('change', (e) => {
+      handleFiles(e.target.files);
+    });
+
+    function handleFiles(files) {
+      Array.from(files).forEach(file => {
+        if (file.type.startsWith('image/')) {
+          const reader = new FileReader();
+          reader.onload = (e) => {
+            const artItem = {
+              id: Date.now() + Math.random(),
+              src: e.target.result,
+              name: file.name
+            };
+            uploadedArt.push(artItem);
+            renderArtPreview();
+          };
+          reader.readAsDataURL(file);
+        }
+      });
+    }
+
+    function renderArtPreview() {
+      artPreview.innerHTML = '';
+      uploadedArt.forEach((art, index) => {
+        const div = document.createElement('div');
+        div.className = 'art-preview-item';
+        div.innerHTML = `
+          <img src="${art.src}" alt="${art.name}" />
+          <button class="remove-art" onclick="removeArt(${index})">×</button>
+        `;
+        artPreview.appendChild(div);
+      });
+    }
+
+    function removeArt(index) {
+      uploadedArt.splice(index, 1);
+      renderArtPreview();
+    }
+
+    // Initialize when page loads
+    document.addEventListener('DOMContentLoaded', function() {
+      updateAuthUI();
+      updateProgress();
+    });
+  </script>
+
+</body>
+</html> 
