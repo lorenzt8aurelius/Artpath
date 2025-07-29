@@ -141,8 +141,9 @@
         alert("Please select at least one topic to continue.");
         return;
       }
-      alert("Topics selected: " + Array.from(selectedTopics).join(", "));
-      // Future: Redirect to a custom learning page or store selection in database
+      // Store selected topics and redirect to learn page
+      localStorage.setItem('artpathSelectedTopics', JSON.stringify(Array.from(selectedTopics)));
+      window.location.href = 'learn.html';
     }
 
     // Initialize essential functions when page loads
