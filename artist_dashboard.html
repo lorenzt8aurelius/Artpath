@@ -99,7 +99,7 @@
           </thead>
           <tbody>
             <tr>
-              <td>Jamie</td>
+              <td>Client 1</td>
               <td>Portrait</td>
               <td>$100</td>
               <td><span class="status pending">Pending</span></td>
@@ -109,7 +109,7 @@
               </td>
             </tr>
             <tr>
-              <td>Morgan</td>
+              <td>Client 2</td>
               <td>Landscape</td>
               <td>$200</td>
               <td><span class="status accepted">Accepted</span></td>
@@ -119,7 +119,7 @@
               </td>
             </tr>
             <tr>
-              <td>Taylor</td>
+              <td>Client 3</td>
               <td>Anime Style</td>
               <td>$80</td>
               <td><span class="status declined">Declined</span></td>
@@ -276,7 +276,7 @@ const ARTIST_CONVOS_KEY = 'artpathArtistConvos';
 const ARTIST_MSGS_KEY = 'artpathArtistMsgs';
 
 function getArtistConvos() {
-  return JSON.parse(localStorage.getItem(ARTIST_CONVOS_KEY) || '[{"name":"Jamie"},{"name":"Morgan"},{"name":"Taylor"}]');
+      return JSON.parse(localStorage.getItem(ARTIST_CONVOS_KEY) || '[{"name":"Client 1"},{"name":"Client 2"},{"name":"Client 3"}]');
 }
 function setArtistConvos(convos) {
   localStorage.setItem(ARTIST_CONVOS_KEY, JSON.stringify(convos));
@@ -376,7 +376,7 @@ const earningsTotal = document.getElementById('earningsTotal');
 const earningsTableBody = document.getElementById('earningsTableBody');
 const EARNINGS_KEY = 'artpathEarnings';
 function getEarnings() {
-  return JSON.parse(localStorage.getItem(EARNINGS_KEY) || '[{"date":"2024-06-01","client":"Jamie","type":"Portrait","amount":100,"status":"Paid"},{"date":"2024-05-28","client":"Morgan","type":"Landscape","amount":200,"status":"Paid"},{"date":"2024-05-20","client":"Taylor","type":"Anime Style","amount":80,"status":"Pending"}]');
+      return JSON.parse(localStorage.getItem(EARNINGS_KEY) || '[{"date":"2024-06-01","client":"Client 1","type":"Portrait","amount":100,"status":"Paid"},{"date":"2024-05-28","client":"Client 2","type":"Landscape","amount":200,"status":"Paid"},{"date":"2024-05-20","client":"Client 3","type":"Anime Style","amount":80,"status":"Pending"}]');
 }
 function setEarnings(items) {
   localStorage.setItem(EARNINGS_KEY, JSON.stringify(items));
