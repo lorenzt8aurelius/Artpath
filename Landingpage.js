@@ -251,12 +251,12 @@ function continueAfterTopics() {
 
 // ========== Art Gallery Functions ==========
 const artworks = [
-  { title: 'Dreamscape', artist: 'Jamie L.', url: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80', category: 'portrait' },
+      { title: 'Dreamscape', artist: 'Artist 1', url: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80', category: 'portrait' },
   { title: 'Digital Muse', artist: 'Priya S.', url: 'https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=400&q=80', category: 'digital' },
   { title: 'Logo Flow', artist: 'Alex R.', url: 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=400&q=80', category: 'logo' },
-  { title: 'Serenity', artist: 'Morgan T.', url: 'https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=400&q=80', category: 'portrait' },
+      { title: 'Serenity', artist: 'Artist 2', url: 'https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=400&q=80', category: 'portrait' },
   { title: 'Neon Dreams', artist: 'Chris P.', url: 'https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=400&q=80', category: 'digital' },
-  { title: 'Brand Spark', artist: 'Taylor K.', url: 'https://images.unsplash.com/photo-1465101178521-c1a9136a3b99?auto=format&fit=crop&w=400&q=80', category: 'logo' },
+      { title: 'Brand Spark', artist: 'Artist 3', url: 'https://images.unsplash.com/photo-1465101178521-c1a9136a3b99?auto=format&fit=crop&w=400&q=80', category: 'logo' },
   { title: 'Abstract Harmony', artist: 'Sam W.', url: 'https://images.unsplash.com/photo-1541961017774-22349e4a1262?auto=format&fit=crop&w=400&q=80', category: 'digital' },
   { title: 'Classic Portrait', artist: 'Emma L.', url: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80', category: 'portrait' },
 ];
@@ -357,6 +357,653 @@ function setupHelpChat() {
   }
 }
 
+// ========== Settings Functions ==========
+function setupSettings() {
+  const settingsModal = document.getElementById('settingsModal');
+  const closeSettingsModal = document.getElementById('closeSettingsModal');
+  const settingsTabs = document.querySelectorAll('.settings-tab');
+  const saveSettingsBtn = document.getElementById('saveSettingsBtn');
+  const resetSettingsBtn = document.getElementById('resetSettingsBtn');
+  
+  // Close settings modal
+  if (closeSettingsModal) {
+    closeSettingsModal.addEventListener('click', () => {
+      settingsModal.classList.add('hidden');
+    });
+  }
+  
+  // Tab switching
+  settingsTabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      const targetTab = tab.dataset.tab;
+      
+      // Update active tab
+      settingsTabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      
+      // Show target content
+      document.querySelectorAll('.settings-tab-content').forEach(content => {
+        content.classList.remove('active');
+      });
+      document.getElementById(targetTab + 'Tab').classList.add('active');
+    });
+  });
+  
+  // Save settings
+  if (saveSettingsBtn) {
+    saveSettingsBtn.addEventListener('click', saveSettings);
+  }
+  
+  // Reset settings
+  if (resetSettingsBtn) {
+    resetSettingsBtn.addEventListener('click', resetSettings);
+  }
+  
+  // Setup other settings interactions
+  setupSettingsInteractions();
+  
+  // Load current settings
+  loadSettings();
+}
+
+function setupSettingsInteractions() {
+  // Font size controls
+  const decreaseFont = document.getElementById('decreaseFont');
+  const increaseFont = document.getElementById('increaseFont');
+  const fontSizeDisplay = document.getElementById('fontSizeDisplay');
+  
+  if (decreaseFont && increaseFont && fontSizeDisplay) {
+    decreaseFont.addEventListener('click', () => changeFontSize(-1));
+    increaseFont.addEventListener('click', () => changeFontSize(1));
+  }
+  
+  // Quiet hours toggle
+  const quietHoursToggle = document.getElementById('quietHoursToggle');
+  const quietHoursRange = document.getElementById('quietHoursRange');
+  
+  if (quietHoursToggle && quietHoursRange) {
+    quietHoursToggle.addEventListener('change', () => {
+      quietHoursRange.style.display = quietHoursToggle.checked ? 'flex' : 'none';
+    });
+  }
+  
+  // Theme selection
+  const themeRadios = document.querySelectorAll('input[name="theme"]');
+  themeRadios.forEach(radio => {
+    radio.addEventListener('change', (e) => {
+      applyTheme(e.target.value);
+    });
+  });
+  
+  // Animation speed
+  const animationSpeedSelect = document.getElementById('animationSpeedSelect');
+  if (animationSpeedSelect) {
+    animationSpeedSelect.addEventListener('change', (e) => {
+      applyAnimationSpeed(e.target.value);
+    });
+  }
+  
+  // Account actions
+  const changePasswordBtn = document.getElementById('changePasswordBtn');
+  const exportDataBtn = document.getElementById('exportDataBtn');
+  const deleteAccountBtn = document.getElementById('deleteAccountBtn');
+  
+  if (changePasswordBtn) {
+    changePasswordBtn.addEventListener('click', showChangePasswordModal);
+  }
+  
+  if (exportDataBtn) {
+    exportDataBtn.addEventListener('click', exportUserData);
+  }
+  
+  if (deleteAccountBtn) {
+    deleteAccountBtn.addEventListener('click', showDeleteAccountConfirmation);
+  }
+}
+
+function changeFontSize(delta) {
+  const fontSizeDisplay = document.getElementById('fontSizeDisplay');
+  const currentSize = fontSizeDisplay.textContent;
+  const sizes = ['Small', 'Medium', 'Large', 'Extra Large'];
+  let currentIndex = sizes.indexOf(currentSize);
+  
+  currentIndex = Math.max(0, Math.min(sizes.length - 1, currentIndex + delta));
+  fontSizeDisplay.textContent = sizes[currentIndex];
+  
+  // Apply font size to body
+  const fontSizes = ['0.9rem', '1rem', '1.1rem', '1.2rem'];
+  document.body.style.fontSize = fontSizes[currentIndex];
+  
+  // Save to localStorage
+  localStorage.setItem('artpathFontSize', sizes[currentIndex]);
+}
+
+function applyTheme(theme) {
+  const body = document.body;
+  
+  // Remove existing theme classes
+  body.classList.remove('theme-dark', 'theme-light');
+  
+  if (theme === 'auto') {
+    // Check system preference
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').missing;
+    body.classList.add(prefersDark ? 'theme-dark' : 'theme-light');
+  } else {
+    body.classList.add(`theme-${theme}`);
+  }
+  
+  // Save to localStorage
+  localStorage.setItem('artpathTheme', theme);
+}
+
+function applyAnimationSpeed(speed) {
+  const body = document.body;
+  
+  // Remove existing animation classes
+  body.classList.remove('animation-fast', 'animation-slow', 'animation-off');
+  
+  if (speed !== 'normal') {
+    body.classList.add(`animation-${speed}`);
+  }
+  
+  // Save to localStorage
+  localStorage.setItem('artpathAnimationSpeed', speed);
+}
+
+function showChangePasswordModal() {
+  const modal = document.createElement('div');
+  modal.className = 'modal';
+  modal.innerHTML = `
+    <div class="modal-content" style="max-width: 400px;">
+      <button class="close-modal" onclick="this.parentElement.parentElement.remove()">×</button>
+      <h3 style="color: #1DBF73; margin-bottom: 24px;">Change Password</h3>
+      <form id="changePasswordForm">
+        <input type="password" id="currentPassword" placeholder="Current Password" required class="setting-input" style="margin-bottom: 16px;">
+        <input type="password" id="newPassword" placeholder="New Password" required class="setting-input" style="margin-bottom: 16px;">
+        <input type="password" id="confirmPassword" placeholder="Confirm New Password" required class="setting-input" style="margin-bottom: 24px;">
+        <button type="submit" class="save-settings-btn" style="width: 100%;">Update Password</button>
+      </form>
+    </div>
+  `;
+  
+  document.body.appendChild(modal);
+  
+  // Handle form submission
+  const form = document.getElementById('changePasswordForm');
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const currentPass = document.getElementById('currentPassword').value;
+    const newPass = document.getElementById('newPassword').value;
+    const confirmPass = document.getElementById('confirmPassword').value;
+    
+    if (newPass !== confirmPass) {
+      alert('New passwords do not match!');
+      return;
+    }
+    
+    if (newPass.length < 6) {
+      alert('Password must be at least 6 characters long!');
+      return;
+    }
+    
+    // Simulate password change
+    alert('Password updated successfully!');
+    modal.remove();
+  });
+}
+
+function exportUserData() {
+  const user = getUser();
+  const userData = {
+    username: user || 'Guest',
+    email: localStorage.getItem('artpathEmail') || 'Not provided',
+    memberSince: localStorage.getItem('artpathMemberSince') || new Date().toISOString(),
+    settings: getAllSettings(),
+    timestamp: new Date().toISOString()
+  };
+  
+  const dataStr = JSON.stringify(userData, null, 2);
+  const dataBlob = new Blob([dataStr], { type: 'application/json' });
+  
+  const link = document.createElement('a');
+  link.href = URL.createObjectURL(dataBlob);
+  link.download = `artpath-data-${user || 'guest'}-${new Date().toISOString().split('T')[0]}.json`;
+  link.click();
+  
+  alert('Data exported successfully!');
+}
+
+function showDeleteAccountConfirmation() {
+  const user = getUser();
+  if (!user) {
+    alert('No account to delete. You are currently a guest.');
+    return;
+  }
+  
+  const confirmed = confirm(`Are you sure you want to delete your account "${user}"? This action cannot be undone and all your data will be permanently lost.`);
+  
+  if (confirmed) {
+    // Simulate account deletion
+    localStorage.removeItem('artpathUser');
+    localStorage.removeItem('artpathEmail');
+    localStorage.removeItem('artpathMemberSince');
+    updateAuthUI();
+    
+    alert('Account deleted successfully. You have been logged out.');
+    
+    // Close settings modal
+    const settingsModal = document.getElementById('settingsModal');
+    if (settingsModal) {
+      settingsModal.classList.add('hidden');
+    }
+  }
+}
+
+function getAllSettings() {
+  const settings = {};
+  
+  // Collect all setting values
+  const inputs = document.querySelectorAll('#settingsModal input, #settingsModal select');
+  inputs.forEach(input => {
+    if (input.type === 'checkbox') {
+      settings[input.id] = input.checked;
+    } else if (input.type === 'radio' && input.checked) {
+      settings[input.name] = input.value;
+    } else if (input.type !== 'radio') {
+      input.value;
+    }
+  });
+  
+  return settings;
+}
+
+function saveSettings() {
+  const settings = getAllSettings();
+  
+  // Save to localStorage
+  Object.keys(settings).forEach(key => {
+    localStorage.setItem(`artpath_${key}`, JSON.stringify(settings[key]));
+  });
+  
+  // Apply settings immediately
+  applySettings(settings);
+  
+  // Show success message
+  const saveBtn = document.getElementById('saveSettingsBtn');
+  const originalText = saveBtn.textContent;
+  saveBtn.textContent = 'Settings Saved!';
+  saveBtn.style.background = '#18a065';
+  
+  setTimeout(() => {
+    saveBtn.textContent = originalText;
+    saveBtn.style.background = '#1DBF73';
+  }, 2000);
+}
+
+function resetSettings() {
+  const confirmed = confirm('Are you sure you want to reset all settings to their default values?');
+  
+  if (confirmed) {
+    // Reset all inputs to default values
+    const inputs = document.querySelectorAll('#settingsModal input, #settingsModal select');
+    inputs.forEach(input => {
+      if (input.type === 'checkbox') {
+        input.checked = input.defaultChecked;
+      } else if (input.type === 'radio') {
+        input.checked = input.defaultChecked;
+      } else {
+        input.value = input.defaultValue;
+      }
+    });
+    
+    // Reset font size display
+    const fontSizeDisplay = document.getElementById('fontSizeDisplay');
+    if (fontSizeDisplay) {
+      fontSizeDisplay.textContent = 'Medium';
+    }
+    
+    // Reset theme to dark
+    const darkThemeRadio = document.querySelector('input[name="theme"][value="dark"]');
+    if (darkThemeRadio) {
+      darkThemeRadio.checked = true;
+    }
+    
+    // Reset animation speed to normal
+    const animationSpeedSelect = document.getElementById('animationSpeedSelect');
+    if (animationSpeedSelect) {
+      animationSpeedSelect.value = 'normal';
+    }
+    
+    // Apply default settings
+    applySettings({
+      theme: 'dark',
+      animationSpeed: 'normal',
+      fontSize: 'Medium'
+    });
+    
+    alert('Settings reset to default values!');
+  }
+}
+
+function applySettings(settings) {
+  // Apply theme
+  if (settings.theme) {
+    applyTheme(settings.theme);
+  }
+  
+  // Apply animation speed
+  if (settings.animationSpeed) {
+    applyAnimationSpeed(settings.animationSpeed);
+  }
+  
+  // Apply font size
+  if (settings.fontSize) {
+    const fontSizeDisplay = document.getElementById('fontSizeDisplay');
+    if (fontSizeDisplay) {
+      fontSizeDisplay.textContent = settings.fontSize;
+    }
+  }
+}
+
+function loadSettings() {
+  // Load saved settings from localStorage
+  const inputs = document.querySelectorAll('#settingsModal input, #settingsModal select');
+  inputs.forEach(input => {
+    const savedValue = localStorage.getItem(`artpath_${input.id || input.name}`);
+    if (savedValue !== null) {
+      if (input.type === 'checkbox') {
+        input.checked = JSON.parse(savedValue);
+      } else if (input.type === 'radio') {
+        if (input.value === JSON.parse(savedValue)) {
+          input.checked = true;
+        }
+      } else {
+        input.value = JSON.parse(savedValue);
+      }
+    }
+  });
+  
+  // Load font size
+  const savedFontSize = localStorage.getItem('artpathFontSize');
+  if (savedFontSize) {
+    const fontSizeDisplay = document.getElementById('fontSizeDisplay');
+    if (fontSizeDisplay) {
+      fontSizeDisplay.textContent = savedFontSize;
+    }
+  }
+  
+  // Load theme
+  const savedTheme = localStorage.getItem('artpathTheme');
+  if (savedTheme) {
+    const themeRadio = document.querySelector(`input[name="theme"][value="${savedTheme}"]`);
+    if (themeRadio) {
+      themeRadio.checked = true;
+    }
+    applyTheme(savedTheme);
+  }
+  
+  // Load animation speed
+  const savedAnimationSpeed = localStorage.getItem('artpathAnimationSpeed');
+  if (savedAnimationSpeed) {
+    const animationSpeedSelect = document.getElementById('animationSpeedSelect');
+    if (animationSpeedSelect) {
+      animationSpeedSelect.value = savedAnimationSpeed;
+    }
+    applyAnimationSpeed(savedAnimationSpeed);
+  }
+  
+  // Update account info
+  updateSettingsAccountInfo();
+}
+
+function applyTheme(theme) {
+  const body = document.body;
+  
+  // Remove existing theme classes
+  body.classList.remove('theme-dark', 'theme-light');
+  
+  if (theme === 'auto') {
+    // Check system preference
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    body.classList.add(prefersDark ? 'theme-dark' : 'theme-light');
+  } else {
+    body.classList.add(`theme-${theme}`);
+  }
+  
+  // Save to localStorage
+  localStorage.setItem('artpathTheme', theme);
+}
+
+function applyAnimationSpeed(speed) {
+  const body = document.body;
+  
+  // Remove existing animation classes
+  body.classList.remove('animation-fast', 'animation-slow', 'animation-off');
+  
+  if (speed !== 'normal') {
+    body.classList.add(`animation-${speed}`);
+  }
+  
+  // Save to localStorage
+  localStorage.setItem('artpathAnimationSpeed', speed);
+}
+
+function showChangePasswordModal() {
+  const modal = document.createElement('div');
+  modal.className = 'modal';
+  modal.innerHTML = `
+    <div class="modal-content" style="max-width: 400px;">
+      <button class="close-modal" onclick="this.parentElement.parentElement.remove()">×</button>
+      <h3 style="color: #1DBF73; margin-bottom: 24px;">Change Password</h3>
+      <form id="changePasswordForm">
+        <input type="password" id="currentPassword" placeholder="Current Password" required class="setting-input" style="margin-bottom: 16px;">
+        <input type="password" id="newPassword" placeholder="New Password" required class="setting-input" style="margin-bottom: 16px;">
+        <input type="password" id="confirmPassword" placeholder="Confirm New Password" required class="setting-input" style="margin-bottom: 24px;">
+        <button type="submit" class="save-settings-btn" style="width: 100%;">Update Password</button>
+      </form>
+    </div>
+  `;
+  
+  document.body.appendChild(modal);
+  
+  // Handle form submission
+  const form = document.getElementById('changePasswordForm');
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const currentPass = document.getElementById('currentPassword').value;
+    const newPass = document.getElementById('newPassword').value;
+    const confirmPass = document.getElementById('confirmPassword').value;
+    
+    if (newPass !== confirmPass) {
+      alert('New passwords do not match!');
+      return;
+    }
+    
+    if (newPass.length < 6) {
+      alert('Password must be at least 6 characters long!');
+      return;
+    }
+    
+    // Simulate password change
+    alert('Password updated successfully!');
+    modal.remove();
+  });
+}
+
+function exportUserData() {
+  const user = getUser();
+  const userData = {
+    username: user || 'Guest',
+    email: localStorage.getItem('artpathEmail') || 'Not provided',
+    memberSince: localStorage.getItem('artpathMemberSince') || new Date().toISOString(),
+    settings: getAllSettings(),
+    timestamp: new Date().toISOString()
+  };
+  
+  const dataStr = JSON.stringify(userData, null, 2);
+  const dataBlob = new Blob([dataStr], { type: 'application/json' });
+  
+  const settings = getAllSettings();
+  
+  // Save to localStorage
+  Object.keys(settings).forEach(key => {
+    localStorage.setItem(`artpath_${key}`, JSON.stringify(settings[key]));
+  });
+  
+  // Apply settings immediately
+  applySettings(settings);
+  
+  // Show success message
+  const saveBtn = document.getElementById('saveSettingsBtn');
+  const originalText = saveBtn.textContent;
+  saveBtn.textContent = 'Settings Saved!';
+  saveBtn.style.background = '#18a065';
+  
+  setTimeout(() => {
+    saveBtn.textContent = originalText;
+    saveBtn.style.background = '#1DBF73';
+  }, 2000);
+}
+
+function resetSettings() {
+  const confirmed = confirm('Are you sure you want to reset all settings to their default values?');
+  
+  if (confirmed) {
+    // Reset all inputs to default values
+    const inputs = document.querySelectorAll('#settingsModal input, #settingsModal select');
+    inputs.forEach(input => {
+      if (input.type === 'checkbox') {
+        input.checked = input.defaultChecked;
+      } else if (input.type === 'radio') {
+        input.checked = input.defaultChecked;
+      } else {
+        input.value = input.defaultValue;
+      }
+    });
+    
+    // Reset font size display
+    const fontSizeDisplay = document.getElementById('fontSizeDisplay');
+    if (fontSizeDisplay) {
+      fontSizeDisplay.textContent = 'Medium';
+    }
+    
+    // Reset theme to dark
+    const darkThemeRadio = document.querySelector('input[name="theme"][value="dark"]');
+    if (darkThemeRadio) {
+      darkThemeRadio.checked = true;
+    }
+    
+    // Reset animation speed to normal
+    const animationSpeedSelect = document.getElementById('animationSpeedSelect');
+    if (animationSpeedSelect) {
+      animationSpeedSelect.value = 'normal';
+    }
+    
+    // Apply default settings
+    applySettings({
+      theme: 'dark',
+      animationSpeed: 'normal',
+      fontSize: 'Medium'
+    });
+    
+    alert('Settings reset to default values!');
+  }
+}
+
+function applySettings(settings) {
+  // Apply theme
+  if (settings.theme) {
+    applyTheme(settings.theme);
+  }
+  
+  // Apply animation speed
+  if (settings.animationSpeed) {
+    applyAnimationSpeed(settings.animationSpeed);
+  }
+  
+  // Apply font size
+  if (settings.fontSize) {
+    const fontSizeDisplay = document.getElementById('fontSizeDisplay');
+    if (fontSizeDisplay) {
+      fontSizeDisplay.textContent = settings.fontSize;
+    }
+  }
+}
+
+function loadSettings() {
+  // Load saved settings from localStorage
+  const inputs = document.querySelectorAll('#settingsModal input, #settingsModal select');
+  inputs.forEach(input => {
+    const savedValue = localStorage.getItem(`artpath_${input.id || input.name}`);
+    if (savedValue !== null) {
+      if (input.type === 'checkbox') {
+        input.checked = JSON.parse(savedValue);
+      } else if (input.type === 'radio') {
+        if (input.value === JSON.parse(savedValue)) {
+          input.checked = true;
+        }
+      } else {
+        input.value = JSON.parse(savedValue);
+      }
+    }
+  });
+  
+  // Load font size
+  const savedFontSize = localStorage.getItem('artpathFontSize');
+  if (savedFontSize) {
+    const fontSizeDisplay = document.getElementById('fontSizeDisplay');
+    if (fontSizeDisplay) {
+      fontSizeDisplay.textContent = savedFontSize;
+    }
+  }
+  
+  // Load theme
+  const savedTheme = localStorage.getItem('artpathTheme');
+  if (savedTheme) {
+    const themeRadio = document.querySelector(`input[name="theme"][value="${savedTheme}"]');
+  }
+  
+  // Load animation speed
+  const savedAnimationSpeed = localStorage.getItem('artpathAnimationSpeed');
+  if (savedAnimationSpeed) {
+    const animationSpeedSelect = document.getElementById('animationSpeedSelect');
+    if (animationSpeedSelect) {
+      animationSpeedSelect.value = savedAnimationSpeed;
+    }
+    applyAnimationSpeed(savedAnimationSpeed);
+  }
+  
+  // Update account info
+  updateSettingsAccountInfo();
+}
+
+function updateSettingsAccountInfo() {
+  const user = getUser();
+  const email = localStorage.getItem('artpathEmail');
+  const memberSince = localStorage.getItem('artpathMemberSince');
+  
+  const usernameSpan = document.getElementById('settingsUsername');
+  const emailSpan = document.getElementById('settingsEmail');
+  const memberSinceSpan = document.getElementById('settingsMemberSince');
+  
+  if (usernameSpan) {
+    usernameSpan.textContent = user || 'Guest';
+  }
+  
+  if (emailSpan) {
+    emailSpan.textContent = email || 'Not provided';
+  }
+  
+  if (memberSinceSpan) {
+    if (memberSince) {
+      const date = new Date(memberSince);
+      memberSinceSpan.textContent = date.toLocaleDateString();
+    } else {
+      memberSinceSpan.textContent = 'Today';
+    }
+  }
+}
+
 // ========== Fade-in on Scroll ==========
 function fadeInOnScroll() {
   const fadeEls = document.querySelectorAll('.fade-in, .section-fade-in, .card-fade-in');
@@ -388,6 +1035,9 @@ document.addEventListener('DOMContentLoaded', function() {
   
   // Setup help chat
   setupHelpChat();
+  
+  // Setup settings
+  setupSettings();
   
   // Setup art gallery
   renderGallery();
