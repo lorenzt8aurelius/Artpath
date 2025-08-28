@@ -31,14 +31,52 @@ function continueAsGuest() {
   alert("You're now exploring as a guest! You can browse but some features require registration.");
 }
 
+// ========== API Configuration ==========
+const API_BASE_URL = window.location.origin + '/api';
+
 // ========== Authentication Functions ==========
 function getUser() {
-  return localStorage.getItem('artpathUser');
+  const token = localStorage.getItem('artpathToken');
+  if (!token) return null;
+  
+  try {
+    // Decode JWT token to get user info
+    const payload = JSON.parse(atob(token.split('.')[1]));
+    if (payload.exp * 1000 < Date.now()) {
+      // Token expired, remove it
+      localStorage.removeItem('artpathToken');
+      localStorage.removeItem('artpathUser');
+      return null;
+    }
+    return localStorage.getItem('artpathUser');
+  } catch (error) {
+    console.error('Error decoding token:', error);
+    localStorage.removeItem('artpathToken');
+    localStorage.removeItem('artpathUser');
+    return null;
+  }
+}
+
+function getAuthToken() {
+  return localStorage.getItem('artpathToken');
+}
+
+function setAuthData(user, token) {
+  localStorage.setItem('artpathUser', user.name);
+  localStorage.setItem('artpathEmail', user.email);
+  localStorage.setItem('artpathToken', token);
+  localStorage.setItem('artpathMemberSince', user.createdAt || new Date().toISOString());
+}
+
+function clearAuthData() {
+  localStorage.removeItem('artpathUser');
+  localStorage.removeItem('artpathEmail');
+  localStorage.removeItem('artpathToken');
+  localStorage.removeItem('artpathMemberSince');
 }
 
 function logout() {
-  localStorage.removeItem('artpathUser');
-  localStorage.removeItem('artpathGuest');
+  clearAuthData();
   updateAuthUI();
   // Redirect to home page if not already there
   if (window.location.pathname !== '/Artpath.html' && !window.location.pathname.endsWith('Artpath.html')) {
@@ -46,44 +84,36 @@ function logout() {
   }
 }
 
-function updateAuthUI() {
-  const authArea = document.getElementById('authArea');
-  const sidebarAuthLink = document.getElementById('sidebarAuthLink');
-  const user = getUser();
-  const isGuest = localStorage.getItem('artpathGuest') === 'true';
+// ========== API Helper Functions ==========
+async function apiCall(endpoint, options = {}) {
+  const token = getAuthToken();
   
-  // Show/hide nav links - show for logged in users AND guests
-  document.querySelectorAll('.protected-link').forEach(link => {
-    link.style.display = (user || isGuest) ? '' : 'none';
-  });
-  
-  // Update dashboard welcome message if on dashboard page
-  const dashboardWelcome = document.querySelector('.dashboard-welcome');
-  if (dashboardWelcome && user) {
-    dashboardWelcome.textContent = `Welcome, ${user}`;
-  }
-  
-  // Show welcome/logout or login/register
-  if (user) {
-    authArea.innerHTML = `<span class='welcome-msg'>Welcome, ${user}</span> <button class='menu-toggle' id='logoutBtn'>Logout</button>`;
-    document.getElementById('logoutBtn').onclick = logout;
-    if (sidebarAuthLink) {
-      sidebarAuthLink.textContent = 'Logout';
-      sidebarAuthLink.onclick = (e) => { e.preventDefault(); logout(); closeSidebar(); };
+  const defaultOptions = {
+    headers: {
+      'Content-Type': 'application/json',
+      ...(token && { 'Authorization': `Bearer ${token}` })
     }
-  } else if (isGuest) {
-    authArea.innerHTML = `<span class='welcome-msg'>Exploring as Guest</span>`;
-    if (sidebarAuthLink) {
-      sidebarAuthLink.textContent = 'Continue as Guest';
-      sidebarAuthLink.onclick = (e) => { e.preventDefault(); closeSidebar(); };
+  };
+
+  try {
+    const response = await fetch(`${API_BASE_URL}${endpoint}`, {
+      ...defaultOptions,
+      ...options,
+      headers: {
+        ...defaultOptions.headers,
+        ...options.headers
+      }
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json().catch(() => ({}));
+      throw new Error(errorData.error || `HTTP error! status: ${response.status}`);
     }
-  } else {
-    authArea.innerHTML = `<button id='openAuthModal' class='menu-toggle'>Login / Register</button>`;
-    document.getElementById('openAuthModal').onclick = () => showAuthModal('login');
-    if (sidebarAuthLink) {
-      sidebarAuthLink.textContent = 'Login / Register';
-      sidebarAuthLink.onclick = (e) => { e.preventDefault(); closeSidebar(); showAuthModal('login'); };
-    }
+
+    return await response.json();
+  } catch (error) {
+    console.error(`API call to ${endpoint} failed:`, error);
+    throw error;
   }
 }
 
@@ -112,12 +142,168 @@ function showAuthModal(tab) {
   }
 }
 
+// ========== Enhanced Auth UI Update ==========
+async function updateAuthUI() {
+  const authArea = document.getElementById('authArea');
+  const sidebarAuthLink = document.getElementById('sidebarAuthLink');
+  const user = getUser();
+  const isGuest = localStorage.getItem('artpathGuest') === 'true';
+  
+  // Show/hide nav links - show for logged in users AND guests
+  document.querySelectorAll('.protected-link').forEach(link => {
+    link.style.display = (user || isGuest) ? '' : 'none';
+  });
+  
+  // Update dashboard welcome message if on dashboard page
+  const dashboardWelcome = document.querySelector('.dashboard-welcome');
+  if (dashboardWelcome && user) {
+    dashboardWelcome.textContent = `Welcome, ${user}`;
+  }
+  
+  // Show welcome/logout or login/register
+  if (user) {
+    authArea.innerHTML = `<span class='welcome-msg'>Welcome, ${user}</span> <button class='menu-toggle' id='logoutBtn'>Logout</button>`;
+    document.getElementById('logoutBtn').onclick = logout;
+    if (sidebarAuthLink) {
+      sidebarAuthLink.textContent = 'Logout';
+      sidebarAuthLink.onclick = (e) => { e.preventDefault(); closeSidebar(); };
+    }
+  } else if (isGuest) {
+    authArea.innerHTML = `<span class='welcome-msg'>Exploring as Guest</span>`;
+    if (sidebarAuthLink) {
+      sidebarAuthLink.textContent = 'Continue as Guest';
+      sidebarAuthLink.onclick = (e) => { e.preventDefault(); closeSidebar(); };
+    }
+  } else {
+    authArea.innerHTML = `<button id='openAuthModal' class='menu-toggle'>Login / Register</button>`;
+    document.getElementById('openAuthModal').onclick = () => showAuthModal('login');
+    if (sidebarAuthLink) {
+      sidebarAuthLink.textContent = 'Login / Register';
+      sidebarAuthLink.onclick = (e) => { e.preventDefault(); closeSidebar(); showAuthModal('login'); };
+    }
+  }
+}
+
+// ========== Auth Form Handlers ==========
+async function handleLogin(e) {
+  e.preventDefault();
+  clearAuthMessage();
+  
+  const email = document.getElementById('loginName').value.trim();
+  const password = document.getElementById('loginPassword').value;
+  
+  if (!email || !password) {
+    showAuthMessage('Please enter your email and password.');
+    return;
+  }
+  
+  if (password.length < 6) {
+    showAuthMessage('Password must be at least 6 characters.');
+    return;
+  }
+  
+  try {
+    showAuthMessage('Logging in...', 'info');
+    
+    const response = await apiCall('/auth/login', {
+      method: 'POST',
+      body: JSON.stringify({ email, password })
+    });
+    
+    setAuthData(response.user, response.token);
+    updateAuthUI();
+    showAuthMessage('Login successful!', 'success');
+    
+    setTimeout(() => {
+      document.getElementById('authModal').classList.add('hidden');
+    }, 900);
+    
+  } catch (error) {
+    showAuthMessage(error.message || 'Login failed. Please try again.');
+  }
+}
+
+async function handleRegister(e) {
+  e.preventDefault();
+  clearAuthMessage();
+  
+  const name = document.getElementById('registerName').value.trim();
+  const email = document.getElementById('registerEmail').value.trim();
+  const password = document.getElementById('registerPassword').value;
+  
+  if (!name || !email || !password) {
+    showAuthMessage('Please fill in all fields.');
+    return;
+  }
+  
+  if (!/^\S+@\S+\.\S+$/.test(email)) {
+    showAuthMessage('Please enter a valid email address.');
+    return;
+  }
+  
+  if (password.length < 6) {
+    showAuthMessage('Password must be at least 6 characters.');
+    return;
+  }
+  
+  try {
+    showAuthMessage('Creating your account...', 'info');
+    
+    const response = await apiCall('/auth/register', {
+      method: 'POST',
+      body: JSON.stringify({ name, email, password })
+    });
+    
+    setAuthData(response.user, response.token);
+    updateAuthUI();
+    showAuthMessage('Registration successful!', 'success');
+    
+    setTimeout(() => {
+      document.getElementById('authModal').classList.add('hidden');
+    }, 900);
+    
+  } catch (error) {
+    showAuthMessage(error.message || 'Registration failed. Please try again.');
+  }
+}
+
+// ========== User Profile Management ==========
+async function getCurrentUser() {
+  try {
+    const response = await apiCall('/auth/me');
+    return response.user;
+  } catch (error) {
+    console.error('Failed to get current user:', error);
+    return null;
+  }
+}
+
+async function updateUserProfile(profileData) {
+  try {
+    const response = await apiCall('/users/profile', {
+      method: 'PUT',
+      body: JSON.stringify(profileData)
+    });
+    return response;
+  } catch (error) {
+    console.error('Failed to update profile:', error);
+    throw error;
+  }
+}
+
+// ========== Enhanced Auth Message Display ==========
 function showAuthMessage(msg, type = 'error') {
   const authMessage = document.getElementById('authMessage');
   if (!authMessage) return;
   
   authMessage.textContent = msg;
   authMessage.className = 'auth-message ' + type;
+  
+  // Add info type styling
+  if (type === 'info') {
+    authMessage.style.color = '#60aaff';
+    authMessage.style.background = 'rgba(96, 170, 255, 0.1)';
+  }
   
   if (type === 'success') {
     setTimeout(() => { authMessage.textContent = ''; }, 1200);
@@ -584,9 +770,7 @@ function showDeleteAccountConfirmation() {
   
   if (confirmed) {
     // Simulate account deletion
-    localStorage.removeItem('artpathUser');
-    localStorage.removeItem('artpathEmail');
-    localStorage.removeItem('artpathMemberSince');
+    clearAuthData();
     updateAuthUI();
     
     alert('Account deleted successfully. You have been logged out.');
@@ -960,7 +1144,11 @@ function loadSettings() {
   // Load theme
   const savedTheme = localStorage.getItem('artpathTheme');
   if (savedTheme) {
-    const themeRadio = document.querySelector(`input[name="theme"][value="${savedTheme}"]');
+    const themeRadio = document.querySelector(`input[name="theme"][value="${savedTheme}"]`);
+    if (themeRadio) {
+      themeRadio.checked = true;
+    }
+    applyTheme(savedTheme);
   }
   
   // Load animation speed
@@ -1029,6 +1217,11 @@ function fadeInOnScroll() {
 document.addEventListener('DOMContentLoaded', function() {
   // Initialize auth UI
   updateAuthUI();
+  
+  // Try to auto-login if token exists
+  refreshTokenIfNeeded().then(() => {
+    updateAuthUI();
+  });
   
   // Setup fade-in animations
   fadeInOnScroll();
@@ -1126,66 +1319,23 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 });
 
-// ========== Auth Form Handlers ==========
-function handleLogin(e) {
-  e.preventDefault();
-  clearAuthMessage();
+// ========== Token Refresh & Auto-login ==========
+async function refreshTokenIfNeeded() {
+  const token = getAuthToken();
+  if (!token) return false;
   
-  const name = document.getElementById('loginName').value.trim();
-  const pass = document.getElementById('loginPassword').value;
-  
-  if (!name || !pass) {
-    showAuthMessage('Please enter your name and password.');
-    return;
+  try {
+    const user = await getCurrentUser();
+    if (user) {
+      // Token is still valid, update user data
+      setAuthData(user, token);
+      return true;
+    }
+  } catch (error) {
+    // Token is invalid, clear auth data
+    clearAuthData();
   }
-  
-  if (pass.length < 6) {
-    showAuthMessage('Password must be at least 6 characters.');
-    return;
-  }
-  
-  // Simulate login (in a real app, this would validate against a backend)
-  localStorage.setItem('artpathUser', name);
-  updateAuthUI();
-  showAuthMessage('Login successful!', 'success');
-  
-  setTimeout(() => {
-    document.getElementById('authModal').classList.add('hidden');
-  }, 900);
-}
-
-function handleRegister(e) {
-  e.preventDefault();
-  clearAuthMessage();
-  
-  const name = document.getElementById('registerName').value.trim();
-  const email = document.getElementById('registerEmail').value.trim();
-  const pass = document.getElementById('registerPassword').value;
-  
-  if (!name || !email || !pass) {
-    showAuthMessage('Please fill in all fields.');
-    return;
-  }
-  
-  if (!/^\S+@\S+\.\S+$/.test(email)) {
-    showAuthMessage('Please enter a valid email address.');
-    return;
-  }
-  
-  if (pass.length < 6) {
-    showAuthMessage('Password must be at least 6 characters.');
-    return;
-  }
-  
-  // Simulate registration (in a real app, this would send data to a backend)
-  localStorage.setItem('artpathUser', name);
-  localStorage.setItem('artpathEmail', email);
-  updateAuthUI();
-  showAuthMessage('Registration successful!', 'success');
-  
-  setTimeout(() => {
-    document.getElementById('authModal').classList.add('hidden');
-  }, 900);
+  return false;
 }
 
 // ========== Utility Functions ==========
@@ -1230,3 +1380,39 @@ function throttle(func, limit) {
 
 // Apply throttling to scroll events
 window.addEventListener('scroll', throttle(fadeInOnScroll, 100));
+
+// ========== Missing Functions ==========
+function clearAuthMessage() {
+  const authMessage = document.getElementById('authMessage');
+  if (authMessage) {
+    authMessage.textContent = '';
+  }
+}
+
+// ========== Enhanced Settings Functions ==========
+function updateSettingsAccountInfo() {
+  const user = getUser();
+  const email = localStorage.getItem('artpathEmail');
+  const memberSince = localStorage.getItem('artpathMemberSince');
+  
+  const usernameSpan = document.getElementById('settingsUsername');
+  const emailSpan = document.getElementById('settingsEmail');
+  const memberSinceSpan = document.getElementById('settingsMemberSince');
+  
+  if (usernameSpan) {
+    usernameSpan.textContent = user || 'Guest';
+  }
+  
+  if (emailSpan) {
+    emailSpan.textContent = email || 'Not provided';
+  }
+  
+  if (memberSinceSpan) {
+    if (memberSince) {
+      const date = new Date(memberSince);
+      memberSinceSpan.textContent = date.toLocaleDateString();
+    } else {
+      memberSinceSpan.textContent = 'Today';
+    }
+  }
+}
